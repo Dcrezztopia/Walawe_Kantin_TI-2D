@@ -19,7 +19,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Barang</a>
+                        <a href="#">Pengajuan</a>
                     </li>
                 </ul>
             </div>
@@ -40,45 +40,50 @@
                                 <table id="add-row" class="display table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                           
+                                            <th>ID Waiting</th>
                                             <th>Nama Barang</th>
-                                            <th>Jenis Barang</th>
-                                            <th>Stok</th>
+                                            <th>Jenis Barang</th>                                    
                                             <th>Harga</th>
-                                            <th>Action</th>
+                                            <th>SKU</th>
+                                            <th>Nama Supplier</th>
+                                            <th>Status</th>
+                                            
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         <?php
 													$no = 1;
-													$query = mysqli_query($conn,'SELECT pinjamruangan.id, pinjamruangan.id_ruangan, pinjamruangan.id_user, pinjamruangan.tgl_mulai, pinjamruangan.tgl_selesai, pinjamruangan.status, ruangan.nama_ruangan from pinjamruangan inner join ruangan on ruangan.id=pinjamruangan.id_ruangan inner join user on user.id=pinjamruangan.id_user');
-													while ($pinjamruangan = mysqli_fetch_array($query)) {
+													$query = mysqli_query($conn,'SELECT * FROM waitingroom');
+													while ($pengajuan = mysqli_fetch_array($query)) {
 												?>
-                                        <?php if($_SESSION['id'] == $pinjamruangan['id_user']) { ?>
+                                        
                                         <tr>
                                             <td><?php echo $no++ ?></td>
-                                            <td><?php echo $pinjamruangan['nama_ruangan'] ?></td>
-                                            <td><?php echo $pinjamruangan['tgl_mulai'] ?></td>
-                                            <td><?php echo $pinjamruangan['tgl_selesai'] ?></td>
+                                            <td><?php echo $pengajuan['namabarang'] ?></td>
+                                            <td><?php echo $pengajuan['jenisbarang'] ?></td>
+                                            <td><?php echo $pengajuan['sku'] ?></td>
+                                            <td><?php echo $pengajuan['namasupplier'] ?></td>
+                                            <td><?php echo $pengajuan['harga'] ?></td>
                                             <td>
-                                                <?php if($pinjamruangan['status'] == 'menunggu') { ?>
-                                                <div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?>
+                                                <?php if($pengajuan['status'] == 'menunggu') { ?>
+                                                <div class="badge badge-danger"><?php echo $pengajuan['status'] ?>
                                                 </div>
                                                 <?php }else { ?>
-                                                <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?>
+                                                <div class="badge badge-success"><?php echo $pengajuan['status'] ?>
                                                 </div>
                                                 <?php } ?>
                                             </td>
                                             <td>
-                                                <a href="index.php?page=anggota/edit&id=<?= $row['user_id'] ?>"
+                                                <a href="index.php?page=anggota/edit&id=<?= $row['id_waiting'] ?>"
                                                     class="btn btn-warning btn-xs">Edit</a>
-                                                <a href="fungsi/hapus.php?anggota=hapus&id=<?= $row['user_id'] ?>"
+                                                <a href="fungsi/hapus.php?anggota=hapus&id=<?= $row['id_waiting'] ?>"
                                                     onclick="javascript:return confirm('Hapus Data Anggota ?');"
                                                     class="btn btn-danger btn-xs">Hapus</a>
                                             </td>
                                         </tr>
-                                        <?php } ?>
+                                       
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -93,7 +98,7 @@
 
 
 <?php 
-										$c = mysqli_query($conn,'SELECT pinjamruangan.id, pinjamruangan.id_ruangan, pinjamruangan.id_user, pinjamruangan.tgl_mulai, pinjamruangan.tgl_selesai, pinjamruangan.status, ruangan.nama_ruangan from pinjamruangan inner join ruangan on ruangan.id=pinjamruangan.id_ruangan inner join user on user.id=pinjamruangan.id_user');
+										$c = mysqli_query($conn,'SELECT * FROM waitingroom');
 										while ($row = mysqli_fetch_array($c)) {
 									?>
 
@@ -134,7 +139,7 @@
 
 
 <?php 
-										$f = mysqli_query($conn,'SELECT pinjamruangan.id, pinjamruangan.id_ruangan, pinjamruangan.id_user, pinjamruangan.tgl_mulai, pinjamruangan.tgl_selesai, pinjamruangan.status, ruangan.nama_ruangan from pinjamruangan inner join ruangan on ruangan.id=pinjamruangan.id_ruangan inner join user on user.id=pinjamruangan.id_user');
+										$f = mysqli_query($conn,'SELECT * FROM waitingroom');
 										while ($row = mysqli_fetch_array($f)) {
 									?>
 
