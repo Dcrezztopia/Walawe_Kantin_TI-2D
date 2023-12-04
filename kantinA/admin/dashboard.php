@@ -55,7 +55,7 @@ $b = mysqli_fetch_array($key);
 											<div class="numbers">
 												<p class="card-category">Waiting List</p>
 												<h4 class="card-title"><?php echo $q['waitingroom'] ?></h4>
-												<a href="index.php?page=jabatan" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i>View</a>
+												<a href="?view=datapengajuan" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i>View</a>
 											</div>
 										</div>
 									</div>

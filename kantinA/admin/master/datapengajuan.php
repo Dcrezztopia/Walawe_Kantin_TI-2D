@@ -19,7 +19,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Barang</a>
+								<a href="#">Pengajuan Barang</a>
 							</li>
 						</ul>
 					</div>
@@ -28,8 +28,8 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Data Barang</h4>
-									
+										<h4 class="card-title">Data Pengajuan Barang</h4>
+										
 									</div>
 								</div>
 								<div class="card-body">
@@ -37,35 +37,39 @@
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
 												<tr>
-													<th>No</th>
+													<th>Id Waiting</th>
 													<th>Nama Barang</th>
 													<th>Jenis Barang</th>
-													<th>Stok</th>
+													<th>SKU </th>
+													<th>Nama Supplier</th>
 													<th>Harga</th>
 													<th>Status</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 											
 											<tbody>
 												<?php
 													$no = 1;
-													$query = mysqli_query($conn,'SELECT pinjambarang.id, pinjambarang.id_barang, pinjambarang.id_user, pinjambarang.tgl_mulai, pinjambarang.tgl_selesai, pinjambarang.qty, pinjambarang.lokasi_barang, pinjambarang.status, barang.nama_barang from pinjambarang inner join barang on barang.id=pinjambarang.id_barang inner join user on user.id=pinjambarang.id_user');
-													while ($pinjambarang = mysqli_fetch_array($query)) {
+													$query = mysqli_query($conn,'SELECT * from waitingroom');
+													while ($pinjamruangan = mysqli_fetch_array($query)) {
 												?>
 												<tr>
 													<td><?php echo $no++ ?></td>
-													<td><?php echo $pinjambarang['nama_barang'] ?></td>
-													<td><?php echo $pinjambarang['tgl_mulai'] ?></td>
-													<td><?php echo $pinjambarang['tgl_selesai'] ?></td>
-													<td><?php echo $pinjambarang['qty'] ?></td>
+													<td><?php echo $pinjamruangan['namabarang'] ?></td>
+													<td><?php echo $pinjamruangan['jenisbarang'] ?></td>
+													<td><?php echo $pinjamruangan['sku'] ?></td>
+													<td><?php echo $pinjamruangan['namasupplier'] ?></td>
+													<td><?php echo $pinjamruangan['harga'] ?></td>
 													<td>
-														<?php if($pinjambarang['status'] == 'menunggu') { ?>
-														<div class="badge badge-danger"><?php echo $pinjambarang['status'] ?></div>
-														<?php }else { ?>
-															<div class="badge badge-success"><?php echo $pinjambarang['status'] ?></div>
-														<?php } ?>
-													</td>
-													
+                                                        <?php if ($pinjamruangan['status'] == 'menunggu') { ?>
+                                                            <div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?></div>
+                                                        <?php } elseif ($pinjamruangan['status'] == 'disetujui') { ?>
+                                                            <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
+                                                        <?php } else { ?>
+                                                            <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
+                                                        <?php } ?>
+                                                    </td>
 												</tr>
 											<?php } ?>
 											</tbody>
@@ -81,11 +85,11 @@
 
 
 									<?php 
-										$c = mysqli_query($conn,'SELECT pinjambarang.id, pinjambarang.id_barang, pinjambarang.id_user, pinjambarang.tgl_mulai, pinjambarang.tgl_selesai, pinjambarang.qty, pinjambarang.lokasi_barang, pinjambarang.status, barang.nama_barang, user.email from pinjambarang inner join barang on barang.id=pinjambarang.id_barang inner join user on user.id=pinjambarang.id_user');
-										while($row = mysqli_fetch_array($c)) {
+										$c = mysqli_query($conn,'SELECT * from waitingroom');
+										while ($row = mysqli_fetch_array($c)) {
 									?>
 
-									<div class="modal fade" id="modalApprovePinjamBarang<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="modalApprovePinjamRuangan<?php echo $row['id_waiting'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -103,13 +107,13 @@
 												<form method="POST" enctype="multipart/form-data" action="">
 												<div class="modal-body">
 													<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+													<input type="hidden" name="id_ruangan" value="<?php echo $row['id_ruangan'] ?>">
 													<input type="hidden" name="tgl_mulai" value="<?php echo $row['tgl_mulai'] ?>">
 													<input type="hidden" name="tgl_selesai" value="<?php echo $row['tgl_selesai'] ?>">
-													<input type="hidden" name="qty" value="<?php echo $row['qty'] ?>">
 													
 													<input type="hidden" name="status" value="approve">
 													<input type="hidden" name="email_penerima" value="<?php echo $row['email'] ?>">
-													<input type="hidden" name="nama_barang" value="<?php echo $row['nama_barang'] ?>">
+													<input type="hidden" name="nama_ruangan" value="<?php echo $row['nama_ruangan'] ?>">
 
 													<h4>Approve Pinjaman</h4>
 												</div>
@@ -124,20 +128,23 @@
 
 									<?php } ?>
 
-		<?php 
-				
+		<?php
 			if(isset($_POST['ubah']))
 			{
 				$id = $_POST['id'];
+				$id_ruangan = $_POST['id_ruangan'];
 				$status = $_POST['status'];
-				$tgl_selesai = $_POST['tgl_selesai'];
-				$tgl_mulai = $_POST['tgl_mulai'];
-				$qty = $_POST['qty'];
-				$nama_barang = $_POST['nama_barang'];
+				$stat = 'dipinjam';
+				
+				$selSto = mysqli_query($conn, "SELECT * FROM ruangan WHERE id='$id_ruangan'");
+			    $sto    = mysqli_fetch_array($selSto);
+			    $stok   = $sto['status'];
+			    $sisa    = 'free';
 
-		        mysqli_query($conn, "UPDATE pinjambarang SET status='$status' WHERE id='$id'");
+		        mysqli_query($conn, "UPDATE ruangan SET status='$stat' WHERE id='$id_ruangan'");
+		        mysqli_query($conn, "UPDATE pinjamruangan SET status='$status' WHERE id='$id'");
 		        
 		        echo "<script>alert ('Data Berhasil Disimpan') </script>";
-                echo "<script>window.location.replace('?view=datapinjambarang');</script>";
+                echo "<script>window.location.replace('?view=datapinjamruangan');</script>";
 			}
 		?>

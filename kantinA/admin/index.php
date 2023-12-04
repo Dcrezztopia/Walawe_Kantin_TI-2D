@@ -97,7 +97,7 @@ session_start();
 										</a>
 									</li>
 									<li>
-										<a href="?view=dataruangan">
+										<a href="?view=datapengajuan">
 											<span class="sub-item">Pengajuan</span>
 										</a>
 									</li>
@@ -105,19 +105,7 @@ session_start();
 							</div>
 						</li>
 						
-						<li class="nav-item">
-							<a href="?view=datapinjambarang">
-								<i class="fas fa-briefcase"></i>
-								<p>List Barang</p>
-							</a>
-						</li>
-
-						<li class="nav-item">
-							<a href="?view=datapinjamruangan">
-								<i class="fas fa-briefcase"></i>
-								<p>Transaksi</p>
-							</a>
-						</li>
+					
 
 						<li class="nav-item">
 							<a href="../logout.php">
@@ -139,11 +127,11 @@ session_start();
 
                     // Data Barang
                     elseif($_GET['view']=='databarang')
-                        include 'master/barang/databarang.php';
+                        include 'master/databarang.php';
                     
                     // Data Ruangan
-                    elseif($_GET['view']=='dataruangan')
-                        include 'master/ruangan/dataruangan.php';
+                    elseif($_GET['view']=='datapengajuan')
+                        include 'master/datapengajuan.php';
 
                     // Data Peminjaman
                     elseif($_GET['view']=='datapinjambarang')

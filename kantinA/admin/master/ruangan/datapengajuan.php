@@ -37,8 +37,12 @@
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>
 												<tr>
-													<th>No</th>
+													<th>Id Waiting</th>
 													<th>Nama Barang</th>
+													<th>Jenis Barang</th>
+													<th>SKU </th>
+													<th>Nama Supplier</th>
+													<th>Harga</th>
 													<th>Status</th>
 													<th>Action</th>
 												</tr>
@@ -47,23 +51,25 @@
 											<tbody>
 												<?php
 													$no = 1;
-													$query = mysqli_query($conn,'SELECT pinjamruangan.id, pinjamruangan.id_ruangan, pinjamruangan.id_user, pinjamruangan.tgl_mulai, pinjamruangan.tgl_selesai, pinjamruangan.status, ruangan.nama_ruangan from pinjamruangan inner join ruangan on ruangan.id=pinjamruangan.id_ruangan inner join user on user.id=pinjamruangan.id_user');
+													$query = mysqli_query($conn,'SELECT * from waitingroom');
 													while ($pinjamruangan = mysqli_fetch_array($query)) {
 												?>
 												<tr>
 													<td><?php echo $no++ ?></td>
-													<td><?php echo $pinjamruangan['nama_ruangan'] ?></td>
+													<td><?php echo $pinjamruangan['namabarang'] ?></td>
+													<td><?php echo $pinjamruangan['jenisbarang'] ?></td>
+													<td><?php echo $pinjamruangan['sku'] ?></td>
+													<td><?php echo $pinjamruangan['namasupplier'] ?></td>
+													<td><?php echo $pinjamruangan['harga'] ?></td>
 													<td>
-														<?php if($pinjamruangan['status'] == 'menunggu') { ?>
-														<div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?></div>
-														<?php }else { ?>
-															<div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
-														<?php } ?>
-													</td>
-													<td>
-													<a href="index.php?page=anggota/edit&id=<?= $row['user_id'] ?>" class="btn btn-success btn-xs">Konfirmasi</a>
-													<a href="fungsi/hapus.php?anggota=hapus&id=<?= $row['user_id'] ?>" onclick="javascript:return confirm('Hapus Data Anggota ?');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>Hapus</a>
-													</td>
+                                                        <?php if ($pinjamruangan['status'] == 'menunggu') { ?>
+                                                            <div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?></div>
+                                                        <?php } elseif ($pinjamruangan['status'] == 'disetujui') { ?>
+                                                            <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
+                                                        <?php } else { ?>
+                                                            <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
+                                                        <?php } ?>
+                                                    </td>
 												</tr>
 											<?php } ?>
 											</tbody>
@@ -79,11 +85,11 @@
 
 
 									<?php 
-										$c = mysqli_query($conn,'SELECT pinjamruangan.id, pinjamruangan.id_ruangan, pinjamruangan.id_user, pinjamruangan.tgl_mulai, pinjamruangan.tgl_selesai, pinjamruangan.status, ruangan.nama_ruangan, user.email from pinjamruangan inner join ruangan on ruangan.id=pinjamruangan.id_ruangan inner join user on user.id=pinjamruangan.id_user');
+										$c = mysqli_query($conn,'SELECT * from waitingroom');
 										while ($row = mysqli_fetch_array($c)) {
 									?>
 
-									<div class="modal fade" id="modalApprovePinjamRuangan<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="modalApprovePinjamRuangan<?php echo $row['id_waiting'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
