@@ -55,6 +55,7 @@
 													while ($pinjamruangan = mysqli_fetch_array($query)) {
 												?>
 												<tr>
+												<input type="hidden" name="id_waiting" value="<?php echo $pinjamruangan['id_waiting']; ?>">
 													<td><?php echo $no++ ?></td>
 													<td><?php echo $pinjamruangan['namabarang'] ?></td>
 													<td><?php echo $pinjamruangan['jenisbarang'] ?></td>
@@ -63,13 +64,18 @@
 													<td><?php echo $pinjamruangan['harga'] ?></td>
 													<td>
                                                         <?php if ($pinjamruangan['status'] == 'menunggu') { ?>
-                                                            <div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?></div>
+                                                            <div class="badge badge-warning"><?php echo $pinjamruangan['status'] ?></div>
                                                         <?php } elseif ($pinjamruangan['status'] == 'disetujui') { ?>
                                                             <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
                                                         <?php } else { ?>
-                                                            <div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
+                                                            <div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?></div>
                                                         <?php } ?>
                                                     </td>
+													<td>
+														<form method="POST" action="">
+														<button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Accept </button>
+            											</form>
+													</td>
 												</tr>
 											<?php } ?>
 											</tbody>
@@ -83,68 +89,25 @@
 			</div>
 		</div>
 
+<?php
+if (isset($_POST['accept'])) {
+    $id_waiting = $_POST['id_waiting'];
+    $nama_barang = $_POST['namabarang'];
+    $jenis_barang = $_POST['jenisbarang'];
+    $sku = $_POST['sku'];
+    $namasupplier = $_POST['namasupplier'];
+    $harga = $_POST['harga'];
 
-									<?php 
-										$c = mysqli_query($conn,'SELECT * from waitingroom');
-										while ($row = mysqli_fetch_array($c)) {
-									?>
+    // Masukkan data ke tabel 'barang'
+    mysqli_query($conn, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$harga')");
 
-									<div class="modal fade" id="modalApprovePinjamRuangan<?php echo $row['id_waiting'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header no-bd">
-													<h5 class="modal-title">
-														<span class="fw-mediumbold">
-														Approve</span> 
-														<span class="fw-light">
-															Pinjaman
-														</span>
-													</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<form method="POST" enctype="multipart/form-data" action="">
-												<div class="modal-body">
-													<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-													<input type="hidden" name="id_ruangan" value="<?php echo $row['id_ruangan'] ?>">
-													<input type="hidden" name="tgl_mulai" value="<?php echo $row['tgl_mulai'] ?>">
-													<input type="hidden" name="tgl_selesai" value="<?php echo $row['tgl_selesai'] ?>">
-													
-													<input type="hidden" name="status" value="approve">
-													<input type="hidden" name="email_penerima" value="<?php echo $row['email'] ?>">
-													<input type="hidden" name="nama_ruangan" value="<?php echo $row['nama_ruangan'] ?>">
+    // Masukkan data ke tabel 'supplier'
+    mysqli_query($conn, "INSERT INTO supplier (namaSupplier) VALUES ('$namasupplier')");
 
-													<h4>Approve Pinjaman</h4>
-												</div>
-												<div class="modal-footer no-bd">
-													<button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-check-circle"></i> Approve</button>
-													<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
-												</div>
-												</form>
-											</div>
-										</div>
-									</div>
+    // Hapus data dari 'waitingroom' berdasarkan ID Waiting
+    mysqli_query($conn, "DELETE FROM waitingroom WHERE id_waiting = $id_waiting");
 
-									<?php } ?>
-
-		<?php
-			if(isset($_POST['ubah']))
-			{
-				$id = $_POST['id'];
-				$id_ruangan = $_POST['id_ruangan'];
-				$status = $_POST['status'];
-				$stat = 'dipinjam';
-				
-				$selSto = mysqli_query($conn, "SELECT * FROM ruangan WHERE id='$id_ruangan'");
-			    $sto    = mysqli_fetch_array($selSto);
-			    $stok   = $sto['status'];
-			    $sisa    = 'free';
-
-		        mysqli_query($conn, "UPDATE ruangan SET status='$stat' WHERE id='$id_ruangan'");
-		        mysqli_query($conn, "UPDATE pinjamruangan SET status='$status' WHERE id='$id'");
-		        
-		        echo "<script>alert ('Data Berhasil Disimpan') </script>";
-                echo "<script>window.location.replace('?view=datapinjamruangan');</script>";
-			}
-		?>
+    echo "<script>alert ('Data Berhasil Disimpan') </script>";
+    echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+}
+?>

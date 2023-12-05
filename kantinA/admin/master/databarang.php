@@ -174,7 +174,7 @@
 													
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="submit" name="ubah" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+													<button type="submit" name="ubah" class="btn btn-primary"><i class="fa fa-save"></i>Save Changes</button>
 													<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
 												</div>
 												</form>
