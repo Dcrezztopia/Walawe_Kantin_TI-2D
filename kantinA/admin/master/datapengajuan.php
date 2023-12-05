@@ -90,7 +90,7 @@
 		</div>
 
 <?php
-if (isset($_POST['accept'])) {
+if (isset($_POST['simpan'])) {
     $id_waiting = $_POST['id_waiting'];
     $nama_barang = $_POST['namabarang'];
     $jenis_barang = $_POST['jenisbarang'];
