@@ -58,9 +58,9 @@
 <div class="form-group">
     <label>Status</label>
     <select name="status" class="form-control" required="">
-        <option value="waiting">Waiting</option>
-        <option value="approved">Approved</option>
-        <option value="declined">Declined</option>
+        <option value="menunggu">menunggu</option>
+        <option value="disetujui">disetujui</option>
+        <option value="ditolak">ditolak</option>
     </select>
 </div>
 
