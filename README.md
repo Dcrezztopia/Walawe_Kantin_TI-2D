@@ -4,6 +4,12 @@
 
 git add .
 git commit -m "Upload file"
+git push origin main
+
+# kalo abis ngedit dan belom yakin, masuk ke branch nyoba
+
+git add .
+git commit -m "Upload file"
 git push origin coba
 
 # kalo mau ngambil kerjaan temen
