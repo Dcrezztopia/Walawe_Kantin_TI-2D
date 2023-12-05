@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Nov 2023 pada 06.10
+-- Waktu pembuatan: 05 Des 2023 pada 04.59
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -42,9 +42,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`idBarang`, `namaBarang`, `jenisBarang`, `stok`, `harga`, `sku`, `idSupplier`) VALUES
-(1, 'Classic Baguette', 'Roti', '100', '3', 'CB001', 1),
 (2, 'Cinnamon Swirl Delight', 'Roti', '50', '3', 'CSD002', 2),
-(3, 'Cheesy Cheddar Rolls', 'Roti', '75', '4', 'CCR003', 1),
 (4, 'Sesame Seed Sourdough', 'Roti', '80', '4', 'SSS004', 3),
 (5, 'Chocolate Chip Brioche', 'Roti', '60', '5', 'CCB005', 4),
 (6, 'Whole Wheat Wonder Loaf', 'Roti', '90', '2', 'WWL006', 5),
@@ -91,7 +89,8 @@ INSERT INTO `barang` (`idBarang`, `namaBarang`, `jenisBarang`, `stok`, `harga`, 
 (47, 'Mocha Hazelnut Cupcake', 'Kue', '80', '5', 'MHC047', 46),
 (48, 'Lavender Honey Tart', 'Kue', '75', '4', 'LHT048', 47),
 (49, 'Apricot Almond Scone', 'Kue', '65', '3', 'AAS049', 48),
-(50, 'Dark Chocolate Truffle Cupcake', 'Kue', '110', '4', 'DCTC050', 49);
+(50, 'Dark Chocolate Truffle Cupcake', 'Kue', '110', '4', 'DCTC050', 49),
+(51, 'ariel', 'dennis', '24', '17', '', 7);
 
 -- --------------------------------------------------------
 
@@ -219,8 +218,18 @@ CREATE TABLE `waitingroom` (
   `jenisbarang` varchar(50) NOT NULL,
   `sku` varchar(225) NOT NULL,
   `namasupplier` varchar(225) NOT NULL,
-  `harga` decimal(10,0) NOT NULL
+  `harga` decimal(10,0) NOT NULL,
+  `status` enum('menunggu','disetujui','ditolak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `waitingroom`
+--
+
+INSERT INTO `waitingroom` (`id_waiting`, `namabarang`, `jenisbarang`, `sku`, `namasupplier`, `harga`, `status`) VALUES
+(1, 'Dennis Parulian Panjaitan', 'Manusia', '32345', 'anjaymabar', '3', 'menunggu'),
+(3, 'Ariel', 'Manusia juga kok', '32134', 'adadeh', '34', 'disetujui'),
+(4, 'Pascalis', 'anjaynmabar', '324567', 'walawe', '3', 'ditolak');
 
 --
 -- Indexes for dumped tables
@@ -274,7 +283,7 @@ ALTER TABLE `waitingroom`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT untuk tabel `detailtransaksi`
@@ -304,7 +313,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `waitingroom`
 --
 ALTER TABLE `waitingroom`
-  MODIFY `id_waiting` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_waiting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
