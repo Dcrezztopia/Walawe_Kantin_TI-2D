@@ -106,6 +106,9 @@ session_start();
 									<li>
 										<a href="?view=datapengajuan">
 											<span class="sub-item">Pengajuan</span>
+											<div class="navbar-notifications" data-count="0">
+												<i class="fas fa-bell"></i>
+											</div>
 										</a>
 									</li>
 									<li>
@@ -138,6 +141,43 @@ session_start();
 			</div>
 		</div>
 
+		<!-- JS NOTIF BELL SAMPING TULISAN PENGAJUAN -->
+		<!-- <script>
+			function updateNotificationsCount() {
+				$.ajax({
+					url: 'path/to/your/script/getUnacceptedPengajuanCount.php',
+					method: 'GET',
+					dataType: 'json',
+					success: function(response) {
+						var count = response.count;
+						$('.navbar-notifications').attr('data-count', count);
+					},
+					error: function() {
+						console.log('Failed to fetch the unaccepted pengajuan count');
+					}
+				});
+			}
+
+			// Call the function to update the count
+			updateNotificationsCount();
+
+			// Set an interval to periodically update the count
+			setInterval(updateNotificationsCount, 10000); // Update every 10 seconds
+		</script> -->
+
+		<!-- <php
+		// getUnacceptedPengajuanCount.php
+		header('Content-Type: application/json');
+
+		// Your database connection code here
+
+		$query = "SELECT COUNT(*) as count FROM pengajuan WHERE status = 'pending'";
+		$result = mysqli_query($conn, $query);
+		$row = mysqli_fetch_assoc($result);
+
+		echo json_encode(['count' => $row['count']]);
+		?> -->
+
 		<?php
                     // Dashboard
                     if(@$_GET['view']=='')
@@ -163,6 +203,8 @@ session_start();
                         include 'peminjaman/datapinjamruangan.php';
                     elseif($_GET['view']=='detailpinjamruangan')
                         include '../user/peminjaman/ruangan/detailpinjamruangan.php';
+
+						
                  ?>
 		
 		<!-- Custom template | don't include it in your project! -->
