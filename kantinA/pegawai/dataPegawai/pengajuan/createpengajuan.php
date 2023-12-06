@@ -69,7 +69,7 @@
 								</div>
 								<div class="card-action">
 									<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save Changes</button>
-									<a href="?view=datapinjamruangan" class="btn btn-danger"><i class="fa fa-undo"></i> Cancel</a>
+									<a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-undo"></i> Cancel</a>
 								</div>
 								</form>
 								
@@ -108,7 +108,7 @@
 			
 				if ($result) {
 					echo "<script>alert('Data Berhasil Disimpan')</script>";
-					echo "<script>window.location.replace('?view=datapinjamruangan');</script>";
+					echo "<script>window.location.replace('?view=datapengajuan');</script>";
 				} else {
 					echo "<script>alert('Gagal menyimpan data')</script>";
 				}

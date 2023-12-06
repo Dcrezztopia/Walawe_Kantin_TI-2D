@@ -32,7 +32,7 @@ include "koneksi.php";
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/azzara.min.css">
+    <link rel="stylesheet" href="assets/css/azzara.css">
 </head>
 
 <body class="login" style="background-color: #9A6D06">
@@ -40,7 +40,7 @@ include "koneksi.php";
 
         <div class="container container-login animated fadeIn">
             <div class="mb-3 text-center">
-                <img src="img/logo.png" height="120" width="120">
+                <img src="img/logo.png" height="150" width="160">
             </div>
             <div class="login-form">
                 <form method="POST" action="cek_login.php">
