@@ -63,9 +63,6 @@
                                     <option value="ditolak">ditolak</option>
                                 </select>
                             </div>
-
-
-
                     </div>
                     <div class="card-action">
                         <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save
