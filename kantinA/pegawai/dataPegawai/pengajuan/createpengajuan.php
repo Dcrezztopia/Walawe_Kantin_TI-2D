@@ -34,8 +34,7 @@
                         <form method="POST" action="" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nama_barang">Nama Barang</label>
-                                <input type="text" id="nama_barang" name="nama_barang" class="form-control"
-                                    placeholder="Masukkan Nama Barang..." required>
+                                <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
                             </div>
                             <div class="form-group">
                                 <label>Jenis Barang</label>
@@ -50,13 +49,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama Supplier</label>
-                                <input type="text" name="namasupplier" class="form-control"
-                                    placeholder="Nama Supplier ..." required="">
+                                <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier ..." required="">
                             </div>
                             <div class="form-group">
                                 <label>Harga</label>
-                                <input type="number" name="harga" class="form-control" placeholder="Harga ..."
-                                    required="">
+                                <input type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
@@ -85,38 +82,38 @@
 </div>
 
 <script type="text/javascript">
-<?php 
-				echo $nama_barang;
-				echo $deskripsi;
-			?>
+    <?php
+    echo $nama_barang;
+    echo $deskripsi;
+    ?>
 
-function change(id_ruangan) {
-    document.getElementById('nama_ruangan').value = nama_ruangan[id_ruangan].nama_ruangan;
-    document.getElementById('deskripsi').value = deskripsi[id_ruangan].deskripsi;
-};
+    function change(id_ruangan) {
+        document.getElementById('nama_ruangan').value = nama_ruangan[id_ruangan].nama_ruangan;
+        document.getElementById('deskripsi').value = deskripsi[id_ruangan].deskripsi;
+    };
 </script>
 
 <?php
-		    if (isset($_POST['simpan'])) {
-				$nama_barang = $_POST['nama_barang'];
-				$jenis_barang = $_POST['jenis_barang'];
-				$sku = $_POST['sku'];
-				$namasupplier = $_POST['namasupplier'];
-				$harga = $_POST['harga'];
-				$status = $_POST['status'];
-			
-				// Ganti query INSERT menjadi sesuai dengan tabel waitingroom
-				$query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga', '$status')";
-				
-				// Eksekusi query INSERT
-				$result = mysqli_query($conn, $query_insert);
-			
-				if ($result) {
-					echo "<script>alert('Data Berhasil Disimpan')</script>";
-					echo "<script>window.location.replace('?view=datapengajuan');</script>";
-				} else {
-					echo "<script>alert('Gagal menyimpan data')</script>";
-				}
-			}
-			
-		    ?>
+if (isset($_POST['simpan'])) {
+    $nama_barang = $_POST['nama_barang'];
+    $jenis_barang = $_POST['jenis_barang'];
+    $sku = $_POST['sku'];
+    $namasupplier = $_POST['namasupplier'];
+    $harga = $_POST['harga'];
+    $status = $_POST['status'];
+
+    // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
+    $query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga', '$status')";
+
+    // Eksekusi query INSERT
+    $result = mysqli_query($conn, $query_insert);
+
+    if ($result) {
+        echo "<script>alert('Data Berhasil Disimpan')</script>";
+        echo "<script>window.location.replace('?view=datapengajuan');</script>";
+    } else {
+        echo "<script>alert('Gagal menyimpan data')</script>";
+    }
+}
+
+?>
