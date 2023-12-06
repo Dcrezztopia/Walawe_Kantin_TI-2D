@@ -15,3 +15,9 @@ git push origin coba
 # kalo mau ngambil kerjaan temen
 
 git pull origin main
+
+# kalo error ! [rejected] 
+
+git fetch
+git pull --rebase origin main
+git push origin main
