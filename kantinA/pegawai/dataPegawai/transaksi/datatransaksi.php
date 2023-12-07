@@ -13,13 +13,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Kantin</a>
-							</li>
-							<li class="separator">
-								<i class="flaticon-right-arrow"></i>
-							</li>
-							<li class="nav-item">
-								<a href="#">Barang</a>
+								<a href="#">Transaksi</a>
 							</li>
 						</ul>
 					</div>
@@ -29,7 +23,7 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Data Transaksi</h4>
-										<a href="?view=createpinjambarang" class="btn btn-primary btn-round ml-auto">
+										<a href="?view=createtransaksi" class="btn btn-primary btn-round ml-auto">
 											<i class="fa fa-plus"></i>
 											Tambah Data
 										</a>

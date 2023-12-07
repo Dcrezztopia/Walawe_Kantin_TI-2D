@@ -15,6 +15,10 @@ $b = mysqli_fetch_array($key);
 
 <div class="main-panel">
     <div class="content">
+        <div class="my-3" style="margin: 0 2rem;">
+			<h1 class="fw-bold">Dashboard Pegawai</h1>
+			<hr>
+		</div>
         <div class="page-inner">
             <div class="row">
                 <div class="col-sm-6 col-md-6">
@@ -72,7 +76,7 @@ $b = mysqli_fetch_array($key);
                                     <div class="numbers">
                                         <p class="card-category">Data Jenis Barang</p>
                                         <h4 class="card-title"><?php echo $b['barang'] ?></h4>
-                                        <a href="?view=databarang" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
+                                        <a href="?view=datajenisbarang" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
                                     </div>
                                 </div>
                             </div>

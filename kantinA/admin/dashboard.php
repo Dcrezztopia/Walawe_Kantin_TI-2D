@@ -15,6 +15,10 @@ $b = mysqli_fetch_array($key);
 
 <div class="main-panel">
 			<div class="content">
+				<div class="my-3" style="margin: 0 2rem;">
+					<h1 class="fw-bold">Dashboard Admin</h1>
+					<hr>
+				</div>
 				<div class="page-inner">
 					<div class="row">
 						<div class="col-sm-6 col-md-6">
@@ -110,7 +114,8 @@ $b = mysqli_fetch_array($key);
 										
 									</div>
 								</div>
-								<div class="card-body">
+							</div>
+							<div class="card-body">
 								<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>

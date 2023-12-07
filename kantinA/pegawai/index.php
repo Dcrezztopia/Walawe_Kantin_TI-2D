@@ -114,7 +114,7 @@ session_start();
                         </li>
                         
                         <li class="nav-item">
-                            <a href="?view=datapengajuan">
+                            <a href="?view=datajenisbarang">
                                 <i class="fa fa-suitcase"></i>
                                 <p>Jenis Barang</p>
                             </a>
@@ -169,6 +169,7 @@ session_start();
 
                     elseif($_GET['view']=='detailpengajuan')
                         include 'dataPegawai/pengajuan/detailpengajuan.php';
+
 
                  ?>
 
