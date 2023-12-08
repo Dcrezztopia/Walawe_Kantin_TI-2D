@@ -64,7 +64,6 @@ session_start();
 
 			<!-- Navbar Header -->
 			<nav class="navbar navbar-header navbar-expand-lg">
-				
 				<div class="container-fluid">
 					<div class="collapse" id="search-nav">
 					</div>
@@ -77,66 +76,63 @@ session_start();
 			
 			<div class="sidebar-wrapper scrollbar-inner">
 				<div class="sidebar-content">
-					<ul class="nav">
-						<li class="nav-item">
-							<a href="?view=dashboard">
-								<i class="fas fa-home"></i>
-								<p>Dashboard</p>
+				<ul class="nav">
+                        <li class="nav-item">
+                            <a href="?view=dashboard">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Components</h4>
+                        </li>
+
+                        <li class="nav-item">
+							<a href="?view=databarang">
+								<i class="fa fa-briefcase"></i>
+								<p class="sub-item">Barang</p>
 							</a>
-						</li>
-						<li class="nav-section">
-							<span class="sidebar-mini-icon">
-								<i class="fa fa-ellipsis-h"></i>
-							</span>
-							<h4 class="text-section">Components</h4>
-						</li>
-						<li class="nav-item">
-							<a data-toggle="collapse" href="#base">
-								<i class="fas fa-layer-group"></i>
-								<p>Data Master</p>
-								<span class="caret"></span>
+                        </li>
+
+                        <li class="nav-item">
+							<a href="?view=datapengajuan">
+								<i class="fa fa-upload"></i>
+								<p class="sub-item">Pengajuan</p>
+								<p>&nbsp;(0 Waiting)</p>
 							</a>
-							<div class="collapse" id="base">
-								<ul class="nav nav-collapse">
-									<li>
-										<a href="?view=databarang">
-											<span class="sub-item">Barang</span>
-										</a>
-									</li>
-									<li>
-										<a href="?view=datapengajuan">
-											<span class="sub-item">Pengajuan</span>
-											<div class="navbar-notifications" data-count="0">
-												<i class="fas fa-bell"></i>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="?view=datapengajuan">
-											<span class="sub-item">Jenis Barang</span>
-										</a>
-									</li>
-									<li>
-										<a href="?view=datapengajuan">
-											<span class="sub-item">Laporan</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="nav-item">
-							<a href="../admin/setting.php">
+                        </li>
+                        
+                        <li class="nav-item">
+							<a href="?view=datajenisbarang">
+								<i class="fa fa-suitcase"></i>
+								<p class="sub-item">Jenis Barang</p>
+							</a>
+                        </li>
+
+                        <li class="nav-item">
+							<a href="?view=datalaporan">
+							<i class="fa fa-tasks"></i>
+								<p class="sub-item">Laporan</p>
+							</a>
+                        </li>
+
+                        <li class="nav-item">
+							<a href="../pegawai/setting.php">
 								<i class="fa fa-cog"></i>
 								<p>Setting</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="../logout.php">
-								<i class="fas fa-lock"></i>
-								<p>Logout</p>
-							</a>
-						</li>
-					</ul>
+
+                        <li class="nav-item">
+                            <a href="../logout.php">
+                                <i class="fas fa-lock"></i>
+                                <p>Logout</p>
+                            </a>
+                        </li>
+                    </ul>
 				</div>
 			</div>
 		</div>
@@ -189,20 +185,18 @@ session_start();
                     elseif($_GET['view']=='databarang')
                         include 'master/databarang.php';
                     
-                    // Data Ruangan
+                    // Data Pengajuan
                     elseif($_GET['view']=='datapengajuan')
                         include 'master/datapengajuan.php';
 
-                    // Data Peminjaman
-                    elseif($_GET['view']=='datapinjambarang')
-                        include 'peminjaman/datapinjambarang.php';
-                    elseif($_GET['view']=='detailpinjambarang')
-                        include '../user/peminjaman/barang/detailpinjambarang.php';
-
-                    elseif($_GET['view']=='datapinjamruangan')
-                        include 'peminjaman/datapinjamruangan.php';
-                    elseif($_GET['view']=='detailpinjamruangan')
-                        include '../user/peminjaman/ruangan/detailpinjamruangan.php';
+                    // Data Jenis Barang
+                    elseif($_GET['view']=='datajenisbarang')
+                        include 'master/datajenisbarang.php';
+                    
+					// Data Laporan
+                    elseif($_GET['view']=='datalaporan')
+                        include 'master/datalaporan.php';
+                   
 
 						
                  ?>

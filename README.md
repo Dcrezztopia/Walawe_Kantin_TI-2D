@@ -3,7 +3,7 @@
 # kalo abis ngedit, ini langkahnya
 
 git add .
-git commit -m "Upload file"
+git commit -m "(tulis file apa yang diubah)"
 git push origin main
 
 # kalo abis ngedit dan belom yakin, masuk ke branch nyoba

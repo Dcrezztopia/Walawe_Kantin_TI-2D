@@ -114,7 +114,7 @@ session_start();
                         </li>
                         
                         <li class="nav-item">
-                            <a href="?view=datapengajuan">
+                            <a href="?view=datajenisbarang">
                                 <i class="fa fa-suitcase"></i>
                                 <p>Jenis Barang</p>
                             </a>
@@ -170,6 +170,25 @@ session_start();
                     elseif($_GET['view']=='detailpengajuan')
                         include 'dataPegawai/pengajuan/detailpengajuan.php';
 
+                    // Data Jenis Barang
+                    elseif($_GET['view']=='datajenisbarang')
+                        include 'dataPegawai/jenisbarang/datajenisbarang.php';
+
+                    elseif($_GET['view']=='createjenisbarang')
+                        include 'dataPegawai/jenisbarang/datajenisbarang.php';
+
+                    elseif($_GET['view']=='detailjenisbarang')
+                        include 'dataPegawai/jenisbarang/detailjenisbarang.php';
+
+                    // Data Stok Barang
+                    elseif($_GET['view']=='datastokbarang')
+                        include 'dataPegawai/stokbarang/datastokbarang.php';
+
+                    elseif($_GET['view']=='createjenisbarang')
+                        include 'dataPegawai/stokbarang/datastokbarang.php';
+
+                    elseif($_GET['view']=='detailjenisbarang')
+                        include 'dataPegawai/stokbarang/detailstokbarang.php';
                  ?>
 
         <!-- Custom template | don't include it in your project! -->

@@ -2,7 +2,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Data</h4>
+						<h4 class="page-title">Transaksi</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="#">
@@ -13,13 +13,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Kantin</a>
-							</li>
-							<li class="separator">
-								<i class="flaticon-right-arrow"></i>
-							</li>
-							<li class="nav-item">
-								<a href="#">Barang</a>
+								<a href="#">Transaksi</a>
 							</li>
 						</ul>
 					</div>
@@ -29,7 +23,7 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Data Transaksi</h4>
-										<a href="?view=createpinjambarang" class="btn btn-primary btn-round ml-auto">
+										<a href="?view=createtransaksi" class="btn btn-primary btn-round ml-auto">
 											<i class="fa fa-plus"></i>
 											Tambah Data
 										</a>
@@ -50,22 +44,22 @@
 											</thead>
 											
 											<tbody>
-												<?php
+											<?php
 													$no = 1;
-													$query = mysqli_query($conn,'SELECT pinjambarang.id, pinjambarang.id_barang, pinjambarang.id_user, pinjambarang.tgl_mulai, pinjambarang.tgl_selesai, pinjambarang.qty, pinjambarang.lokasi_barang, pinjambarang.status, barang.nama_barang from pinjambarang inner join barang on barang.id=pinjambarang.id_barang inner join user on user.id=pinjambarang.id_user');
-													while ($pinjambarang = mysqli_fetch_array($query)) {
+													$query = mysqli_query($conn,'SELECT * FROM waitingroom');
+													while ($pengajuan = mysqli_fetch_array($query)) {
 												?>
-												<?php if($_SESSION['id'] == $pinjambarang['id_user']) { ?>
+												
 												<tr>
 													<td><?php echo $no++ ?></td>
-													<td><?php echo $pinjambarang['nama_barang'] ?></td>
-													<td><?php echo $pinjambarang['tgl_mulai'] ?></td>
-													<td><?php echo $pinjambarang['tgl_selesai'] ?></td>
-													<td><?php echo $pinjambarang['qty'] ?></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
 												
 												</tr>
-											<?php } ?>
-											<?php } ?>
+												<?php } ?>
 											</tbody>
 										</table>
 									</div>

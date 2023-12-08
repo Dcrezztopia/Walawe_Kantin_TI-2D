@@ -29,12 +29,20 @@ $crudPengajuan = new CrudPengajuan($conn);
 				</ul>
 			</div>
 
-			<!-- TAMBAH DAFTAR BARANG -->
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card">
-						<div class="card-header">
-							<div class="card-title">Pengajuan Barang</div>
+					<!-- TAMBAH DAFTAR BARANG -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Pengajuan Barang</div>
+								</div>
+								<form method="POST" action="" enctype="multipart/form-data">
+								<div class="form-group">
+
+
+									
+							<label for="nama_barang">Nama Barang</label>
+							<input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
 						</div>
 						<form method="POST" action="" enctype="multipart/form-data">
 							<div class="form-group">
