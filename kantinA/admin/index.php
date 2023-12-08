@@ -101,6 +101,16 @@ session_start();
 											<span class="sub-item">Pengajuan</span>
 										</a>
 									</li>
+									<li>
+										<a href="?view=datajenisbarang">
+											<span class="sub-item">Jenis Barang</span>
+										</a>
+									</li>
+									<li>
+										<a href="?view=datalaporan">
+											<span class="sub-item">Laporan</span>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</li>
@@ -133,16 +143,15 @@ session_start();
                     elseif($_GET['view']=='datapengajuan')
                         include 'master/datapengajuan.php';
 
-                    // Data Peminjaman
-                    elseif($_GET['view']=='datapinjambarang')
-                        include 'peminjaman/datapinjambarang.php';
-                    elseif($_GET['view']=='detailpinjambarang')
-                        include '../user/peminjaman/barang/detailpinjambarang.php';
+						// Data Ruangan
+                    elseif($_GET['view']=='datajenisbarang')
+                        include 'master/datajenisbarang.php';
 
-                    elseif($_GET['view']=='datapinjamruangan')
-                        include 'peminjaman/datapinjamruangan.php';
-                    elseif($_GET['view']=='detailpinjamruangan')
-                        include '../user/peminjaman/ruangan/detailpinjamruangan.php';
+						// Data Ruangan
+                    elseif($_GET['view']=='datalaporan')
+                        include 'master/datalaporan.php';
+
+                    
                  ?>
 		
 		<!-- Custom template | don't include it in your project! -->

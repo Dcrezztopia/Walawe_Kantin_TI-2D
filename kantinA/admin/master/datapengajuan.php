@@ -112,36 +112,49 @@
 		</div>
 
 <?php
-if (isset($_POST['simpan'])) {
-
-    $id_waiting = $_POST['id_waiting'];
-    $nama_barang = $_POST['namabarang'];
-    $jenis_barang = $_POST['jenisbarang'];
-    $sku = $_POST['sku'];
-    $namasupplier = $_POST['namasupplier'];
-    $harga = $_POST['harga'];
-
-    
+	if (isset($_POST['simpan'])) {
+		$id_waiting = $_POST['id_waiting'];
+		$nama_barang = $_POST['namabarang'];
+		$jenis_barang = $_POST['jenisbarang'];
+		$sku = $_POST['sku'];
+		$namasupplier = $_POST['namasupplier'];
+		$harga = $_POST['harga'];
 	
-    // Check if the status is 'disetujui'
-    $result = mysqli_query($conn, "SELECT status FROM waitingroom WHERE id_waiting='$id_waiting'");
-    $row = mysqli_fetch_assoc($result);
-    $status = $row['status'];
+		// Check if the status is 'disetujui'
+		$result = mysqli_query($conn, "SELECT status FROM waitingroom WHERE id_waiting='$id_waiting'");
+		$row = mysqli_fetch_assoc($result);
+		$status = $row['status'];
 	
-    if ($status === 'disetujui') {
-		echo "<script>alert('Barang telah disetujui')</script>";
-    } else {
-	  mysqli_query($conn,"UPDATE waitingroom SET status='disetujui' WHERE id_waiting='$id_waiting'");
-      mysqli_query($conn, "INSERT INTO supplier (namaSupplier) VALUES ('$namasupplier')");
-	  $idSupplier_query = "SELECT idSupplier FROM supplier WHERE namaSupplier = '$namasupplier'";
-	  $result = mysqli_query($conn, $idSupplier_query);
-	  $row = mysqli_fetch_assoc($result);
-	  $idSupplier = $row['idSupplier'];
-	  mysqli_query($conn,"INSERT into barang values ('','$nama_barang','$jenis_barang','0','$harga','$sku', '$idSupplier')");
-	  echo "<script>alert('Data berhasil disimpan')</script>";
-    }
-    echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
-}
+		if ($status === 'disetujui') {
+			echo "<script>alert('Barang telah disetujui')</script>";
+			echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+		} else {
+			// Cek apakah jenis barang sudah ada di tabel jenisbarang
+			$resultCheckJenis = mysqli_query($conn, "SELECT * FROM jenisbarang WHERE jenisBarang = '$jenis_barang'");
+			$rowCheckJenis = mysqli_fetch_assoc($resultCheckJenis);
+	
+			if ($rowCheckJenis) {
+				// Jenis barang sudah ada, gunakan jenisBarang langsung
+				$jenis_barang_query = $jenis_barang;
+			} else {
+				// Jenis barang belum ada, tambahkan ke tabel jenisbarang
+				mysqli_query($conn, "INSERT INTO jenisbarang (jenisBarang, deskripsi) VALUES ('$jenis_barang', 'belum tersedia')");
+				$jenis_barang_query = $jenis_barang;
+			}
+	
+			// Update status ke 'disetujui' di tabel waitingroom
+			mysqli_query($conn, "UPDATE waitingroom SET status='disetujui' WHERE id_waiting='$id_waiting'");
+	
+			// Insert ke tabel barang
+			mysqli_query($conn, "INSERT INTO barang (namabarang, jenisbarang, sku, harga, namasupplier) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier')");
+			
+			if ($rowCheckJenis) {
+				echo "<script>alert('Data berhasil disimpan jenis')</script>";
+			} else {
+				echo "<script>alert('Data berhasil disimpan (jenis barang baru)')</script>";
+			}
+		}
+	}
 
 
 elseif(isset($_POST['hapus']))
@@ -158,4 +171,11 @@ elseif(isset($_POST['hapus']))
 	echo "<script>alert ('Data Berhasil Dihapus') </script>";
 	echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
 }
+
+
+
+
+	
+
 ?>
+

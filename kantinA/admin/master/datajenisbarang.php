@@ -41,10 +41,8 @@
 											<thead>
 												<tr>
 													<th>No</th>
-													<th>Nama Barang</th>
 													<th>Jenis Barang</th>
-													<th>Stok</th>
-													<th>Harga</th>
+													<th>Deskripsi</th>
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -52,19 +50,17 @@
 											<tbody>
 												<?php
 													$no = 1;
-													$query = mysqli_query($conn,'SELECT * from barang');
+													$query = mysqli_query($conn,'SELECT * from jenisbarang');
 													while ($barang = mysqli_fetch_array($query)) {
 												?>
 												<tr>
 													<td><?php echo $no++ ?></td>
-													<td><?php echo $barang['namaBarang'] ?></td>
 													<td><?php echo $barang['jenisBarang'] ?></td>
-													<td><?php echo $barang['stok'] ?></td>
-													<td><?php echo $barang['harga'] ?></td>
+													<td><?php echo $barang['deskripsi'] ?></td>
 													<td>	
-														<a href="#modalDetailBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-														<a href="#modalEditBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-														<a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+														<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+														<a href="#modalEditBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+														<a href="#modalHapusBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
 													</td>
 												</tr>
 											<?php } ?>
@@ -87,7 +83,6 @@
 													<h5 class="modal-title">
 														<span class="fw-mediumbold">
 														Tambah Barang</span> 
-														
 													</h5>
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -96,41 +91,12 @@
 												<form method="POST" enctype="multipart/form-data" action="">
 												<div class="modal-body">
 													<div class="form-group">
-														<label>Nama Barang</label>
-														<input type="text" name="namaBarang" class="form-control" placeholder="Nama Barang ..." required="">
+														<label>Nama Jenis Barang</label>
+														<input type="text" name="jenisBarang" class="form-control" placeholder="jenisBarang ..." required="">
 													</div>
 													<div class="form-group">
- 													   <label>Jenis Barang</label>
-  													  	<select name="jenisBarang" class="form-control" required="">
-  													      <?php
-      													  $resultJenis = mysqli_query($conn, "SELECT jenisBarang FROM jenisbarang");
-              												while ($rowJenis = mysqli_fetch_assoc($resultJenis)) {
-            														$jenisBarang = $rowJenis['jenisBarang'];
-       													     echo "<option value='$jenisBarang'>$jenisBarang</option>";
-        																										}
-       													 ?>
-    													</select>
-													</div>
-
-													<div class="form-group">
-														<label>Stok</label>
-														<input type="number" name="stok" class="form-control" placeholder="Stok ..." required="">
-													</div>
-													<div class="form-group">
-														<label>Harga</label>
-														<input type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
-													</div>
-													<div class="form-group">
-														<label>SKU</label>
-														<input type="number" name="SKU" class="form-control" placeholder="SKU ..." required="">
-													</div>
-													<div class="form-group">
-														<label>Nama Supplier</label>
-														<input type="text" name="namaSupplier" class="form-control" placeholder="namaSupplier ..." required="">
-													</div>
-													<div class="form-group">
-														<label>Foto</label>
-														<input type="file" name="foto" class="form-control" placeholder required="">
+														<label>Deskripsi</label>
+														<input type="number" name="deskripsi" class="form-control" placeholder="Stok ..." required="">
 													</div>
 												</div>
 												<div class="modal-footer no-bd">
@@ -143,12 +109,12 @@
 									</div>
 
 									<?php 
-										$p = mysqli_query($conn,'SELECT * from barang');
+										$p = mysqli_query($conn,'SELECT * from jenisbarang');
 										while($d = mysqli_fetch_array($p)) {
 									?>
 
 									<!-- EDIT -->
-									<div class="modal fade" id="modalEditBarang<?php echo $d['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="modalEditBarang<?php echo $d['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -162,7 +128,7 @@
 												</div>
 												<form method="POST" enctype="multipart/form-data" action="">
 												<div class="modal-body">
-													<input type="hidden" name="id" value="<?php echo $d['idBarang'] ?>">
+													<input type="hidden" name="id" value="<?php echo $d['jenisBarang'] ?>">
 													<div class="form-group">
 														<label>Nama Barang</label>
 														<input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Nama Barang ..." required="">
@@ -206,7 +172,7 @@
 										while($row = mysqli_fetch_array($c)) {
 									?>
 
-									<div class="modal fade" id="modalHapusBarang<?php echo $row['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal fade" id="modalHapusBarang<?php echo $row['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header no-bd">
@@ -223,7 +189,7 @@
 												</div>
 												<form method="POST" enctype="multipart/form-data" action="">
 												<div class="modal-body">
-													<input type="hidden" name="id" value="<?php echo $row['idBarang'] ?>">
+													<input type="hidden" name="id" value="<?php echo $row['jenisBarang'] ?>">
 													<h4>Apakah Anda Ingin Menghapus Data Ini ?</h4>
 												</div>
 												<div class="modal-footer no-bd">

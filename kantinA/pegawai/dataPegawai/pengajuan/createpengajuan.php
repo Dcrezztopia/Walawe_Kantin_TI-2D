@@ -40,7 +40,6 @@
     <label>Jenis Barang</label>
     <select name="jenis_barang" class="form-control" required="">
         <option value="makanan">Makanan</option>
-        <option value="minuman">Minuman</option>
     </select>
 </div>
 <div class="form-group">
