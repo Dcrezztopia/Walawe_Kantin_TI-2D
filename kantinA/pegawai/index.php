@@ -15,18 +15,18 @@ session_start();
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
-        WebFont.load({
-            google: {
-                "families": ["Open+Sans:300,400,600,700"]
-            },
-            custom: {
-                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"],
-                urls: ['../assets/css/fonts.css']
-            },
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-        });
+    WebFont.load({
+        google: {
+            "families": ["Open+Sans:300,400,600,700"]
+        },
+        custom: {
+            "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"],
+            urls: ['../assets/css/fonts.css']
+        },
+        active: function() {
+            sessionStorage.fonts = true;
+        }
+    });
     </script>
 
     <!-- CSS Files -->
@@ -48,7 +48,8 @@ session_start();
                 <a href="#" class="logo">
                     <img src="../assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
                 </a>
-                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <i class="fa fa-bars"></i>
                     </span>
@@ -176,9 +177,9 @@ session_start();
     <!-- Azzara DEMO methods, don't include it in your project! -->
     <script src="../assets/js/setting-demo.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#add-row').DataTable({});
-        });
+    $(document).ready(function() {
+        $('#add-row').DataTable({});
+    });
     </script>
 
 </body>
