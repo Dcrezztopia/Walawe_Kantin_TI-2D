@@ -113,9 +113,9 @@ $b = mysqli_fetch_array($key);
 										<h4 class="card-title">Data Barang Paling Laku</h4>
 										
 									</div>
+									
 								</div>
-							</div>
-							<div class="card-body">
+								<div class="card-body">
 								<div class="table-responsive">
 										<table id="add-row" class="display table table-striped table-hover" >
 											<thead>

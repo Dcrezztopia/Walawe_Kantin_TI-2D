@@ -2,18 +2,12 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Data</h4>
+                <h4 class="page-title">Pengajuan Barang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
                             <i class="flaticon-home"></i>
                         </a>
-                    </li>
-                    <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Kantin</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
@@ -28,7 +22,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Daftar Pengajuan</h4>
+                                <h4 class="card-title">Data Pengajuan Barang</h4>
                                 <a href="?view=createpengajuan" class="btn btn-primary btn-round ml-auto">
                                     <i class="fa fa-plus"></i>
                                     Tambah Data
@@ -77,8 +71,8 @@
                                                         <?php } ?>
                                             </td>
                                             <td>
-                                            <a href="#modalEditBarang<?php echo $pengajuan['id_waiting'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-primary">
-                                            <i class="fa fa-edit"></i></a>
+                                            <a href="#modalEditBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
+											<a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                        
