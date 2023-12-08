@@ -48,6 +48,7 @@
                                             <th>SKU</th>
                                             <th>Nama Supplier</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                             
                                         </tr>
                                     </thead>

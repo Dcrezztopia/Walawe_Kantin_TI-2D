@@ -10,7 +10,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Sistem Informasi Kantin</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="../assets/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="../assets/img/logo.png" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
@@ -29,10 +29,17 @@ session_start();
     });
     </script>
 
-    <!-- CSS Files -->
+    <style>
+		.logo img.navbar-brand {
+    		width: 120px;
+    		height: auto;
+		}
+	</style>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/azzara.min.css">
-    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/azzara.css">
     <link rel="stylesheet" href="../assets/css/demo.css">
 </head>
 
@@ -46,7 +53,7 @@ session_start();
             <div class="logo-header">
 
                 <a href="#" class="logo">
-                    <img src="../assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
+                    <img src="../assets/img/logo2.png" alt="navbar brand" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,22 +72,12 @@ session_start();
 
             <!-- Navbar Header -->
             <nav class="navbar navbar-header navbar-expand-lg">
-
-                <div class="container-fluid">
-                    <div class="collapse" id="search-nav">
-                        <form class="navbar-left navbar-form nav-search mr-md-3">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pr-1">
-                                        <i class="fa fa-search search-icon"></i>
-                                    </button>
-                                </div>
-                                <input type="text" placeholder="Search ..." class="form-control">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </nav>
+				
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+					</div>
+				</div>
+			</nav>
             <!-- End Navbar -->
         </div>
         <!-- Sidebar -->
@@ -104,17 +101,38 @@ session_start();
 
                         <li class="nav-item">
                             <a href="?view=datatransaksi">
-                                <i class="fas fa-briefcase"></i>
+                            <i class="fa fa-money" aria-hidden="true"></i>
                                 <p>Transaksi</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="?view=datapengajuan">
-                                <i class="fas fa-briefcase"></i>
-                                <p>Pengajuan</p>
+                                <i class="fa fa-upload"></i>
+                                <p>Pengajuan Barang</p>
                             </a>
                         </li>
+                        
+                        <li class="nav-item">
+                            <a href="?view=datajenisbarang">
+                                <i class="fa fa-suitcase"></i>
+                                <p>Jenis Barang</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="?view=datapengajuan">
+                                <i class="fas fa-briefcase"></i>
+                                <p>Data Barang</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+							<a href="../pegawai/setting.php">
+								<i class="fa fa-cog"></i>
+								<p>Setting</p>
+							</a>
+						</li>
 
                         <li class="nav-item">
                             <a href="../logout.php">
@@ -151,6 +169,7 @@ session_start();
 
                     elseif($_GET['view']=='detailpengajuan')
                         include 'dataPegawai/pengajuan/detailpengajuan.php';
+
 
                  ?>
 

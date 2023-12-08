@@ -1,8 +1,10 @@
+
+
 <div class="main-panel">
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Tambah</h4>
+						<h4 class="page-title">Transaksi</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="#">
@@ -13,67 +15,99 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Kantin</a>
+								<a href="#">Transaksi</a>
 							</li>
 							<li class="separator">
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Barang</a>
+								<a href="#">Tambah Transaksi</a>
 							</li>
 						</ul>
 					</div>
 
 					<!-- TAMBAH TRANSAKSI -->
 					<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Data Transaksi</div>
-            </div>
-            <form method="POST" action="" enctype="multipart/form-data">
-                <div class="card-body">
-                    <table id="transaksiTable">
-                        <tr>
-                            <th>Id Barang</th>
-                            <th>Nama Barang</th>
-                            <th>Tanggal</th>
-                            <th>Stok</th>
-                            <th>Qty</th>
-                            <th>Harga</th>
-                        </tr>
-                        <tr class="input-row">
-                            <td><input type="text" name="id_barang[]" style="width: 200px"></td>
-                            <td><input type="text" name="nama_barang[]" style="width: 200px"></td>
-                            <td><input type="text" readonly="" name="tanggal[]" class="form-control" value="<?php echo date('Y-m-d') ?>"></td>
-                            <td><input type="text" name="stok[]" style="width: 100px"></td>
-                            <td><input type="text" name="qty[]" style="width: 100px"></td>
-                            <td><input type="text" name="harga[]" style="width: 200px"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-action">
-                    <button type="button" id="tambahRow" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</button>
-                    <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save Changes</button>
-                    <a href="?view=datapinjambarang" class="btn btn-danger"><i class="fa fa-undo"></i> Cancel</a>
-                </div>
-            </form>
-        </div>
-    </div>
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Tambah Transaksi
+										<a href="?view=datatransaksi">
+										<button type="button" class="close" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</a>
+									</div>
+								</div>
+								<form method="POST" action="" enctype="multipart/form-data">
+								<div class="card-body">
+									<div class="form-group" id="skuFormGroup">
+										<label class="fw-bold">SKU</label>
+										<input type="text" name="sku" id="skuInput" class="form-control" placeholder="RT001-001-STRW" required="" >
+										<span>Sisa Barang: XX</span>
+									</div>
+
+									<div class="form-group" id="jumlahFormGroup">
+										<label class="fw-bold">Jumlah</label>
+										<input type="number" name="harga" id="jumlahInput" class="form-control" placeholder="Masukkan Jumlah.." required="">
+									</div>
+
+									<div class="form-group" id="idTransaksiFormGroup">
+										<label class="fw-bold">ID Transaksi</label>
+										<input type="text" id="idTransaksi" class="form-control" value="12345" readonly>
+									</div>
+
+									<div class="form-group" id="totalNominal">
+										<label class="fw-bold">Total</label>
+									</div>
+
+									<div class="form-group" id="angkaNominal">
+										<span id="total" style="color: red; font-size: 40px">1000</span>
+									</div>
+
+									<div class="card-action">
+										<button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
+										<button type="submit" name="bayar" class="btn btn-success">Bayar</button>
+									</div>
+									</div>
+
+								</form>
+
+								<div class="card-body">
+								<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+											<thead>
+												
+												<tr>
+													<th>No</th>
+													<th>Foto</th>
+													<th>SKU</th>
+													<th>Nama Barang</th>													
+													<th>Harga</th>
+													<th>Jumlah</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											
+											<tbody>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td>	
+													<a href="" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+												</td>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        // Add a new row when the "Tambah" button is clicked
-        $("#tambahRow").on("click", function () {
-            var newRow = $(".input-row:first").clone();
-            $("#transaksiTable").append(newRow);
-        });
-    });
-</script>
-				</div>
-			</div>
-		</div>
 
 		<script type="text/javascript">
 			<?php 

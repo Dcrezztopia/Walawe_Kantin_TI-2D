@@ -9,7 +9,7 @@ session_start();
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Sistem Informasi Kantin</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="../assets/img/logo.png" type="image/x-icon"/>
 	
 	<!-- Fonts and icons -->
 	<script src="../assets/js/plugin/webfont/webfont.min.js"></script>
@@ -23,10 +23,17 @@ session_start();
 		});
 	</script>
 
-	<!-- CSS Files -->
+	<style>
+		.logo img.navbar-brand {
+    		width: 120px;
+    		height: auto;
+		}
+	</style>
+	
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/css/azzara.css">
-	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="../assets/css/demo.css">
 </head>
 <body>
@@ -39,8 +46,8 @@ session_start();
 			<div class="logo-header">
 				
 				<a href="#" class="logo">
-					<img src="../assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
-				</a>
+                    <img src="../assets/img/logo2.png" alt="navbar brand" class="navbar-brand">
+                </a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
 						<i class="fa fa-bars"></i>
@@ -86,7 +93,7 @@ session_start();
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
-								<p>Edit</p>
+								<p>Data Master</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="base">
@@ -99,6 +106,14 @@ session_start();
 									<li>
 										<a href="?view=datapengajuan">
 											<span class="sub-item">Pengajuan</span>
+											<div class="navbar-notifications" data-count="0">
+												<i class="fas fa-bell"></i>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="?view=datalaporann">
+											<span class="sub-item">Laporan</span>
 										</a>
 									</li>
 									<li>
@@ -106,17 +121,15 @@ session_start();
 											<span class="sub-item">Jenis Barang</span>
 										</a>
 									</li>
-									<li>
-										<a href="?view=datalaporan">
-											<span class="sub-item">Laporan</span>
-										</a>
-									</li>
 								</ul>
 							</div>
 						</li>
-						
-					
-
+						<li class="nav-item">
+							<a href="../admin/setting.php">
+								<i class="fa fa-cog"></i>
+								<p>Setting</p>
+							</a>
+						</li>
 						<li class="nav-item">
 							<a href="../logout.php">
 								<i class="fas fa-lock"></i>
@@ -127,6 +140,43 @@ session_start();
 				</div>
 			</div>
 		</div>
+
+		<!-- JS NOTIF BELL SAMPING TULISAN PENGAJUAN -->
+		<!-- <script>
+			function updateNotificationsCount() {
+				$.ajax({
+					url: 'path/to/your/script/getUnacceptedPengajuanCount.php',
+					method: 'GET',
+					dataType: 'json',
+					success: function(response) {
+						var count = response.count;
+						$('.navbar-notifications').attr('data-count', count);
+					},
+					error: function() {
+						console.log('Failed to fetch the unaccepted pengajuan count');
+					}
+				});
+			}
+
+			// Call the function to update the count
+			updateNotificationsCount();
+
+			// Set an interval to periodically update the count
+			setInterval(updateNotificationsCount, 10000); // Update every 10 seconds
+		</script> -->
+
+		<!-- <php
+		// getUnacceptedPengajuanCount.php
+		header('Content-Type: application/json');
+
+		// Your database connection code here
+
+		$query = "SELECT COUNT(*) as count FROM pengajuan WHERE status = 'pending'";
+		$result = mysqli_query($conn, $query);
+		$row = mysqli_fetch_assoc($result);
+
+		echo json_encode(['count' => $row['count']]);
+		?> -->
 
 		<?php
                     // Dashboard
@@ -147,11 +197,7 @@ session_start();
                     elseif($_GET['view']=='datajenisbarang')
                         include 'master/datajenisbarang.php';
 
-						// Data Ruangan
-                    elseif($_GET['view']=='datalaporan')
-                        include 'master/datalaporan.php';
-
-                    
+			
                  ?>
 		
 		<!-- Custom template | don't include it in your project! -->
