@@ -40,38 +40,64 @@
 									</div>
 								</div>
 								<form method="POST" action="" enctype="multipart/form-data">
-								<div class="card-body">
-									<div class="form-group" id="skuFormGroup">
-										<label class="fw-bold">SKU</label>
-										<input type="text" name="sku" id="skuInput" class="form-control" placeholder="RT001-001-STRW" required="" >
-										<span>Sisa Barang: XX</span>
-									</div>
+									<div class=" row card-body">
+										<div class="col-md-6">
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="skuFormGroup">
+													<label class="fw-bold">SKU</label>
+													<input type="text" name="sku" id="skuInput" class="form-control" placeholder="RT001-001-STRW" required="">
+													<span>Sisa Barang: XX</span>
+												</div>
 
-									<div class="form-group" id="jumlahFormGroup">
-										<label class="fw-bold">Jumlah</label>
-										<input type="number" name="harga" id="jumlahInput" class="form-control" placeholder="Masukkan Jumlah.." required="">
-									</div>
+												<div class="d-flex" style="align-items: center; overflow: auto;">
+													<span>Roti Strawberry</span>
+												</div>
+											</div>
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="jumlahFormGroup">
+													<label class="fw-bold">Jumlah</label>
+													<input type="number" name="harga" id="jumlahInput" class="form-control" placeholder="0" required="">
+												</div>
+											</div>
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="idTransaksiFormGroup">
+													<label class="fw-bold">Nominal</label>
+													<input type="number" name="nominal" id="nominalinput" class="form-control" placeholder="Rp" required="">
+												</div>
+											</div>
 
-									<div class="form-group" id="idTransaksiFormGroup">
-										<label class="fw-bold">ID Transaksi</label>
-										<input type="text" id="idTransaksi" class="form-control" value="12345" readonly>
-									</div>
+										</div>
+										<div class="col-md-6">
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="idTransaksiFormGroup">
+													<label class="fw-bold">ID Transaksi</label>
+													<input type="text" id="idTransaksi" class="form-control" value="12345" readonly>
+												</div>
+											</div>
+											
+											
 
-									<div class="form-group" id="totalNominal">
-										<label class="fw-bold">Total</label>
-									</div>
+											<div class="d-flex">
+												<div class="form-group" id="totalNominal" style="width: 70px; padding-right: 0;">
+													<label class="fw-bold">Total</label>
+												</div>
+												<div class="form-group w-100" id="angkaNominal" style="padding-left: 0;">
+													<span id="total" style="color: red; font-size: 40px">1000</span>
+												</div>
+											</div>
+										</div>
 
-									<div class="form-group" id="angkaNominal">
-										<span id="total" style="color: red; font-size: 40px">1000</span>
+										<div class="card-action w-100">
+											<a href="">
+												<button type="submit" name="tambah" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</button>
+											</a>
+											<a href="">
+												<button type="submit" name="bayar" class="btn btn-success"><i class="fa fa-usd" aria-hidden="true"></i> Bayar</button>
+											</a>
+										</div>
 									</div>
-
-									<div class="card-action">
-										<button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
-										<button type="submit" name="bayar" class="btn btn-success">Bayar</button>
-									</div>
-									</div>
-
 								</form>
+								
 
 								<div class="card-body">
 								<div class="table-responsive">
@@ -106,8 +132,9 @@
 							</div>
 							</div>
 						</div>
-</div>
+					</div>
 
+					<div class="modal fade"></div>
 
 		<script type="text/javascript">
 			<?php 
