@@ -29,56 +29,48 @@ $crudPengajuan = new CrudPengajuan($conn);
 				</ul>
 			</div>
 
-					<!-- TAMBAH DAFTAR BARANG -->
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="card-title">Pengajuan Barang</div>
-								</div>
-								<form method="POST" action="" enctype="multipart/form-data">
-								<div class="form-group">
-
-
-									
-							<label for="nama_barang">Nama Barang</label>
-							<input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
+			<!-- TAMBAH DAFTAR BARANG -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Pengajuan Barang</div>
 						</div>
 						<form method="POST" action="" enctype="multipart/form-data">
-							<div class="form-group">
-								<label for="nama_barang">Nama Barang</label>
-								<input type="text" id="nama_barang" name="nama_barang" class="form-control"
-									placeholder="Masukkan Nama Barang..." required>
-							</div>
-							<div class="form-group">
-								<label>Jenis Barang</label>
-								<select name="jenis_barang" class="form-control" required="">
-									<option value="makanan">Makanan</option>
-									<option value="minuman">Minuman</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>SKU</label>
-								<input type="text" name="sku" class="form-control" placeholder="SKU ..." required="">
-							</div>
-							<div class="form-group">
-								<label>Nama Supplier</label>
-								<input type="text" name="namasupplier" class="form-control"
-									placeholder="Nama Supplier ..." required="">
-							</div>
-							<div class="form-group">
-								<label>Harga</label>
-								<input type="number" name="harga" class="form-control" placeholder="Harga ..."
-									required="">
-							</div>
-							<div class="form-group">
-								<label>Status</label>
-								<select name="status" class="form-control" required="">
-									<option value="menunggu">menunggu</option>
-									<option value="disetujui">disetujui</option>
-									<option value="ditolak">ditolak</option>
-								</select>
-							</div>
+							<form method="POST" action="" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="nama_barang">Nama Barang</label>
+									<input type="text" id="nama_barang" name="nama_barang" class="form-control"
+										placeholder="Masukkan Nama Barang..." required>
+								</div>
+								<div class="form-group">
+									<?php
+									$query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
+									?>
+									<label>Jenis Barang</label>
+									<select name="jenis_barang" class="form-control" required="">
+										<?php
+										while ($jenis_barang = mysqli_fetch_assoc($query)) {
+											echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $jenis_barang['jenisBarang'] . '</option>';
+										}
+										?>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>SKU</label>
+									<input type="text" name="sku" class="form-control" placeholder="SKU ..."
+										required="">
+								</div>
+								<div class="form-group">
+									<label>Nama Supplier</label>
+									<input type="text" name="namasupplier" class="form-control"
+										placeholder="Nama Supplier ..." required="">
+								</div>
+								<div class="form-group">
+									<label>Harga</label>
+									<input type="number" name="harga" class="form-control" placeholder="Harga ..."
+										required="">
+								</div>
 
 					</div>
 					<div class="card-action">
@@ -103,7 +95,6 @@ if (isset($_POST['simpan'])) {
 		'sku' => $_POST['sku'],
 		'namasupplier' => $_POST['namasupplier'],
 		'harga' => $_POST['harga'],
-		'status' => $_POST['status']
 	);
 
 	$crudPengajuan->Create($data);

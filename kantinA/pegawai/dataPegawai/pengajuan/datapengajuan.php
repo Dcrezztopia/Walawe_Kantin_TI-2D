@@ -54,33 +54,52 @@ $crudPengajuan = new CrudPengajuan($conn);
 
                                     <tbody>
                                         <?php
-													$no = 1;
-													$query = mysqli_query($conn,'SELECT * FROM waitingroom');
-													while ($pengajuan = mysqli_fetch_array($query)) {
-												?>
-                                        
-                                        <tr>
-                                            <td><?php echo $no++ ?></td>
-                                            <td><?php echo $pengajuan['namabarang'] ?></td>
-                                            <td><?php echo $pengajuan['jenisbarang'] ?></td>
-                                            <td><?php echo $pengajuan['sku'] ?></td>
-                                            <td><?php echo $pengajuan['namasupplier'] ?></td>
-                                            <td><?php echo $pengajuan['harga'] ?></td>
-                                            <td>
-                                            <?php if ($pengajuan['status'] == 'menunggu') { ?>
-                                                            <div class="badge badge-warning"><?php echo $pengajuan['status'] ?></div>
-                                                        <?php } elseif ($pengajuan['status'] == 'disetujui') { ?>
-                                                            <div class="badge badge-success"><?php echo $pengajuan['status'] ?></div>
-                                                        <?php } else { ?>
-                                                            <div class="badge badge-danger"><?php echo $pengajuan['status'] ?></div>
-                                                        <?php } ?>
-                                            </td>
-                                            <td>
-                                            <a href="#modalEditBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
-											<a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                       
+                                        $no = 1;
+                                        $query = mysqli_query($conn, 'SELECT * FROM waitingroom');
+                                        while ($pengajuan = mysqli_fetch_array($query)) {
+                                            ?>
+
+                                            <tr>
+                                                <td>
+                                                    <?php echo $no++ ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $pengajuan['namabarang'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $pengajuan['jenisbarang'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $pengajuan['sku'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $pengajuan['namasupplier'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $pengajuan['harga'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($pengajuan['status'] == 'menunggu') { ?>
+                                                        <div class="badge badge-warning">
+                                                            <?php echo $pengajuan['status'] ?>
+                                                        </div>
+                                                    <?php } elseif ($pengajuan['status'] == 'disetujui') { ?>
+                                                        <div class="badge badge-success">
+                                                            <?php echo $pengajuan['status'] ?>
+                                                        </div>
+                                                    <?php } else { ?>
+                                                        <div class="badge badge-danger">
+                                                            <?php echo $pengajuan['status'] ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <a href="#modalEditBarang<?php echo $pengajuan['id_waiting'] ?>"
+                                                        data-toggle="modal" title="Edit" class="btn btn-xs btn-primary">
+                                                        <i class="fa fa-edit"></i></a>
+                                                </td>
+                                            </tr>
+
                                         <?php } ?>
                                     </tbody>
                                 </table>
