@@ -88,13 +88,16 @@ session_start();
 							</a>
 						</li>
 						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
 							<h4 class="text-section">Components</h4>
 						</li>
 
 						<li class="nav-item">
 							<a href="?view=databarang" class="nav-link">
 								<i class="fa fa-briefcase"></i>
-								<p class="sub-item">Data Barang</p>
+								<p class="sub-item">Daftar Barang</p>
 							</a>
 						</li>
 
@@ -121,6 +124,9 @@ session_start();
 						</li>
 
 						<li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </span>
 							<h4 class="text-section">Setting</h4>
 						</li>
 					
@@ -153,7 +159,7 @@ session_start();
                     </div>
                     <div class="modal-footer">
 						<button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
-                        <a class="btn btn-danger" href="../login.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
+                        <a class="btn btn-danger" href="../logout.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
                     </div>
                 </div>
             </div>
@@ -217,9 +223,13 @@ session_start();
                     
 					// Data Laporan
                     elseif($_GET['view']=='datalaporan')
-                        include 'master/datalaporan.php';
+                        include 'master/laporan/datalaporan.php';
                    
-
+					// Profil
+                    elseif($_GET['view']=='profil')
+                        include 'master/profil/profil.php';
+                    elseif($_GET['view']=='editprofil')
+                        include 'master/profil/editprofil.php';
 						
                  ?>
 

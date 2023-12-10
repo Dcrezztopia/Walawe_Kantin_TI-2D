@@ -51,6 +51,7 @@
                                 </ul>
                             </div>
 
+<<<<<<< HEAD
                             <!-- TAMBAH TRANSAKSI -->
                             <div class="row">
                                 <div class="col-md-12">
@@ -105,6 +106,41 @@
                                                                 value="12345" readonly>
                                                         </div>
                                                     </div>
+=======
+												<div class="d-flex" style="align-items: center; overflow: auto;">
+													<span>Roti Strawberry</span>
+												</div>
+											</div>
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="jumlahFormGroup">
+													<label class="fw-bold">Jumlah</label>
+													<input type="number" name="harga" id="jumlahInput" class="form-control" placeholder="0" required="">
+												</div>
+											</div>
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="idTransaksiFormGroup">
+													<label class="fw-bold">Nominal</label>
+													<input type="number" name="nominal" id="nominalinput" class="form-control" placeholder="Rp" required="">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div style="display: grid; grid-template-columns:1fr 1fr;">
+												<div class="form-group" id="idTransaksiFormGroup">
+													<label class="fw-bold">ID Transaksi</label>
+													<input type="text" id="idTransaksi" class="form-control" value="12345" readonly>
+												</div>
+											</div>	
+											<div class="d-flex">
+												<div class="form-group" id="totalNominal" style="width: 70px; padding-right: 0;">
+													<label class="fw-bold">Total</label>
+												</div>
+												<div class="form-group w-100" id="angkaNominal" style="padding-left: 0;">
+													<span id="total" style="color: red; font-size: 40px">1000</span>
+												</div>
+											</div>
+										</div>
+>>>>>>> 09d22e3 (Update menu profil, beberapa index)
 
 
 

@@ -18,7 +18,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Pengajuan</a>
+                        <a href="#">Pengajuan Barang</a>
                     </li>
                 </ul>
             </div>

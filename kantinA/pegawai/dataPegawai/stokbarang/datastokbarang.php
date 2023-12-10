@@ -2,7 +2,7 @@
     <div class="content">
         <div class="page-inner">
             <div class="page-header">
-                <h4 class="page-title">Data Barang</h4>
+                <h4 class="page-title">Stok Barang</h4>
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
@@ -13,7 +13,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Pengajuan</a>
+                        <a href="#">Stok Barang</a>
                     </li>
                 </ul>
             </div>

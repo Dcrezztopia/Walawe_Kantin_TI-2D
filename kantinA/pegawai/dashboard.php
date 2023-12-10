@@ -98,7 +98,7 @@ $b = mysqli_fetch_array($key);
                                 </div>
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Data Barang</p>
+                                        <p class="card-category">Data Stok Barang</p>
                                         <h4 class="card-title"><?php echo $b['barang'] ?></h4>
                                         <a href="?view=databarang" class="btn btn-primary"><i
                                                 class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>

@@ -128,11 +128,14 @@ session_start();
                         <li class="nav-item">
                             <a href="?view=datastokbarang" class="nav-link">
                                 <i class="fas fa-briefcase"></i>
-                                <p>Data Barang</p>
+                                <p>Stok Barang</p>
                             </a>
                         </li>
 
                         <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </span>
 							<h4 class="text-section">Setting</h4>
 						</li>
 					
@@ -165,7 +168,7 @@ session_start();
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
-                        <a class="btn btn-danger" href="../login.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
+                        <a class="btn btn-danger" href="../logout.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
                     </div>
                 </div>
             </div>
@@ -215,6 +218,12 @@ session_start();
 
                     elseif($_GET['view']=='detailjenisbarang')
                         include 'dataPegawai/stokbarang/detailstokbarang.php';
+
+                    // Profil
+                    elseif($_GET['view']=='profil')
+                        include 'dataPegawai/profil/profil.php';
+                    elseif($_GET['view']=='editprofil')
+                        include 'dataPegawai/profil/editprofil.php';
                  ?>
 
         <!-- Custom template | don't include it in your project! -->
