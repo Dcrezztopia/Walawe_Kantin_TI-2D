@@ -133,7 +133,7 @@
 									<?php } ?>
 
 
-<?php 
+                                    <?php 
 										$f = mysqli_query($conn,'SELECT * FROM waitingroom');
 										while ($row = mysqli_fetch_array($f)) {
 									?>
