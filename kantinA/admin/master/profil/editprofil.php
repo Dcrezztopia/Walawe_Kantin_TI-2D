@@ -29,7 +29,7 @@
                         <div class="row card-body">                           
                             <div class="row">
 								<div class="col-sm-8 ml-5 mr-5 mt-3 text-center">
-                                    <img src="../assets/img/pegawai.png" class="rounded" alt="user" width="201" height="177">
+                                    <img src="../assets/img/administrator.png" class="rounded" alt="user" width="201" height="177">
                                     <h4 class="fw-bold mt-3">ADMIN</h4>	                               
 								</div>
 							</div>     

@@ -8,7 +8,7 @@
 								<a href="#">
 									<i class="flaticon-home"></i>
 								</a>
-							</li>
+							</li>							
 							<li class="separator">
 								<i class="flaticon-right-arrow"></i>
 							</li>

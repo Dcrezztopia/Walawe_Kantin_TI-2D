@@ -18,12 +18,6 @@ $crudPengajuan = new CrudPengajuan($conn);
 						<i class="flaticon-right-arrow"></i>
 					</li>
 					<li class="nav-item">
-						<a href="#">Kantin</a>
-					</li>
-					<li class="separator">
-						<i class="flaticon-right-arrow"></i>
-					</li>
-					<li class="nav-item">
 						<a href="#">Pengajuan Barang</a>
 					</li>
 				</ul>
@@ -37,7 +31,6 @@ $crudPengajuan = new CrudPengajuan($conn);
 							<div class="card-title">Pengajuan Barang</div>
 						</div>
 						<form method="POST" action="" enctype="multipart/form-data">
-							<form method="POST" action="" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="nama_barang">Nama Barang</label>
 									<input type="text" id="nama_barang" name="nama_barang" class="form-control"
@@ -71,15 +64,13 @@ $crudPengajuan = new CrudPengajuan($conn);
 									<input type="number" name="harga" class="form-control" placeholder="Harga ..."
 										required="">
 								</div>
-
-					</div>
-					<div class="card-action">
-						<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save
-							Changes</button>
-						<a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-undo"></i> Cancel</a>
-					</div>
-					</form>
-
+								<div class="card-action">
+									<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save
+										Changes</button>
+									<a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-undo"></i> Cancel</a>
+								</div>
+						</form>
+					</div>							
 				</div>
 			</div>
 		</div>

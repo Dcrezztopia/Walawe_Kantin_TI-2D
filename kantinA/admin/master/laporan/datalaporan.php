@@ -22,27 +22,60 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Laporan Harian</h4>
+										<h4 class="card-title">Laporan Transaksi</h4>
 									</div>
 								</div>
-								<div class="card-body">
+								<div class="row card-body">	
+									<div class="col-md-3">
+										<div class="form-group mb-3">
+											<label>Tanggal Transaksi</label>
+											<input type="date" name="tanggalTransaksi" class="form-control">
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="form-group mb-3">
+											<label>Omzet</label>
+											<input type="number" name="omzet" class="form-control" placeholder="Rp" readonly>
+										</div>
+									</div>
+
 									<div class="table-responsive">
-										
-									</div>
-								</div>
-							</div>
-						</div>
-                        
-                        <div class="col-md-12">
-							<div class="card">
-								<div class="card-header">
-									<div class="d-flex align-items-center">
-										<h4 class="card-title">Laporan Mingguan</h4>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="table-responsive">
-										
+										<table id="add-row" class="display table table-striped table-hover">
+											<thead>
+												<tr>
+													<th>No</th>
+													<th>ID Transaksi</th>
+													<th>Tanggal</th>
+													<th>Jumlah Item</th>
+													<th>Total Pembayaran</th>                                    
+													<th>NIP Pegawai</th>
+													<th>Action</th>         
+												</tr>
+											</thead>
+
+											<tbody>
+												<?php
+															$no = 1;
+															$query = mysqli_query($conn,'SELECT * FROM waitingroom');
+															while ($pengajuan = mysqli_fetch_array($query)) {
+														?>
+												
+												<tr>
+													<td><?php echo $no++ ?></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>                                           
+													<td>
+													<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+													</td>
+												</tr>
+											
+												<?php } ?>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
