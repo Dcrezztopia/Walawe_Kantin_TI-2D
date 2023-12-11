@@ -13,12 +13,6 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Kantin</a>
-							</li>
-							<li class="separator">
-								<i class="flaticon-right-arrow"></i>
-							</li>
-							<li class="nav-item">
 								<a href="#">Pengajuan Barang</a>
 							</li>
 						</ul>

@@ -34,6 +34,12 @@ session_start();
     		width: 120px;
     		height: auto;
 		}
+
+        .nav-item.active a {
+            background-color: #007bff;
+            color: #fff;
+        }
+
 	</style>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -82,12 +88,11 @@ session_start();
         </div>
         <!-- Sidebar -->
         <div class="sidebar">
-
             <div class="sidebar-wrapper scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a href="?view=dashboard">
+                            <a href="?view=dashboard" class="nav-link">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -100,47 +105,71 @@ session_start();
                         </li>
 
                         <li class="nav-item">
-                            <a href="?view=datatransaksi">
-                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <a href="?view=datatransaksi" class="nav-link">
+                                <i class="fa fa-money" aria-hidden="true"></i>
                                 <p>Transaksi</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="?view=datapengajuan">
+                            <a href="?view=datapengajuan" class="nav-link">
                                 <i class="fa fa-upload"></i>
                                 <p>Pengajuan Barang</p>
                             </a>
                         </li>
-                        
+
                         <li class="nav-item">
-                            <a href="?view=datajenisbarang">
+                            <a href="?view=datajenisbarang" class="nav-link">
                                 <i class="fa fa-suitcase"></i>
                                 <p>Jenis Barang</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="?view=datapengajuan">
+                            <a href="?view=datastokbarang" class="nav-link">
                                 <i class="fas fa-briefcase"></i>
-                                <p>Data Barang</p>
+                                <p>Stok Barang</p>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-							<a href="../pegawai/setting.php">
-								<i class="fa fa-cog"></i>
-								<p>Setting</p>
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </span>
+							<h4 class="text-section">Setting</h4>
+						</li>
+					
+						<li class="nav-item">
+							<a href="?view=profil" class="nav-link">
+								<i class="fa fa-user" aria-hidden="true"></i>
+								<p>Profil</p>
 							</a>
 						</li>
 
                         <li class="nav-item">
-                            <a href="../logout.php">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutConfirmationModal">
                                 <i class="fas fa-lock"></i>
                                 <p>Logout</p>
                             </a>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin <b>logout</b>?</h4>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+                        <a class="btn btn-danger" href="../logout.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,35 +218,57 @@ session_start();
 
                     elseif($_GET['view']=='detailjenisbarang')
                         include 'dataPegawai/stokbarang/detailstokbarang.php';
+
+                    // Profil
+                    elseif($_GET['view']=='profil')
+                        include 'dataPegawai/profil/profil.php';
+                    elseif($_GET['view']=='editprofil')
+                        include 'dataPegawai/profil/editprofil.php';
                  ?>
 
         <!-- Custom template | don't include it in your project! -->
         <!-- End Custom template -->
 
     </div>
+    
+        <!-- Add Bootstrap JS and jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!--   Core JS Files   -->
+        <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+        <script src="../assets/js/core/popper.min.js"></script>
+        <script src="../assets/js/core/bootstrap.min.js"></script>
+        <!-- jQuery UI -->
+        <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+        <script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+        <!-- Bootstrap Toggle -->
+        <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+        <!-- jQuery Scrollbar -->
+        <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+        <!-- Datatables -->
+        <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+        <!-- Azzara JS -->
+        <script src="../assets/js/ready.min.js"></script>
+        <!-- Azzara DEMO methods, don't include it in your project! -->
+        <script src="../assets/js/setting-demo.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#add-row').DataTable({});
+        });
+        </script>
+        <!-- jQuery script to add "active" class to clicked menu item -->
+        <script>
+            $(document).ready(function () {
+                var currentUrl = window.location.href;
 
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <!-- jQuery UI -->
-    <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-    <script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-    <!-- Bootstrap Toggle -->
-    <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-    <!-- jQuery Scrollbar -->
-    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <!-- Datatables -->
-    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
-    <!-- Azzara JS -->
-    <script src="../assets/js/ready.min.js"></script>
-    <!-- Azzara DEMO methods, don't include it in your project! -->
-    <script src="../assets/js/setting-demo.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#add-row').DataTable({});
-    });
-    </script>
+                $(".nav-item a").each(function () {
+                    if (currentUrl.indexOf($(this).attr("href")) > -1) {
+                        $(this).closest('.nav-item').addClass("active");
+                    }
+                });
+            });
+        </script>
 
 </body>
 

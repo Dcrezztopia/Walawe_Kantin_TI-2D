@@ -1,8 +1,12 @@
+<?php
+include 'cruddatabarang.php';
+$cruddatabarang = new cruddatabarang($conn);
+?>
 <div class="main-panel">
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Barang</h4>
+						<h4 class="page-title">Daftar Barang</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="#">
@@ -13,7 +17,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">Barang</a>
+								<a href="#">Daftar Barang</a>
 							</li>
 						</ul>
 					</div>
@@ -22,7 +26,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div class="d-flex align-items-center">
-										<h4 class="card-title">Data Barang</h4>
+										<h4 class="card-title">Data Daftar Barang</h4>
 										<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalAddBarang">
 											<i class="fa fa-plus"></i>
 											 Tambah Data
@@ -162,6 +166,7 @@
 												<form method="POST" enctype="multipart/form-data" action="">
 												<div class="modal-body">
 													<input type="hidden" name="id" value="<?php echo $d['idBarang'] ?>">
+													<input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
 													<div class="form-group">
 														<label>Nama Barang</label>
 														<input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Nama Barang ..." required="">
@@ -186,6 +191,11 @@
 													<div class="form-group">
 														<label>Harga</label>
 														<input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
+													</div>
+													<div class="form-group">
+														<label>Gambar</label>
+														<img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
+														<input type="file" name="foto" class="form-control">
 													</div>
 													
 												</div>
@@ -260,6 +270,7 @@
 												<form method="POST" enctype="multipart/form-data" action="">
 												<div class="modal-body">
 													<input type="hidden" name="id" value="<?php echo $k['idBarang'] ?>">
+													<input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
 													<div class="form-group">
 														<label>Nama Barang</label>
 														<input readonly value="<?php echo $k['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Nama Barang ..." required="">
@@ -280,9 +291,8 @@
 														<label>SKU</label>
 														<input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control" placeholder="sku ..." required="">
 													</div>
-													
-
 													<div class="form-group">
+													<label>Gambar</label>
 														<img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
 													</div>
 												</div>
@@ -299,51 +309,40 @@
 		<?php
             if(isset($_POST['simpan']))
                 {
-                    $nama_barang = $_POST['namaBarang'];
-                    $jenis_barang = $_POST['jenisBarang'];
-                    $stok = $_POST['stok'];
-                    $harga = $_POST['harga'];
-                    $sku = $_POST['sku'];
-                    $nama_supplier = $_POST['namaSupplier'];
-    
-					// Ambil informasi file
-    
-					$foto = $_FILES['foto']['name'];
-    
-					$file_tmp = $_FILES['foto']['tmp_name'];
-    
-					$upload_path = '../assets/img/';
+					$data = array(
+						'namaBarang' => $_POST['namaBarang'],
+						'jenisBarang' => $_POST['jenisBarang'],
+						'stok' => $_POST['stok'],
+						'harga' => $_POST['harga'],
+						'sku' => $_POST['sku'],
+						'foto' => $_FILES['foto']['name'],
+						'file_tmp' => $_FILES['foto']['tmp_name'],
+					);
+					$cruddatabarang->Create($data);
 
-    
-					// Pindahkan file ke direktori yang diinginkan
-    
-					move_uploaded_file($file_tmp, $upload_path . $foto);
-                        
-                    mysqli_query($conn,"INSERT into barang values ('','$nama_barang','$jenis_barang','$stok','$harga','$sku', '$nama_supplier')");
-                    echo "<script>alert ('Data Berhasil Disimpan') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
                 }
 
                 elseif(isset($_POST['ubah']))
                 {
-					$idBarang = $_POST['id'];
-                	$nama_barang = $_POST['namaBarang'];
-                    $jenis_barang = $_POST['jenisBarang'];
-                    $stok = $_POST['stok'];
-                    $harga = $_POST['harga'];
-                    $sku = $_POST['sku'];
-      
-                        
-                    mysqli_query($conn,"UPDATE barang set namaBarang='$nama_barang', jenisBarang='$jenis_barang', stok='$stok', harga='$harga', sku='$sku' where idBarang='$idBarang'");
-                    echo "<script>alert ('Data Berhasil Diubah') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+					$data = array(
+						'id' => $_POST['id'],
+						'namaBarang' => $_POST['namaBarang'],
+						'jenisBarang' => $_POST['jenisBarang'],
+						'stok' => $_POST['stok'],
+						'harga' => $_POST['harga'],
+						'sku' => $_POST['sku'],
+						'gambarLama' => $_POST['gambarLama'],
+						'foto' => $_FILES['foto']['name'],
+						'file_tmp' => $_FILES['foto']['tmp_name'],
+					);
+					$cruddatabarang->Update($data);
                 }
 
                 elseif(isset($_POST['hapus']))
                 {
-                	$id = $_POST['id'];
-                	mysqli_query($conn,"DELETE from barang where idBarang='$id'");
-                    echo "<script>alert ('Data Berhasil Dihapus') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+					$data = array(
+						'idBarang' => $_POST['id'],
+					);
+					$cruddatabarang->Delete($data);
                 }
                 ?>
