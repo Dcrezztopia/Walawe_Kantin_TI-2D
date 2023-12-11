@@ -20,6 +20,12 @@ $crudPengajuan = new CrudPengajuan($conn);
 					<li class="nav-item">
 						<a href="#">Pengajuan Barang</a>
 					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Tambah Pengajuan Barang</a>
+					</li>
 				</ul>
 			</div>
 
@@ -28,15 +34,21 @@ $crudPengajuan = new CrudPengajuan($conn);
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">Pengajuan Barang</div>
+							<div class="card-title">Jenis Barang
+								<a href="?view=datapengajuan">
+									<button	button type="button" class="close" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</a>
+							</div>
 						</div>
+						
 						<form method="POST" action="" enctype="multipart/form-data">
-								<div class="form-group">
+								<div class="form-group col-md-4 ml-3 mt-2">
 									<label for="nama_barang">Nama Barang</label>
-									<input type="text" id="nama_barang" name="nama_barang" class="form-control"
-										placeholder="Masukkan Nama Barang..." required>
+									<input type="text" id="nama_barang" name="nama_barang" class="form-control"	placeholder="Nama Barang ..." required>
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-4 ml-3">
 									<?php
 									$query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
 									?>
@@ -49,25 +61,24 @@ $crudPengajuan = new CrudPengajuan($conn);
 										?>
 									</select>
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-4 ml-3">
 									<label>SKU</label>
 									<input type="text" name="sku" class="form-control" placeholder="SKU ..."
 										required="">
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-4 ml-3">
 									<label>Nama Supplier</label>
 									<input type="text" name="namasupplier" class="form-control"
 										placeholder="Nama Supplier ..." required="">
 								</div>
-								<div class="form-group">
+								<div class="form-group col-md-4 ml-3">
 									<label>Harga</label>
 									<input type="number" name="harga" class="form-control" placeholder="Harga ..."
 										required="">
 								</div>
 								<div class="card-action">
-									<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save
-										Changes</button>
-									<a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-undo"></i> Cancel</a>
+									<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+									<a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</a>
 								</div>
 						</form>
 					</div>							
