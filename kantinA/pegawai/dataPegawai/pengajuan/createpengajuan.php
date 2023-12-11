@@ -58,14 +58,6 @@
 							<label>Harga</label>
 							<input type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
 						</div>
-						<div class="form-group">
-							<label>Status</label>
-							<select name="status" class="form-control" required="">
-								<option value="menunggu">menunggu</option>
-								<option value="disetujui">disetujui</option>
-								<option value="ditolak">ditolak</option>
-							</select>
-						</div>
 
 								</div>
 								<div class="card-action">

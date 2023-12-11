@@ -87,8 +87,8 @@
 																		<input type="hidden" name="sku" value="<?php echo $pinjamruangan['sku']; ?>">
 																		<input type="hidden" name="namasupplier" value="<?php echo $pinjamruangan['namasupplier']; ?>">
 																		<input type="hidden" name="harga" value="<?php echo $pinjamruangan['harga']; ?>">
-																		<a href="#modalEditBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
-																		<a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+																		<button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Accept </button>
+																		<button type="submit" name="hapus" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
 																	</form>
 																</td>
 											    </tr>

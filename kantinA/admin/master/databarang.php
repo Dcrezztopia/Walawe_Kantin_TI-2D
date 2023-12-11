@@ -35,6 +35,7 @@
 											<thead>
 												<tr>
 													<th>No</th>
+													<th>Gambar</th>
 													<th>Nama Barang</th>
 													<th>Jenis Barang</th>
 													<th>Stok</th>
@@ -51,6 +52,7 @@
 												?>
 												<tr>
 													<td><?php echo $no++ ?></td>
+													<td><img src="../img/<?php echo $barang['gambar'] ?>" alt="Gambar Barang" class="gambar-barang"></td>
 													<td><?php echo $barang['namaBarang'] ?></td>
 													<td><?php echo $barang['jenisBarang'] ?></td>
 													<td><?php echo $barang['stok'] ?></td>
@@ -281,7 +283,7 @@
 													
 
 													<div class="form-group">
-														<img src="master/barang/Fotobarang/<?php echo $k['foto'] ?>" width="100%" height="200">
+														<img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
 													</div>
 												</div>
 												<div class="modal-footer no-bd">
@@ -303,10 +305,19 @@
                     $harga = $_POST['harga'];
                     $sku = $_POST['sku'];
                     $nama_supplier = $_POST['namaSupplier'];
-                    
-                    
-                        move_uploaded_file($file_tmp, 'master/barang/Fotobarang/' . $foto);
-						
+    
+					// Ambil informasi file
+    
+					$foto = $_FILES['foto']['name'];
+    
+					$file_tmp = $_FILES['foto']['tmp_name'];
+    
+					$upload_path = '../assets/img/';
+
+    
+					// Pindahkan file ke direktori yang diinginkan
+    
+					move_uploaded_file($file_tmp, $upload_path . $foto);
                         
                     mysqli_query($conn,"INSERT into barang values ('','$nama_barang','$jenis_barang','$stok','$harga','$sku', '$nama_supplier')");
                     echo "<script>alert ('Data Berhasil Disimpan') </script>";

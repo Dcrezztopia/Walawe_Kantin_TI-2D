@@ -3,6 +3,11 @@ include '../koneksi.php';
 session_start();
 ?>
 
+<?php 
+$p = mysqli_query($conn,'SELECT count(*) as waitingroom from waitingroom');
+$q = mysqli_fetch_array($p);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,7 +106,7 @@ session_start();
 							<a href="?view=datapengajuan">
 								<i class="fa fa-upload"></i>
 								<p class="sub-item">Pengajuan</p>
-								<p>&nbsp;(0 Waiting)</p>
+								<p>&nbsp;(<?php echo $q['waitingroom'] ?> Waiting)</p>
 							</a>
                         </li>
                         

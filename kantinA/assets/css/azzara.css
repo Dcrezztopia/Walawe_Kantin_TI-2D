@@ -2283,6 +2283,17 @@ label.error {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
 
+/* gambar tabel databarang */
+
+  .gambar-barang {
+    
+    width: 250px; 
+    height: 200px; 
+    
+    
+  }
+  
+
 /*     Navbar     */
 .navbar .navbar-nav .nav-item {
   margin-right: 7px; }
