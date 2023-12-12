@@ -16,8 +16,10 @@ git push origin coba
 
 git pull origin main
 
-# kalo error ! [rejected] 
+# kalo mau push lalu terdapat error ! [rejected] 
 
 git fetch
-git pull --rebase origin main
-git push origin main
+git pull 
+git add .
+git commit -m "Upload File"
+git push
