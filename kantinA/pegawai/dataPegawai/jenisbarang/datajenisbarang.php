@@ -76,8 +76,8 @@
 </div>
 
 <div class="modal fade" id="modalHapusBarang<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
 												<div class="modal-header no-bd">
 													<h5 class="modal-title">
 														<span class="fw-mediumbold">
@@ -100,11 +100,11 @@
 													<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
 												</div>
 												</form>
-											</div>
 										</div>
 									</div>
+									
 
-                                    
+
 <?php 
 										$p = mysqli_query($conn,'SELECT * from waitingroom');
 										while($d = mysqli_fetch_array($p)) {

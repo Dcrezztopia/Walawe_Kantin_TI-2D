@@ -51,7 +51,7 @@ class CrudPengajuan implements Crud
         mysqli_query($this->connection, "UPDATE waitingroom set namabarang='$nama_barang', jenisbarang='$jenis_barang', sku='$sku', namasupplier='$namasupplier', harga='$harga' where id_waiting='$id_waiting'");
 
         echo "<script>alert ('Data Berhasil Diubah') </script>";
-        echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
+        echo "<script>window.location.replace('?view=datapengajuan');</script>";
     }
 
     public function Delete($data)

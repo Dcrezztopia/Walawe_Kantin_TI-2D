@@ -1,3 +1,9 @@
+<?php
+include 'crudPengajuan.php';
+
+$crudPengajuan = new CrudPengajuan($conn);
+?>
+
 <div class="main-panel">
 			<div class="content">
 				<div class="page-inner">
@@ -24,58 +30,90 @@
                         </ul>
 					</div>
 
-					<!-- TAMBAH DAFTAR BARANG -->
+
+<?php
+
+$p = mysqli_query($conn, 'SELECT * from waitingroom');
+while ($pengajuan = mysqli_fetch_array($p)) {
+    ?>
+
+					<!-- TAMBAH EDIT BARANG -->
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
 									<div class="card-title">Edit Pengajuan Barang</div>
 								</div>
-								<form method="POST" action="" enctype="multipart/form-data">
 
-                                    
-
-                                    <div class="form-group col-md-4 ml-3 mt-2">
-                                        <label for="nama_barang">Nama Barang</label>
-                                        <input value="<?php echo $d['nama_barang'] ?>" type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Sari" required>
-                                    </div>
-                                    <div class="form-group col-md-4 ml-3">
-                                        <?php
-                                        $query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
-                                        ?>
-                                        <label>Jenis Barang</label>
-                                        <select value="<?php echo $d['jenisbarang'] ?>" name="jenis_barang" class="form-control" required="">
+                                <form method="POST" enctype="multipart/form-data" action="">
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id" value="<?php echo $pengajuan['id_waiting'] ?>">
+                                        <div class="form-group col-md-4 ml-3 mt-2">
+                                            <label>Nama Barang</label>
+                                            <input value="<?php echo $pengajuan['namabarang'] ?>" type="text" name="namabarang"
+                                                class="form-control" placeholder="Nama Barang ..." required="">
+                                        </div>
+                                        <div class="form-group col-md-4 ml-3">
                                             <?php
-                                            while ($jenis_barang = mysqli_fetch_assoc($query)) {
-                                                echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $jenis_barang['jenisBarang'] . '</option>';
-                                            }
+                                            $query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
                                             ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-4 ml-3">
-                                        <label>SKU</label>
-                                        <input value="<?php echo $d['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU ..."
-                                            required="">
-                                    </div>
-                                    <div class="form-group col-md-4 ml-3">
-                                        <label>Nama Supplier</label>
-                                        <input value="<?php echo $d['namasupplier'] ?>" type="text" name="namasupplier" class="form-control"
-                                            placeholder="Nama Supplier ..." required="">
-                                    </div>
-                                    <div class="form-group col-md-4 ml-3">
-                                        <label>Harga</label>
-                                        <input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga ..."
-                                            required="">
+                                            <label>Jenis Barang</label>
+                                            <select name="jenisbarang" class="form-control" required="">
+                                                <?php
+                                                while ($jenis_barang = mysqli_fetch_assoc($query)) {
+                                                    echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $jenis_barang['jenisBarang'] . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4 ml-3">
+                                            <label>SKU</label>
+                                            <input value="<?php echo $pengajuan['sku'] ?>" type="text" name="sku" class="form-control"
+                                                placeholder="SKU ..." required="">
+                                        </div>
+                                        <div class="form-group col-md-4 ml-3">
+                                            <label>Nama Supplier</label>
+                                            <input value="<?php echo $pengajuan['namasupplier'] ?>" type="text" name="namasupplier"
+                                                class="form-control" placeholder="Nama Supplier ..." required="">
+                                        </div>
+                                        <div class="form-group col-md-4 ml-3">
+                                            <label>Harga</label>
+                                            <input value="<?php echo $pengajuan['harga'] ?>" type="number" name="harga" class="form-control"
+                                                placeholder="Harga ..." required="">
+                                        </div>
+
                                     </div>
                                     <div class="card-action">
-                                        <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
-                                        <a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</a>
+                                        <button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i> Save
+                                            Changes</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
+                                            Cancel</button>
                                     </div>
-						        </form>
-								
+                                </form>
+
 							</div>
 						</div>
 					</div>
+                    <?php } ?>
 				</div>
 			</div>
 		</div>
+
+        
+<?php
+
+if (isset($_POST['ubah'])) {
+    $data = array(
+        'id_waiting' => $_POST['id'],
+        'nama_barang' => $_POST['namabarang'],
+        'jenis_barang' => $_POST['jenisbarang'],
+        'sku' => $_POST['sku'],
+        'namasupplier' => $_POST['namasupplier'],
+        'harga' => $_POST['harga']
+    );
+    // echo "<script>alert ('pe') </script>";
+    $crudPengajuan->Update($data);
+}
+?>
+
+        

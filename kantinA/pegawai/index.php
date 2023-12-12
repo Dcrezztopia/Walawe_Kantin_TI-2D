@@ -209,6 +209,9 @@ session_start();
                     elseif($_GET['view']=='detailpengajuan')
                         include 'dataPegawai/pengajuan/detailpengajuan.php';
 
+                    elseif($_GET['view']=='editpengajuan')
+                        include 'dataPegawai/pengajuan/editpengajuan.php';
+
                     // Data Jenis Barang
                     elseif($_GET['view']=='datajenisbarang')
                         include 'dataPegawai/jenisbarang/datajenisbarang.php';

@@ -76,6 +76,7 @@
 </div>
 
 
+
 <?php 
 										$p = mysqli_query($conn,'SELECT * from waitingroom');
 										while($d = mysqli_fetch_array($p)) {
