@@ -87,8 +87,8 @@
 																		<input type="hidden" name="sku" value="<?php echo $pinjamruangan['sku']; ?>">
 																		<input type="hidden" name="namasupplier" value="<?php echo $pinjamruangan['namasupplier']; ?>">
 																		<input type="hidden" name="harga" value="<?php echo $pinjamruangan['harga']; ?>">
-																		<button type="Accept" name="simpan" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></button>
-																		<button type="Delete" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+																		<button type="Accept" name="simpan" class="btn btn-xs btn-success"><i class="fa fa-check-square-o"></i></button>
+																		<button type="Delete" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-times-circle"></i></button>
 																	</form>
 																</td>
 											   				</tr>
@@ -143,7 +143,7 @@
 			mysqli_query($conn, "INSERT INTO barang (namabarang, jenisbarang, sku, harga, namasupplier) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier')");
 			
 			if ($rowCheckJenis) {
-				echo "<script>alert('Data berhasil disimpan jenis')</script>";
+				echo "<script>alert('Data berhasil disimpan')</script>";
 			} else {
 				echo "<script>alert('Data berhasil disimpan (jenis barang baru)')</script>";
 			}

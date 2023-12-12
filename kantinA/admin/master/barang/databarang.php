@@ -126,7 +126,7 @@ $crudDataBarang = new crudDataBarang($conn);
 													</div>
 													<div class="form-group">
 														<label>SKU</label>
-														<input type="number" name="SKU" class="form-control" placeholder="SKU ..." required="">
+														<input type="text" name="SKU" class="form-control" placeholder="SKU ..." required="">
 													</div>
 													<div class="form-group">
 														<label>Nama Supplier</label>
@@ -138,8 +138,8 @@ $crudDataBarang = new crudDataBarang($conn);
 													</div>
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
-													<button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
+													<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+													<button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 												</div>
 												</form>
 											</div>
@@ -201,8 +201,8 @@ $crudDataBarang = new crudDataBarang($conn);
 													
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="submit" name="ubah" class="btn btn-primary"><i class="fa fa-save"></i>Save Changes</button>
-													<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
+													<button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i> Save Changes</button>
+													<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 												</div>
 												</form>
 											</div>

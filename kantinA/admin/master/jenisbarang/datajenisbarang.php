@@ -52,8 +52,8 @@
 													<td><?php echo $barang['jenisBarang'] ?></td>
 													<td><?php echo $barang['deskripsi'] ?></td>
 													<td>	
-														<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
-														<a href="#modalEditBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+														<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+														<a href="#modalEditBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
 														<a href="#modalHapusBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
 													</td>
 												</tr>
@@ -94,7 +94,7 @@
 													</div>
 												</div>
 												<div class="modal-footer no-bd">
-													<button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+													<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
 													<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
 												</div>
 												</form>
@@ -209,12 +209,7 @@
 													</div>
 													<div class="form-group">
 														<label>Deskripsi </label>
-														<input readonly value="<?php echo $k['deskripsi'] ?>" type="text" name="sku" class="form-control" placeholder="sku ..." required="">
-													</div>
-													
-
-													<div class="form-group">
-														<img src="master/barang/Fotobarang/<?php echo $k['foto'] ?>" width="100%" height="200">
+														<input readonly value="<?php echo $k['deskripsi'] ?>" type="text" name="deskripsi" class="form-control" placeholder="Deskripsi ..." required="">
 													</div>
 												</div>
 												<div class="modal-footer no-bd">
@@ -231,13 +226,11 @@
             if(isset($_POST['simpan']))
                 {
                     $jenis_barang = $_POST['jenisBarang'];
-                    $deskripsi = $_POST['deskripsi']; 
-                        move_uploaded_file($file_tmp, 'master/barang/Fotobarang/' . $foto);
-						
+                    $deskripsi = $_POST['deskripsi']; 						
                         
                     mysqli_query($conn,"INSERT into jenisbarang values ('$jenis_barang','$deskripsi')");
                     echo "<script>alert ('Data Jenis Barang Berhasil Disimpan') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+                    echo"<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
                 }
 
                 elseif(isset($_POST['ubah']))
@@ -247,7 +240,7 @@
 
                     mysqli_query($conn,"UPDATE jenisbarang set  jenisBarang='$jenis_barang', deskripsi='$deskripsi'");
                     echo "<script>alert ('Data Jenis Barang Berhasil Diubah') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+                    echo"<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
                 }
 
                 elseif(isset($_POST['hapus']))
@@ -255,6 +248,6 @@
                 	$jenis_barang = $_POST['jenisBarang'];
                 	mysqli_query($conn,"DELETE from jenisbarang where jenisBarang='$jenis_barang'");
                     echo "<script>alert ('Data Jenis Barang Berhasil Dihapus') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+                    echo"<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
                 }
                 ?>

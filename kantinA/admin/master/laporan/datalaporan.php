@@ -69,7 +69,7 @@
 													<td></td>
 													<td></td>                                           
 													<td>
-													<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-success"><i class="fa fa-eye"></i></a>
+													<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
 													</td>
 												</tr>
 											
