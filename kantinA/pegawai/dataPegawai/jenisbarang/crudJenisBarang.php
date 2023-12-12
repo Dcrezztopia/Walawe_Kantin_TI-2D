@@ -2,7 +2,7 @@
 
 require_once '../crud.php';
 $connection = $conn;
-class CrudPengajuan implements Crud
+class CrudJenisBarang implements Crud
 {
     private $connection;
     public function __construct($conn)
@@ -13,20 +13,17 @@ class CrudPengajuan implements Crud
 
     public function Create($data)
     {
-        $nama_barang = $data['nama_barang'];
-        $jenis_barang = $data['jenis_barang'];
-        $sku = $data['sku'];
-        $namasupplier = $data['namasupplier'];
-        $harga = $data['harga'];
-        $status = $data['status'];
+        $jenis_barang = $data['jenisBarang'];
+        $deskripsi = $data['deskripsi'];
+
 
         // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
-        $query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga', '$status')";
+        $query_insert = "INSERT INTO waitingroom VALUES ('$jenis_barang','$deskripsi')";
         $result = $this->connection->query($query_insert);
 
         if ($result) {
             echo "<script>alert('Data Berhasil Disimpan')</script>";
-            echo "<script>window.location.replace('?view=datapengajuan');</script>";
+            echo "<script>window.location.replace('?view=datajenisbarang');</script>";
         } else {
             echo "<script>alert('Gagal menyimpan data')</script>";
         }

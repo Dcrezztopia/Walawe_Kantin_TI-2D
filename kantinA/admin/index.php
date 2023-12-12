@@ -156,14 +156,21 @@ $q = mysqli_fetch_array($p);
         <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin <b>logout</b>?</h4>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-						<button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+                    <div class="modal-header no-bd">
+						<h5 class="modal-title">
+							<span class="fw-mediumbold">Logout</span> 
+							<span class="fw-light">Admin</span>
+						</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+                    <div class="modal-body">
+						<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+					    <h4>Apakah anda ingin <b>Logout</b>?</h4>
+					</div>
+                    <div class="modal-footer no-bd">
+                        <button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
                         <a class="btn btn-danger" href="../logout.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
                     </div>
                 </div>

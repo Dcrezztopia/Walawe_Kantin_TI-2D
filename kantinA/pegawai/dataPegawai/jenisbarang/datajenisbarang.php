@@ -23,7 +23,7 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Jenis Barang</h4>
-                                <a href="?view=createpengajuan" class="btn btn-primary btn-round ml-auto">
+                                <a href="?view=createjenisbarang" class="btn btn-primary btn-round ml-auto">
                                     <i class="fa fa-plus"></i>
                                     Tambah Data
                                 </a>
@@ -57,7 +57,7 @@
                                             <td><?php echo $pengajuan['sku'] ?></td>
                                             
                                             <td>
-                                            <a href="#modalDetailBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+                                            <a href="?view=detailjenisbarang"  data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
 											<a href="#modalEditBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
 											<a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>"  data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
                                             </td>
@@ -74,6 +74,35 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalHapusBarang<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+												<div class="modal-header no-bd">
+													<h5 class="modal-title">
+														<span class="fw-mediumbold">
+														Hapus</span> 
+														<span class="fw-light">
+															Barang
+														</span>
+													</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form method="POST" enctype="multipart/form-data" action="">
+												<div class="modal-body">
+													<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+													<h4>Apakah Anda Ingin Menghapus Data Ini ?</h4>
+												</div>
+												<div class="modal-footer no-bd">
+													<button type="submit" name="hapus" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+													<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
+												</div>
+												</form>
+										</div>
+									</div>
+									
 
 
 <?php 
