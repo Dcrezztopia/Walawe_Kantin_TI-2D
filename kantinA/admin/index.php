@@ -142,7 +142,7 @@ $q = mysqli_fetch_array($p);
 
                     	<li class="nav-item">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutConfirmationModal">
-                                <i class="fas fa-lock"></i>
+                                <i class="fa fa-sign-out"></i>
                                 <p>Logout</p>
                             </a>
                         </li>

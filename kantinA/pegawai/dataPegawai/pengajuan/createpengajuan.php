@@ -74,33 +74,7 @@ $crudPengajuan = new CrudPengajuan($conn);
 								<div class="form-group col-md-4 ml-3">
 									<label>Harga</label>
 									<input type="number" name="harga" class="form-control" placeholder="Harga ..."
-										required="">
-
-
-									
-							<label for="nama_barang">Nama Barang</label>
-							<input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Masukkan Nama Barang..." required>
-						</div>
-						<div class="form-group">
-							<label>Jenis Barang</label>
-							<select name="jenis_barang" class="form-control" required="">
-								<option value="makanan">Makanan</option>
-								<option value="minuman">Minuman</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>SKU</label>
-							<input type="text" name="sku" class="form-control" placeholder="SKU ..." required="">
-						</div>
-						<div class="form-group">
-							<label>Nama Supplier</label>
-							<input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier ..." required="">
-						</div>
-						<div class="form-group">
-							<label>Harga</label>
-							<input type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
-						</div>
-
+										required="">		
 								</div>
 								<div class="card-action">
 									<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
