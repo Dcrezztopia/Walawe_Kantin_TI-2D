@@ -20,7 +20,7 @@ class crudDataBarang implements Crud
         $sku = $_POST['sku'];
         $nama_supplier = $_POST['namaSupplier'];
         $foto = $_FILES['foto']['name'];
-        $file_tmp = $_FILES['foto']['tmp_name'];
+        $file_tmp = $_FILES['foto']['tmp_name'];    
         $upload_path = '../img/';
 
         move_uploaded_file($file_tmp, $upload_path . $foto);
