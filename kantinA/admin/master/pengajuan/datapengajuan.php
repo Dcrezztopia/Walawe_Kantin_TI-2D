@@ -87,11 +87,11 @@
 																		<input type="hidden" name="sku" value="<?php echo $pinjamruangan['sku']; ?>">
 																		<input type="hidden" name="namasupplier" value="<?php echo $pinjamruangan['namasupplier']; ?>">
 																		<input type="hidden" name="harga" value="<?php echo $pinjamruangan['harga']; ?>">
-																		<button type="submit" name="simpan" class="btn btn-primary"><i class="fa fa-save"></i> Accept </button>
-																		<button type="submit" name="hapus" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+																		<button type="Accept" name="simpan" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></button>
+																		<button type="Delete" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
 																	</form>
 																</td>
-											    </tr>
+											   				</tr>
 															<?php } ?>
 														</tbody>
 													

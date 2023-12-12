@@ -2,12 +2,10 @@
 include '../koneksi.php';
 session_start();
 ?>
-
 <?php 
 $p = mysqli_query($conn,'SELECT count(*) as waitingroom from waitingroom');
 $q = mysqli_fetch_array($p);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -223,7 +221,7 @@ $q = mysqli_fetch_array($p);
 
                     // Data Barang
                     elseif($_GET['view']=='databarang')
-                        include 'master/databarang/databarang.php';
+                        include 'master/barang/databarang.php';
                     
                     // Data Pengajuan
                     elseif($_GET['view']=='datapengajuan')
