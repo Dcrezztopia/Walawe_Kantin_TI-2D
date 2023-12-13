@@ -18,13 +18,13 @@ $crudJenisBarang = new CrudJenisBarang($conn);
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Pengajuan Barang</a>
+                        <a href="#">Jenis Barang</a>
                     </li>
                     <li class="separator">
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Tambah Pengajuan Barang</a>
+                        <a href="#">Tambah Jenis Barang</a>
                     </li>
                 </ul>
             </div>
@@ -45,16 +45,16 @@ $crudJenisBarang = new CrudJenisBarang($conn);
                             </div>
 
                             <form method="POST" enctype="multipart/form-data" action="">
+                                <!-- <input type="hidden" name="jenisBarang" value="<?php echo $jenis['jenisbarang'] ?>"> -->
                                 <div class="modal-body">
-                                    <input type="hidden" name="id" value="<?php echo $jenis['jenisBarang'] ?>">
                                     <div class="form-group col-md-4 ml-3 mt-2">
                                         <label>Jenis Barang</label>
-                                        <input value="<?php echo $jenis['jenisBarang'] ?>" type="text" name="namabarang"
+                                        <input value="<?php echo $jenis['jenisBarang'] ?>" type="text" name="jenis_barang"
                                             class="form-control" placeholder="Jenis Barang ..." required="">
                                     </div>
                                     <div class="form-group col-md-4 ml-3">
                                         <label>Deskripsi</label>
-                                        <input value="<?php echo $jenis['deskripsi'] ?>" type="text" name="sku"
+                                        <input value="<?php echo $jenis['deskripsi'] ?>" type="text" name="deskripsi"
                                             class="form-control" placeholder="Deskripsi ..." required="">
                                     </div>
 
@@ -63,9 +63,8 @@ $crudJenisBarang = new CrudJenisBarang($conn);
                                     <button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i>
                                         Save
                                         Changes</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i
-                                            class="fa fa-times"></i>
-                                        Cancel</button>
+                                    <a href="?view=datajenisbarang" class="btn btn-danger"><i class="fa fa-times"></i>
+                                        Cancel</a>
                                 </div>
                             </form>
 
@@ -81,14 +80,8 @@ $crudJenisBarang = new CrudJenisBarang($conn);
 <?php
 
 if (isset($_POST['ubah'])) {
-    $data = array(
-        'id_waiting' => $_POST['id'],
-        'nama_barang' => $_POST['namabarang'],
-        'jenis_barang' => $_POST['jenisbarang'],
-        'sku' => $_POST['sku'],
-        'namasupplier' => $_POST['namasupplier'],
-        'harga' => $_POST['harga']
-    );
+    $data = array('jenis_barang' => $_POST['jenis_barang'],
+        'deskripsi' => $_POST['deskripsi']);
     // echo "<script>alert ('pe') </script>";
     $crudJenisBarang->Update($data);
 }

@@ -18,7 +18,7 @@ class CrudJenisBarang implements Crud
 
 
         // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
-        $query_insert = "INSERT INTO waitingroom VALUES ('$jenis_barang','$deskripsi')";
+        $query_insert = "INSERT INTO jenisbarang VALUES ('$jenis_barang','$deskripsi')";
         $result = $this->connection->query($query_insert);
 
         if ($result) {
@@ -37,11 +37,11 @@ class CrudJenisBarang implements Crud
     public function Update($data)
     {
         // echo "<script>alert ('pe') </script>";
-        $jenis_barang = $data['jenisBarang'];
+        $jenis_barang = $data['jenis_barang'];
         $deskripsi = $data['deskripsi'];
 
 
-        mysqli_query($this->connection, "UPDATE waitingroom set jenisBarang = '$jenis_barang', deskripsi = '$deskripsi'");
+        mysqli_query($this->connection, "UPDATE jenisbarang set jenisBarang = '$jenis_barang', deskripsi = '$deskripsi' WHERE jenisBarang = '$jenis_barang'");
 
         echo "<script>alert ('Data Berhasil Diubah') </script>";
         echo "<script>window.location.replace('?view=datajenisbarang');</script>";
