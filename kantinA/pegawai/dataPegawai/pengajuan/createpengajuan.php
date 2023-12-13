@@ -74,10 +74,7 @@ $crudPengajuan = new CrudPengajuan($conn);
 								<div class="form-group col-md-4 ml-3">
 									<label>Harga</label>
 									<input type="number" name="harga" class="form-control" placeholder="Harga ..."
-										required="">
-						</div>
-
-
+										required="">		
 								</div>
 								<div class="card-action">
 									<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>

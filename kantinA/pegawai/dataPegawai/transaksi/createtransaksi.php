@@ -39,8 +39,8 @@
 								</div>
 								<form method="POST" action="" enctype="multipart/form-data">
 									<div class=" row card-body">
-										<div class="col-md-6">
-											<div style="display: grid; grid-template-columns:1fr 1fr;">
+										<div class="col-md-4">
+											<div style="display: grid; grid-template-columns:2fr 1fr;">
 												<div class="form-group" id="skuFormGroup">
 													<label class="fw-bold">SKU</label>
 													<input type="text" name="sku" id="skuInput" class="form-control" placeholder="RT001-001-STRW" required="">
@@ -51,21 +51,20 @@
 													<span>Roti Strawberry</span>
 												</div>
 											</div>
-											<div style="display: grid; grid-template-columns:1fr 1fr;">
+											<div style="display: grid; grid-template-columns:2fr 1fr;">
 												<div class="form-group" id="jumlahFormGroup">
 													<label class="fw-bold">Jumlah</label>
 													<input type="number" name="harga" id="jumlahInput" class="form-control" placeholder="0" required="">
 												</div>
 											</div>
-											<div style="display: grid; grid-template-columns:1fr 1fr;">
+											<div style="display: grid; grid-template-columns:2fr 1fr;">
 												<div class="form-group" id="idTransaksiFormGroup">
 													<label class="fw-bold">Nominal</label>
 													<input type="number" name="nominal" id="nominalinput" class="form-control" placeholder="Rp" required="">
 												</div>
 											</div>
-										</div>
-										<div class="col-md-6">
-											<div style="display: grid; grid-template-columns:1fr 1fr;">
+
+											<div style="display: grid; grid-template-columns:2fr 1fr;">
 												<div class="form-group" id="idTransaksiFormGroup">
 													<label class="fw-bold">ID Transaksi</label>
 													<input type="text" id="idTransaksi" class="form-control" value="12345" readonly>
@@ -76,10 +75,42 @@
 													<label class="fw-bold">Total</label>
 												</div>
 												<div class="form-group w-100" id="angkaNominal" style="padding-left: 0;">
-													<span id="total" style="color: red; font-size: 40px">1000</span>
+													<span id="total" style="color: red; font-size: 70px">1000</span>
 												</div>
 											</div>
 										</div>
+										<div class="row col-md-8">
+											<div class="table-responsive d-flex">
+												<table id="add-row" class="display table table-striped table-hover" >
+													<thead>
+														
+														<tr>
+															<th>No</th>
+															
+															<th>SKU</th>
+															<th>Nama Barang</th>													
+															<th>Harga</th>
+															<th>Jumlah</th>
+															<th>Action</th>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+									
+														<td>	
+															<a href="modalHapusTransaksi<?php echo $row[''] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+														</td>
+													</tbody>
+												</table>                                            
+											</div>
+										</div>
+										
+                                    </div>
 
 										<div class="card-action w-100">			
 											<button type="submit" name="tambah" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</button>											
@@ -90,37 +121,6 @@
 									</div>
 								</form>
 								
-
-								<div class="card-body">
-                                    <div class="table-responsive">
-                                            <table id="add-row" class="display table table-striped table-hover" >
-                                                <thead>
-                                                    
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Foto</th>
-                                                        <th>SKU</th>
-                                                        <th>Nama Barang</th>													
-                                                        <th>Harga</th>
-                                                        <th>Jumlah</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                
-                                                <tbody>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td>	
-                                                        <a href="modalHapusTransaksi<?php echo $row[''] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-                                                    </td>
-                                                </tbody>
-                                            </table>                                            
-                                        </div>
-                                    </div>
 							</div>
 						</div>
 					</div>

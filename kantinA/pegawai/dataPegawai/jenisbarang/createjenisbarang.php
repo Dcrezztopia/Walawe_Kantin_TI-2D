@@ -59,7 +59,7 @@ $crudJenisBarang = new CrudJenisBarang($conn);
 							<div class="card-action">
 								<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i>
 									Save</button>
-								<a href="?view=datapengajuan" class="btn btn-danger"><i class="fa fa-times"></i>
+								<a href="?view=datajenisbarang" class="btn btn-danger"><i class="fa fa-times"></i>
 									Cancel</a>
 							</div>
 						</form>

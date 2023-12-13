@@ -37,18 +37,14 @@ class CrudJenisBarang implements Crud
     public function Update($data)
     {
         // echo "<script>alert ('pe') </script>";
-        $id_waiting = $data['id_waiting'];
-        $nama_barang = $data['nama_barang'];
-        $jenis_barang = $data['jenis_barang'];
-        $sku = $data['sku'];
-        $namasupplier = $data['namasupplier'];
-        $harga = $data['harga'];
+        $jenis_barang = $data['jenisBarang'];
+        $deskripsi = $data['deskripsi'];
 
 
-        mysqli_query($this->connection, "UPDATE waitingroom set namabarang='$nama_barang', jenisbarang='$jenis_barang', sku='$sku', namasupplier='$namasupplier', harga='$harga' where id_waiting='$id_waiting'");
+        mysqli_query($this->connection, "UPDATE waitingroom set jenisBarang = '$jenis_barang', deskripsi = '$deskripsi'");
 
         echo "<script>alert ('Data Berhasil Diubah') </script>";
-        echo "<script>window.location.replace('?view=datapengajuan');</script>";
+        echo "<script>window.location.replace('?view=datajenisbarang');</script>";
     }
 
     public function Delete($data)
