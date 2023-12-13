@@ -94,8 +94,8 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <a href="?view=editpengajuan"
-                                                         title="Edit" class="btn btn-xs btn-primary">
+                                                    <a href="?view=editpengajuan" title="Edit"
+                                                        class="btn btn-xs btn-warning">
                                                         <i class="fa fa-edit"></i></a>
                                                 </td>
                                             </tr>
