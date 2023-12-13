@@ -144,8 +144,10 @@
 			
 			if ($rowCheckJenis) {
 				echo "<script>alert('Data berhasil disimpan')</script>";
+				echo "<script>window.location.replace('?view=datapengajuan');</script>";
 			} else {
 				echo "<script>alert('Data berhasil disimpan (jenis barang baru)')</script>";
+				echo "<script>window.location.replace('?view=datapengajuan');</script>";
 			}
 		}
 	}

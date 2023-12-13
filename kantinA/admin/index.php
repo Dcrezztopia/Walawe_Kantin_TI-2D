@@ -3,7 +3,7 @@ include '../koneksi.php';
 session_start();
 ?>
 <?php 
-$p = mysqli_query($conn,'SELECT count(*) as waitingroom from waitingroom');
+$p = mysqli_query($conn,'SELECT count(*) as waitingroom from waitingroom where status = "menunggu"');
 $q = mysqli_fetch_array($p);
 ?>
 <!DOCTYPE html>

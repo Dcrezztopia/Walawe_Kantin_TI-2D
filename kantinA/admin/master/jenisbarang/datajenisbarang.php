@@ -1,3 +1,8 @@
+<?php
+include 'crudDataJenisBarang.php';
+
+$crudDataJenisBarang = new crudDataJenisBarang($conn);
+?>
 <div class="main-panel">
 			<div class="content">
 				<div class="page-inner">
@@ -90,7 +95,7 @@
 													</div>
 													<div class="form-group">
 														<label>Deskripsi</label>
-														<input type="number" name="deskripsi" class="form-control" placeholder="Stok ..." required="">
+														<input type="text" name="deskripsi" class="form-control" placeholder="Deskripsi ..." required="">
 													</div>
 												</div>
 												<div class="modal-footer no-bd">
@@ -125,7 +130,7 @@
 													<input type="hidden" name="id" value="<?php echo $d['jenisBarang'] ?>">
 													<div class="form-group">
 														<label>Jenis Barang</label>
-														<input value="<?php echo $d['jenisBarang'] ?>" type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang ..." required="">
+														<input value="<?php echo $d['jenisBarang'] ?>" type="text" name="jenisBarangBaru" class="form-control" placeholder="Jenis Barang ..." required="">
 													</div>
 													<div class="form-group">
  													   <label>Deskripsi</label>
@@ -225,29 +230,29 @@
 		<?php
             if(isset($_POST['simpan']))
                 {
-                    $jenis_barang = $_POST['jenisBarang'];
-                    $deskripsi = $_POST['deskripsi']; 						
-                        
-                    mysqli_query($conn,"INSERT into jenisbarang values ('$jenis_barang','$deskripsi')");
-                    echo "<script>alert ('Data Jenis Barang Berhasil Disimpan') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+					$data = array(
+						'jenisBarang' => $_POST['jenisBarang'],
+						'deskripsi' => $_POST['deskripsi']
+					);
+					$crudDataJenisBarang->Create($data);					
+
                 }
 
                 elseif(isset($_POST['ubah']))
                 {
-                    $jenis_barang = $_POST['jenisBarang'];
-                    $deskripsi = $_POST['deskripsi']; 
-
-                    mysqli_query($conn,"UPDATE jenisbarang set  jenisBarang='$jenis_barang', deskripsi='$deskripsi'");
-                    echo "<script>alert ('Data Jenis Barang Berhasil Diubah') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+					$data = array(
+					'id' => $_POST['id'],
+					'deskripsi' => $_POST['deskripsi'],
+					'jenisBarangBaru' => $_POST['jenisBarangBaru']
+				);
+				$crudDataJenisBarang->Update($data);		
                 }
 
                 elseif(isset($_POST['hapus']))
                 {
-                	$jenis_barang = $_POST['jenisBarang'];
-                	mysqli_query($conn,"DELETE from jenisbarang where jenisBarang='$jenis_barang'");
-                    echo "<script>alert ('Data Jenis Barang Berhasil Dihapus') </script>";
-                    echo"<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+					$data = array(
+						'jenisBarang' => $_POST['jenisBarang']
+					);
+					$crudDataJenisBarang->Delete($data);	
                 }
                 ?>

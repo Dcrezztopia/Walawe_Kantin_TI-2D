@@ -30,7 +30,7 @@ class crudDataBarang implements Crud
 
         if ($result) {
             echo "<script>alert('Data Berhasil Disimpan')</script>";
-            echo "<script>window.location.replace('?view=datapengajuan');</script>";
+            echo "<script>window.location.replace('?view=databarang');</script>";
         } else {
             echo "<script>alert('Gagal menyimpan data')</script>";
         }

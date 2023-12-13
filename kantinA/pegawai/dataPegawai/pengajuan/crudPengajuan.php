@@ -18,7 +18,7 @@ class CrudPengajuan implements Crud
         $sku = $data['sku'];
         $namasupplier = $data['namasupplier'];
         $harga = $data['harga'];
-        $status = $data['status'];
+        $status = 'menunggu';
 
         // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
         $query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga', '$status')";
