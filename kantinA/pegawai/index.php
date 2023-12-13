@@ -15,32 +15,31 @@ session_start();
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
-    WebFont.load({
-        google: {
-            "families": ["Open+Sans:300,400,600,700"]
-        },
-        custom: {
-            "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"],
-            urls: ['../assets/css/fonts.css']
-        },
-        active: function() {
-            sessionStorage.fonts = true;
-        }
-    });
+        WebFont.load({
+            google: {
+                "families": ["Open+Sans:300,400,600,700"]
+            },
+            custom: {
+                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"],
+                urls: ['../assets/css/fonts.css']
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
     </script>
 
     <style>
-		.logo img.navbar-brand {
-    		width: 120px;
-    		height: auto;
-		}
+        .logo img.navbar-brand {
+            width: 120px;
+            height: auto;
+        }
 
         .nav-item.active a {
             background-color: #007bff;
             color: #fff;
         }
-
-	</style>
+    </style>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -61,8 +60,7 @@ session_start();
                 <a href="#" class="logo">
                     <img src="../assets/img/logo2.png" alt="navbar brand" class="navbar-brand">
                 </a>
-                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
-                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <i class="fa fa-bars"></i>
                     </span>
@@ -78,12 +76,12 @@ session_start();
 
             <!-- Navbar Header -->
             <nav class="navbar navbar-header navbar-expand-lg">
-				
-				<div class="container-fluid">
-					<div class="collapse" id="search-nav">
-					</div>
-				</div>
-			</nav>
+
+                <div class="container-fluid">
+                    <div class="collapse" id="search-nav">
+                    </div>
+                </div>
+            </nav>
             <!-- End Navbar -->
         </div>
         <!-- Sidebar -->
@@ -136,19 +134,19 @@ session_start();
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                             </span>
-							<h4 class="text-section">Setting</h4>
-						</li>
-					
-						<li class="nav-item">
-							<a href="?view=profil" class="nav-link">
-								<i class="fa fa-user" aria-hidden="true"></i>
-								<p>Profil</p>
-							</a>
-						</li>
+                            <h4 class="text-section">Setting</h4>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="?view=profil" class="nav-link">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <p>Profil</p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutConfirmationModal">
-                                <i class="fas fa-lock"></i>
+                                <i class="fa fa-sign-out"></i>
                                 <p>Logout</p>
                             </a>
                         </li>
@@ -158,133 +156,133 @@ session_start();
         </div>
 
         <div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header no-bd">
-						<h5 class="modal-title">
-							<span class="fw-mediumbold">Logout</span> 
-							<span class="fw-light">Pegawai</span>
-						</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-					</div>
+                        <h5 class="modal-title">
+                            <span class="fw-mediumbold">Logout</span>
+                            <span class="fw-light">Pegawai</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="modal-body">
-						<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-					    <h4>Apakah anda ingin <b>Logout</b>?</h4>
-					</div>
+                        <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                        <h4>Apakah anda ingin <b>Logout</b>?</h4>
+                    </div>
                     <div class="modal-footer no-bd">
                         <button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
-                        <a class="btn btn-danger" href="../logout.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
+                        <a class="btn btn-danger" href="../logout.php"><i class="fa fa-sign-out"></i>&nbsp;Logout</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <?php
-                    // Dashboard
-                    if(@$_GET['view']=='')
-                        include 'dashboard.php';
-                    
-                    elseif($_GET['view']=='dashboard')
-                        include 'dashboard.php';
+        // Dashboard
+        if (@$_GET['view'] == '')
+            include 'dashboard.php';
 
-                    // Data Transaksi
-                    elseif($_GET['view']=='datatransaksi')
-                        include 'dataPegawai/transaksi/datatransaksi.php';
+        elseif ($_GET['view'] == 'dashboard')
+            include 'dashboard.php';
 
-                    elseif($_GET['view']=='createtransaksi')
-                        include 'dataPegawai/transaksi/createtransaksi.php';
+        // Data Transaksi
+        elseif ($_GET['view'] == 'datatransaksi')
+            include 'dataPegawai/transaksi/datatransaksi.php';
 
-                    elseif($_GET['view']=='detailtransaksi')
-                        include 'dataPegawai/transaksi/detailtransaksi.php';
+        elseif ($_GET['view'] == 'createtransaksi')
+            include 'dataPegawai/transaksi/createtransaksi.php';
 
-                    // Data Pengajuan
-                    elseif($_GET['view']=='datapengajuan')
-                        include 'dataPegawai/pengajuan/datapengajuan.php';
+        elseif ($_GET['view'] == 'detailtransaksi')
+            include 'dataPegawai/transaksi/detailtransaksi.php';
 
-                    elseif($_GET['view']=='createpengajuan')
-                        include 'dataPegawai/pengajuan/createpengajuan.php';
+        // Data Pengajuan
+        elseif ($_GET['view'] == 'datapengajuan')
+            include 'dataPegawai/pengajuan/datapengajuan.php';
 
-                    elseif($_GET['view']=='detailpengajuan')
-                        include 'dataPegawai/pengajuan/detailpengajuan.php';
+        elseif ($_GET['view'] == 'createpengajuan')
+            include 'dataPegawai/pengajuan/createpengajuan.php';
 
-                    elseif($_GET['view']=='editpengajuan')
-                        include 'dataPegawai/pengajuan/editpengajuan.php';
+        elseif ($_GET['view'] == 'detailpengajuan')
+            include 'dataPegawai/pengajuan/detailpengajuan.php';
 
-                    // Data Jenis Barang
-                    elseif($_GET['view']=='datajenisbarang')
-                        include 'dataPegawai/jenisbarang/datajenisbarang.php';
+        elseif ($_GET['view'] == 'editpengajuan')
+            include 'dataPegawai/pengajuan/editpengajuan.php';
 
-                    elseif($_GET['view']=='createjenisbarang')
-                        include 'dataPegawai/jenisbarang/createjenisbarang.php';
+        // Data Jenis Barang
+        elseif ($_GET['view'] == 'datajenisbarang')
+            include 'dataPegawai/jenisbarang/datajenisbarang.php';
 
-                    elseif($_GET['view']=='detailjenisbarang')
-                        include 'dataPegawai/jenisbarang/detailjenisbarang.php';
+        elseif ($_GET['view'] == 'createjenisbarang')
+            include 'dataPegawai/jenisbarang/createjenisbarang.php';
 
-                    elseif($_GET['view']=='editjenisbarang')
-                        include 'dataPegawai/jenisbarang/editjenisbarang.php';
+        elseif ($_GET['view'] == 'detailjenisbarang')
+            include 'dataPegawai/jenisbarang/detailjenisbarang.php';
 
-                    // Data Stok Barang
-                    elseif($_GET['view']=='datastokbarang')
-                        include 'dataPegawai/stokbarang/datastokbarang.php';
+        elseif ($_GET['view'] == 'editjenisbarang')
+            include 'dataPegawai/jenisbarang/editjenisbarang.php';
 
-                    elseif($_GET['view']=='detailstokbarang')
-                        include 'dataPegawai/stokbarang/detailstokbarang.php';
+        // Data Stok Barang
+        elseif ($_GET['view'] == 'datastokbarang')
+            include 'dataPegawai/stokbarang/datastokbarang.php';
 
-                    elseif($_GET['view']=='editstokbarang')
-                        include 'dataPegawai/stokbarang/editstokbarang.php';
+        elseif ($_GET['view'] == 'detailstokbarang')
+            include 'dataPegawai/stokbarang/detailstokbarang.php';
 
-                    // Profil
-                    elseif($_GET['view']=='profil')
-                        include 'dataPegawai/profil/profil.php';
-                    elseif($_GET['view']=='editprofil')
-                        include 'dataPegawai/profil/editprofil.php';
-                 ?>
+        elseif ($_GET['view'] == 'editstokbarang')
+            include 'dataPegawai/stokbarang/editstokbarang.php';
+
+        // Profil
+        elseif ($_GET['view'] == 'profil')
+            include 'dataPegawai/profil/profil.php';
+        elseif ($_GET['view'] == 'editprofil')
+            include 'dataPegawai/profil/editprofil.php';
+        ?>
 
         <!-- Custom template | don't include it in your project! -->
         <!-- End Custom template -->
 
     </div>
-    
-        <!-- Add Bootstrap JS and jQuery -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!--   Core JS Files   -->
-        <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-        <script src="../assets/js/core/popper.min.js"></script>
-        <script src="../assets/js/core/bootstrap.min.js"></script>
-        <!-- jQuery UI -->
-        <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-        <script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-        <!-- Bootstrap Toggle -->
-        <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-        <!-- jQuery Scrollbar -->
-        <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-        <!-- Datatables -->
-        <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
-        <!-- Azzara JS -->
-        <script src="../assets/js/ready.min.js"></script>
-        <!-- Azzara DEMO methods, don't include it in your project! -->
-        <script src="../assets/js/setting-demo.js"></script>
-        <script>
+
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+    <!-- Bootstrap Toggle -->
+    <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- Datatables -->
+    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+    <!-- Azzara JS -->
+    <script src="../assets/js/ready.min.js"></script>
+    <!-- Azzara DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo.js"></script>
+    <script>
         $(document).ready(function() {
             $('#add-row').DataTable({});
         });
-        </script>
-        <!-- jQuery script to add "active" class to clicked menu item -->
-        <script>
-            $(document).ready(function () {
-                var currentUrl = window.location.href;
+    </script>
+    <!-- jQuery script to add "active" class to clicked menu item -->
+    <script>
+        $(document).ready(function() {
+            var currentUrl = window.location.href;
 
-                $(".nav-item a").each(function () {
-                    if (currentUrl.indexOf($(this).attr("href")) > -1) {
-                        $(this).closest('.nav-item').addClass("active");
-                    }
-                });
+            $(".nav-item a").each(function() {
+                if (currentUrl.indexOf($(this).attr("href")) > -1) {
+                    $(this).closest('.nav-item').addClass("active");
+                }
             });
-        </script>
+        });
+    </script>
 
 </body>
 

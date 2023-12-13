@@ -1,3 +1,8 @@
+<?php
+include 'crudJenisBarang.php';
+$crudJenisBarang = new CrudJenisBarang($conn);
+?>
+
 <div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
@@ -23,10 +28,10 @@
 						<div class="card-header">
 							<div class="d-flex align-items-center">
 								<h4 class="card-title">Data Jenis Barang</h4>
-								<a href="?view=createjenisbarang" class="btn btn-primary btn-round ml-auto">
+								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalAddBarang">
 									<i class="fa fa-plus"></i>
 									Tambah Data
-								</a>
+								</button>
 							</div>
 						</div>
 						<div class="card-body">
@@ -47,7 +52,7 @@
 										$no = 1;
 										$query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
 										while ($jenis = mysqli_fetch_array($query)) {
-											?>
+										?>
 
 											<tr>
 												<td>
@@ -61,13 +66,9 @@
 												</td>
 
 												<td>
-													<a href="?view=detailjenisbarang" data-toggle="modal" title="Detail"
-														class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
-													<a href="?view=editjenisbarang.php" title="Edit"
-														class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
-													<a href="#modalHapusBarang<?php echo $jenis['jenisBarang'] ?>"
-														data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i
-															class="fa fa-trash"></i></a>
+													<a href="#modalDetailBarang<?php echo $jenis['jenisBarang'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+													<a href="#modalEditBarang<?php echo $jenis['jenisBarang'] ?>" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
+													<a href="#modalHapusBarang<?php echo $jenis['jenisBarang'] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
 												</td>
 											</tr>
 
@@ -83,15 +84,16 @@
 	</div>
 </div>
 
-<div class="modal fade" id="modalHapusBarang<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- CREATE -->
+<div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header no-bd">
 				<h5 class="modal-title">
 					<span class="fw-mediumbold">
-						Hapus</span>
+						Tambah</span>
 					<span class="fw-light">
-						Barang
+						Jenis Barang
 					</span>
 				</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -100,28 +102,73 @@
 			</div>
 			<form method="POST" enctype="multipart/form-data" action="">
 				<div class="modal-body">
-					<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-					<h4>Apakah Anda Ingin Menghapus Data Ini ?</h4>
+					<div class="form-group">
+						<label>Nama Jenis Barang</label>
+						<input type="text" id="jenis_barang" name="jenis_barang" class="form-control" placeholder="Jenis Barang" required>
+					</div>
+
+					<div class="form-group">
+						<label>Deskripsi</label>
+						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required></textarea>
+					</div>
+
+					<div class="modal-footer no-bd">
+						<button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i>
+							Save</button>
+						<a href="?view=datajenisbarang" class="btn btn-danger"><i class="fa fa-times"></i>
+							Cancel</a>
+					</div>
 				</div>
-				<div class="modal-footer no-bd">
-					<button type="submit" name="hapus" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-undo"></i>
-						Close</button>
-				</div>
+
 			</form>
 		</div>
 	</div>
+</div>
 
+<?php
+$c = mysqli_query($conn, 'SELECT * from barang');
+while ($row = mysqli_fetch_array($c)) {
+?>
+
+	<!-- DELETE -->
+	<div class="modal fade" id="modalHapusBarang<?php echo $row['id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header no-bd">
+					<h5 class="modal-title">
+						<span class="fw-mediumbold">
+							Hapus</span>
+						<span class="fw-light">
+							Barang
+						</span>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form method="POST" enctype="multipart/form-data" action="">
+					<div class="modal-body">
+						<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+						<h4>Apakah Anda Ingin Menghapus Data Ini ?</h4>
+					</div>
+					<div class="modal-footer no-bd">
+						<button type="submit" name="hapus" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i>
+							Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	<?php } ?>
 
 
 	<?php
 	$p = mysqli_query($conn, 'SELECT * from waitingroom');
 	while ($d = mysqli_fetch_array($p)) {
-		?>
+	?>
 
-		<!-- EDIT -->
-		<div class="modal fade" id="modalEditBarang<?php echo $d['id_waiting'] ?>" tabindex="-1" role="dialog"
-			aria-hidden="true">
+		<!-- UPDATE -->
+		<div class="modal fade" id="modalEditBarang<?php echo $d['id_waiting'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header no-bd">
@@ -135,38 +182,70 @@
 					</div>
 					<form method="POST" enctype="multipart/form-data" action="">
 						<div class="modal-body">
-							<input type="hidden" name="id" value="<?php echo $d['id_waiting'] ?>">
-							<div class="form-group">
-								<label>Nama Barang</label>
-								<input value="<?php echo $d['namabarang'] ?>" type="text" name="namabarang"
-									class="form-control" placeholder="Nama Barang ..." required="">
-							</div>
+							<input type="hidden" name="id" value="<?php echo $jenis['jenisBarang'] ?>">
 							<div class="form-group">
 								<label>Jenis Barang</label>
-								<input value="<?php echo $d['jenisbarang'] ?>" type="text" name="jenisbarang"
-									class="form-control" placeholder="Jenis Barang ..." required="">
+								<input value="<?php echo $jenis['jenisBarang'] ?>" type="text" name="namabarang" class="form-control" placeholder="Jenis Barang" required="">
 							</div>
 							<div class="form-group">
-								<label>SKU</label>
-								<input value="<?php echo $d['sku'] ?>" type="text" name="sku" class="form-control"
-									placeholder="SKU ..." required="">
-							</div>
-							<div class="form-group">
-								<label>Nama Supplier</label>
-								<input value="<?php echo $d['namasupplier'] ?>" type="text" name="namasupplier"
-									class="form-control" placeholder="Nama Supplier ..." required="">
-							</div>
-							<div class="form-group">
-								<label>Harga</label>
-								<input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control"
-									placeholder="Harga ..." required="">
+								<label>Deskripsi</label>
+								<input value="<?php echo $jenis['deskripsi'] ?>" type="text" name="sku" class="form-control" placeholder="Deskripsi" required="">
 							</div>
 
 						</div>
 						<div class="modal-footer no-bd">
-							<button type="submit" name="ubah" class="btn btn-primary"><i class="fa fa-save"></i>Save
+							<button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i> Save
 								Changes</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-undo"></i>
+							<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
+								Cancel</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+	<?php } ?>
+
+	<?php
+	$q = mysqli_query($conn, 'SELECT * FROM barang');
+
+	while ($k = mysqli_fetch_array($q)) {
+	?>
+
+		<!-- READ -->
+		<div class="modal fade" id="modalDetailBarang<?php echo $k['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header no-bd">
+						<h5 class="modal-title">
+							<span class="fw-mediumbold">
+								Detail</span>
+							<span class="fw-light">
+								Barang
+							</span>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form method="POST" enctype="multipart/form-data" action="">
+						<div class="modal-body">
+							<input type="hidden" name="id" value="<?php echo $jenis['jenisBarang'] ?>">
+							<div class="form-group">
+								<label>Jenis Barang</label>
+								<input value="<?php echo $jenis['jenisBarang'] ?>" type="text" name="namabarang" class="form-control" placeholder="Jenis Barang" required="" readonly>
+							</div>
+							<div class="form-group">
+								<label>Deskripsi</label>
+								<input value="<?php echo $jenis['deskripsi'] ?>" type="text" name="sku" class="form-control" placeholder="Deskripsi" required="" readonly>
+							</div>
+
+						</div>
+						<div class="modal-footer no-bd">
+							<button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i> Save
+								Changes</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
 								Cancel</button>
 						</div>
 					</form>
@@ -176,35 +255,21 @@
 
 	<?php } ?>
 
-
 	<?php
-	if (isset($_POST['ubah'])) {
-		$id_Waiting = $_POST['id'];
-		$nama_barang = $_POST['namabarang'];
-		$jenis_barang = $_POST['jenisbarang'];
-		$sku = $_POST['sku'];
-		$namaSupplier = $_POST['namaSupplier'];
-		$harga = $_POST['harga'];
+	if (isset($_POST['simpan'])) {
+		$data = array(
+			'jenis_barang' => $_POST['jenis_barang'],
+			'deksripsi' => $_POST['deksripsi']
+		);
 
-
-		mysqli_query($conn, "UPDATE waitingroom set namabarang='$nama_barang', jenisbarang='$jenis_barang', sku='$sku', namasupplier='$namaSupplier', harga='$harga' where id_waiting='$id_Waiting'");
-		echo "<script>alert ('Data Berhasil Diubah') </script>";
-		echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
-	}
-
-
-	if (isset($_POST['hapus'])) {
-		$id = $_POST['id'];
-		$id_ruangan = $_POST['id_ruangan'];
-
-		$selSto = mysqli_query($conn, "SELECT * FROM ruangan WHERE id='$id_ruangan'");
-		$sto = mysqli_fetch_array($selSto);
-		$sisa = 'free';
-
-		mysqli_query($conn, "UPDATE ruangan SET status='$sisa' WHERE id='$id_ruangan'");
-		mysqli_query($conn, "DELETE from pinjamruangan where id='$id'");
-		echo "<script>alert ('Data Berhasil Dihapus') </script>";
-		echo "<meta http-equiv='refresh' content=0; URL=?view=datapinjamruangan>";
-
+		$crudJenisBarang->Create($data);
+	} else if (isset($_POST['ubah'])) {
+		$data = array(
+			'jenis_barang' => $_POST['jenis_barang'],
+			'deksripsi' => $_POST['deksripsi']
+		);
+		// echo "<script>alert ('pe') </script>";
+		$crudJenisBarang->Update($data);
+	} else if (isset($_POST['hapus'])) {
 	}
 	?>

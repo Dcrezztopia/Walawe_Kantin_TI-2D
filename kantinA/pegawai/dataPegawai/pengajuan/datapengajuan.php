@@ -28,10 +28,10 @@ $crudPengajuan = new CrudPengajuan($conn);
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Pengajuan Barang</h4>
-                                <a href="?view=createpengajuan" class="btn btn-primary btn-round ml-auto">
+                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalAddBarang">
                                     <i class="fa fa-plus"></i>
                                     Tambah Data
-                                </a>
+                                </button>
                             </div>
                         </div>
                         <div class="card-body">
@@ -57,7 +57,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                         $no = 1;
                                         $query = mysqli_query($conn, 'SELECT * FROM waitingroom');
                                         while ($pengajuan = mysqli_fetch_array($query)) {
-                                            ?>
+                                        ?>
 
                                             <tr>
                                                 <td>
@@ -94,9 +94,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <a href="?view=editpengajuan"
-                                                         title="Edit" class="btn btn-xs btn-primary">
-                                                        <i class="fa fa-edit"></i></a>
+                                                    <a href="#modalEditBarang<?php echo $barang['jenisBarang'] ?>" data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
                                                 </td>
                                             </tr>
 
@@ -111,3 +109,157 @@ $crudPengajuan = new CrudPengajuan($conn);
         </div>
     </div>
 </div>
+
+
+
+<!-- CREATE -->
+<div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header no-bd">
+                <h5 class="modal-title">
+                    <span class="fw-mediumbold">
+                        Tambah</span>
+                    <span class="fw-light">
+                        Jenis Barang
+                    </span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama_barang">Nama Barang</label>
+                        <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang" required>
+                    </div>
+                    <div class="form-group">
+                        <?php
+                        $query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
+                        ?>
+                        <label>Jenis Barang</label>
+                        <select name="jenis_barang" class="form-control" required="">
+                            <?php
+                            while ($jenis_barang = mysqli_fetch_assoc($query)) {
+                                echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $jenis_barang['jenisBarang'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>SKU</label>
+                        <input type="text" name="sku" class="form-control" placeholder="SKU" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Supplier</label>
+                        <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Harga</label>
+                        <input type="number" name="harga" class="form-control" placeholder="Harga" required="">
+                    </div>
+                    <div class="modal-footer no-bd">
+                        <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                        <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php
+$p = mysqli_query($conn, 'SELECT * from waitingroom');
+while ($pengajuan = mysqli_fetch_array($p)) {
+?>
+
+    <!-- UPDATE -->
+    <div class="modal fade" id="modalEditBarang<?php echo $d[''] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h5 class="modal-title">
+                        <span class="fw-mediumbold">
+                            Edit</span>
+                        <span class="fw-light">
+                            Jenis Barang
+                        </span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama_barang">Nama Barang</label>
+                            <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang" required>
+                        </div>
+                        <div class="form-group">
+                            <?php
+                            $query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
+                            ?>
+                            <label>Jenis Barang</label>
+                            <select name="jenis_barang" class="form-control" required="">
+                                <?php
+                                while ($jenis_barang = mysqli_fetch_assoc($query)) {
+                                    echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $jenis_barang['jenisBarang'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>SKU</label>
+                            <input type="text" name="sku" class="form-control" placeholder="SKU" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Supplier</label>
+                            <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input type="number" name="harga" class="form-control" placeholder="Harga" required="">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer no-bd">
+                        <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                        <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
+
+<?php
+if (isset($_POST['simpan'])) {
+    $data = array(
+        'nama_barang' => $_POST['nama_barang'],
+        'jenis_barang' => $_POST['jenis_barang'],
+        'sku' => $_POST['sku'],
+        'namasupplier' => $_POST['namasupplier'],
+        'harga' => $_POST['harga'],
+    );
+
+    $crudPengajuan->Create($data);
+} else if (isset($_POST['ubah'])) {
+    $data = array(
+        'id_waiting' => $_POST['id'],
+        'nama_barang' => $_POST['namabarang'],
+        'jenis_barang' => $_POST['jenisbarang'],
+        'sku' => $_POST['sku'],
+        'namasupplier' => $_POST['namasupplier'],
+        'harga' => $_POST['harga']
+    );
+    // echo "<script>alert ('pe') </script>";
+    $crudPengajuan->Update($data);
+}
+
+?>
