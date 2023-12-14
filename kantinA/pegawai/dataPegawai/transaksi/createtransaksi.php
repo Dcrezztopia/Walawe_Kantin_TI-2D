@@ -41,11 +41,22 @@
 							<div class=" row card-body">
 								<div class="col-md-4">
 									<div style="display: grid; grid-template-columns:2fr 1fr;">
+
 										<div class="form-group" id="skuFormGroup">
+											<label>SKU</label>
+											<select class="form-control choices-single" id="sku" name="sku" autocomplete="on" required>
+												<option></option>
+											</select>
+											<input type="hidden" class="form-control" id="skuAfterInput" name="skuAfterInput" autocomplete="off">
+											<span>Sisa Barang: XX</span>
+										</div>
+
+
+										<!-- <div class="form-group" id="skuFormGroup">
 											<label class="fw-bold">SKU</label>
 											<input type="text" name="sku" id="skuInput" class="form-control" placeholder="RT001-001-STRW" required="">
 											<span>Sisa Barang: XX</span>
-										</div>
+										</div> -->
 
 										<div class="d-flex" style="align-items: center; overflow: auto;">
 											<span>Roti Strawberry</span>
@@ -75,7 +86,7 @@
 											<label class="fw-bold">Total</label>
 										</div>
 										<div class="form-group w-100" id="angkaNominal" style="padding-left: 0;">
-											<span id="total" style="color: red; font-size: 70px">1000</span>
+											<span id="total" style="color: red; font-size: 70px">100000</span>
 										</div>
 									</div>
 								</div>

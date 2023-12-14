@@ -46,49 +46,49 @@
 										<?php
 										$no = 1;
 										$query = mysqli_query($conn, 'SELECT * from waitingroom');
-										while ($pinjamruangan = mysqli_fetch_array($query)) {
+										while ($pengajuanbarang = mysqli_fetch_array($query)) {
 										?>
 
 											<tr>
 												<td>
-													<?php echo $pinjamruangan['id_waiting'] ?>
+													<?php echo $pengajuanbarang['id_waiting'] ?>
 												</td>
 												<td>
-													<?php echo $pinjamruangan['namabarang'] ?>
+													<?php echo $pengajuanbarang['namabarang'] ?>
 												</td>
 												<td>
-													<?php echo $pinjamruangan['jenisbarang'] ?>
+													<?php echo $pengajuanbarang['jenisbarang'] ?>
 												</td>
 												<td>
-													<?php echo $pinjamruangan['sku'] ?>
+													<?php echo $pengajuanbarang['sku'] ?>
 												</td>
 												<td>
-													<?php echo $pinjamruangan['namasupplier'] ?>
+													<?php echo $pengajuanbarang['namasupplier'] ?>
 												</td>
 												<td>
-													<?php echo $pinjamruangan['harga'] ?>
+													<?php echo $pengajuanbarang['harga'] ?>
 												</td>
 												<td>
 
-													<?php if ($pinjamruangan['status'] == 'menunggu') { ?>
-														<div class="badge badge-warning"><?php echo $pinjamruangan['status'] ?></div>
-													<?php } elseif ($pinjamruangan['status'] == 'disetujui') { ?>
-														<div class="badge badge-success"><?php echo $pinjamruangan['status'] ?></div>
+													<?php if ($pengajuanbarang['status'] == 'menunggu') { ?>
+														<div class="badge badge-warning"><?php echo $pengajuanbarang['status'] ?></div>
+													<?php } elseif ($pengajuanbarang['status'] == 'disetujui') { ?>
+														<div class="badge badge-success"><?php echo $pengajuanbarang['status'] ?></div>
 													<?php } else { ?>
-														<div class="badge badge-danger"><?php echo $pinjamruangan['status'] ?></div>
+														<div class="badge badge-danger"><?php echo $pengajuanbarang['status'] ?></div>
 													<?php } ?>
 												</td>
 
 												<td>
 													<form method="POST">
-														<input type="hidden" name="id_waiting" value="<?php echo $pinjamruangan['id_waiting']; ?>">
-														<input type="hidden" name="namabarang" value="<?php echo $pinjamruangan['namabarang']; ?>">
-														<input type="hidden" name="jenisbarang" value="<?php echo $pinjamruangan['jenisbarang']; ?>">
-														<input type="hidden" name="sku" value="<?php echo $pinjamruangan['sku']; ?>">
-														<input type="hidden" name="namasupplier" value="<?php echo $pinjamruangan['namasupplier']; ?>">
-														<input type="hidden" name="harga" value="<?php echo $pinjamruangan['harga']; ?>">
-														<button type="Accept" name="simpan" class="btn btn-xs btn-success"><i class="fa fa-check-square-o"></i></button>
-														<button type="Delete" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-times-circle"></i></button>
+														<input type="hidden" name="id_waiting" value="<?php echo $pengajuanbarang['id_waiting']; ?>">
+														<input type="hidden" name="namabarang" value="<?php echo $pengajuanbarang['namabarang']; ?>">
+														<input type="hidden" name="jenisbarang" value="<?php echo $pengajuanbarang['jenisbarang']; ?>">
+														<input type="hidden" name="sku" value="<?php echo $pengajuanbarang['sku']; ?>">
+														<input type="hidden" name="namasupplier" value="<?php echo $pengajuanbarang['namasupplier']; ?>">
+														<input type="hidden" name="harga" value="<?php echo $pengajuanbarang['harga']; ?>">
+														<button type="Accept" name="accept" class="btn btn-xs btn-success"><i class="fa fa-check-square-o"></i></button>
+														<button type="Decline" name="decline" class="btn btn-xs btn-danger"><i class="fa fa-times-circle"></i></button>
 													</form>
 												</td>
 											</tr>
@@ -110,7 +110,7 @@
 <!-- MODAL DECLINE -->
 
 <?php
-if (isset($_POST['simpan'])) {
+if (isset($_POST['accept'])) {
 	$id_waiting = $_POST['id_waiting'];
 	$nama_barang = $_POST['namabarang'];
 	$jenis_barang = $_POST['jenisbarang'];
@@ -154,7 +154,8 @@ if (isset($_POST['simpan'])) {
 			echo "<script>window.location.replace('?view=datapengajuan');</script>";
 		}
 	}
-} elseif (isset($_POST['hapus'])) {
+}
+if (isset($_POST['decline'])) {
 	$id_waiting = $_POST['id_waiting'];
 	$nama_barang = $_POST['namabarang'];
 	$jenis_barang = $_POST['jenisbarang'];
@@ -162,11 +163,13 @@ if (isset($_POST['simpan'])) {
 	$namasupplier = $_POST['namasupplier'];
 	$harga = $_POST['harga'];
 
-
+	// Remove the entry from the waitingroom table
 	mysqli_query($conn, "DELETE FROM waitingroom WHERE id_waiting = $id_waiting");
-	echo "<script>alert ('Data Berhasil Dihapus') </script>";
-	echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+
+	echo "<script>alert ('Data Berhasil Ditolak')</script>";
+	echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
 }
+
 
 
 

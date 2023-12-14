@@ -35,11 +35,30 @@ class CrudPengajuan implements Crud
         } else {
             echo "<script>alert('Gagal menyimpan data')</script>";
         }
+
+        // if ($result) {
+        //     // Success Modal
+        //     echo '
+        //         <script>
+        //             $(document).ready(function(){
+        //                 $("#successModal").modal("show");
+        //             });
+        //         </script>
+        //     ';
+        // } else {
+        //     // Error Modal
+        //     echo '
+        //         <script>
+        //             $(document).ready(function(){
+        //                 $("#errorModal").modal("show");
+        //             });
+        //         </script>
+        //     ';
+        // }
     }
 
     public function Read()
     {
-
     }
 
     public function Update($data)
@@ -76,7 +95,5 @@ class CrudPengajuan implements Crud
 
     public function Delete($data)
     {
-
     }
 }
-?>
