@@ -22,24 +22,40 @@
 					<div class="card">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
-								<h4 class="card-title">Laporan Transaksi</h4>
+								<h4 class="card-title">Filter Laporan</h4>
 							</div>
 						</div>
 						<div class="row card-body">
+
 							<div class="col-md-4">
 								<div class="form-group mb-3">
-									<label>Tanggal Awal</label>
-									<input type="date" name="tanggalTransaksi" class="form-control">
+									<label for="inputMulaiTanggal" class="font-weight-bold">Mulai Tanggal :</label>
+									<input type="date" id="inputMulaiTanggal" class="form-control" name="mulai_tanggal" value="<?php echo $mulai_tanggal ?>" required>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="form-group mb-3">
-									<label>Tanggal Akhir</label>
-									<input type="date" name="tanggalTransaksi" class="form-control">
+									<label for="inputSampaiTanggal" class="font-weight-bold">Sampai Tanggal :</label>
+									<input type="date" id="inputSampaiTanggal" class="form-control" name="sampai_tanggal" value="<?php echo $sampai_tanggal ?>" required>
 								</div>
 							</div>
 
+							<div class="col-md-4 d-flex align-items-center mt-2">
+								<button type="submit" name="tampil" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i>&nbsp; Tampilkan</button>
+							</div>
+
+
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header">
+							<div class="d-flex align-items-center">
+								<h4 class="card-title">Laporan Penghasilan</h4>
+							</div>
+						</div>
+						<div class="row card-body">
 							<div class="col-md-4">
 								<div class="form-group mb-3">
 									<label>Omzet</label>
@@ -47,7 +63,11 @@
 								</div>
 							</div>
 
-
+							<div class="col-md-4 d-flex align-items-center mt-2">
+								<a href="cetaklaporan.php" target="_blank">
+									<button type="button" name="cetak" class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>&nbsp; Cetak</button>
+								</a>
+							</div>
 							<div class="table-responsive">
 								<table id="add-row" class="display table table-striped table-hover">
 									<thead>

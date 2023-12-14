@@ -92,7 +92,7 @@ session_start();
                         <li class="nav-item">
                             <a href="?view=dashboard" class="nav-link">
                                 <i class="fas fa-home"></i>
-                                <p>Dashboard</p>
+                                <p>Dashboard Pegawai</p>
                             </a>
                         </li>
                         <li class="nav-section">

@@ -10,7 +10,7 @@ include "koneksi.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Kantin</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="assets/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="assets/img/logo.png" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
@@ -39,8 +39,8 @@ include "koneksi.php";
     <div class="wrapper wrapper-login">
 
         <div class="container container-login animated fadeIn">
-            <div class="mb-3 text-center">
-                <img src="img/logo.png" height="150" width="160">
+            <div class="text-center mb-3">
+                <img src="assets/img/logologin.png" height="250" width="300">
             </div>
             <div class="login-form">
                 <form method="POST" action="cek_login.php">
@@ -54,7 +54,7 @@ include "koneksi.php";
                     </div>
 
                     <div class="form-action mb-3">
-                        <button type="submit" class="btn btn-rounded w-100 btn-login py-2" style="background-color: #FFC107">Login</button>
+                        <button type="submit" class="btn btn-rounded w-100 btn-login py-2" style="background-color: #fff29d">Login</button>
                     </div>
                 </form>
             </div>

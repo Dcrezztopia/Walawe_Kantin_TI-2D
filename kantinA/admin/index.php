@@ -94,7 +94,7 @@ $q = mysqli_fetch_array($p);
 						<li class="nav-item">
 							<a href="?view=dashboard" class="nav-link">
 								<i class="fas fa-home"></i>
-								<p>Dashboard</p>
+								<p>Dashboard Admin</p>
 							</a>
 						</li>
 						<li class="nav-section">
@@ -181,43 +181,6 @@ $q = mysqli_fetch_array($p);
 				</div>
 			</div>
 		</div>
-
-		<!-- JS NOTIF BELL SAMPING TULISAN PENGAJUAN -->
-		<!-- <script>
-			function updateNotificationsCount() {
-				$.ajax({
-					url: 'path/to/your/script/getUnacceptedPengajuanCount.php',
-					method: 'GET',
-					dataType: 'json',
-					success: function(response) {
-						var count = response.count;
-						$('.navbar-notifications').attr('data-count', count);
-					},
-					error: function() {
-						console.log('Failed to fetch the unaccepted pengajuan count');
-					}
-				});
-			}
-
-			// Call the function to update the count
-			updateNotificationsCount();
-
-			// Set an interval to periodically update the count
-			setInterval(updateNotificationsCount, 10000); // Update every 10 seconds
-		</script> -->
-
-		<!-- <php
-		// getUnacceptedPengajuanCount.php
-		header('Content-Type: application/json');
-
-		// Your database connection code here
-
-		$query = "SELECT COUNT(*) as count FROM pengajuan WHERE status = 'pending'";
-		$result = mysqli_query($conn, $query);
-		$row = mysqli_fetch_assoc($result);
-
-		echo json_encode(['count' => $row['count']]);
-		?> -->
 
 		<?php
 		// Dashboard
