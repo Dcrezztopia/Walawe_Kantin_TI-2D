@@ -1,3 +1,8 @@
+<?php
+include 'crudDataBarang.php';
+
+$crudDataBarang = new crudDataBarang($conn);
+?>
 <div class="main-panel">
     <div class="content">
         <div class="page-inner">
@@ -31,13 +36,13 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>ID Barang</th>
+                                            <th>Gambar</th>
                                             <th>Nama Barang</th>
                                             <th>Jenis Barang</th>
                                             <th>Stok</th>
                                             <th>Harga</th>
                                             <th>SKU</th>
-                                            <th>ID Supplier</th>
+                                            <th>Nama Supplier</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -46,21 +51,33 @@
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $query = mysqli_query($conn, 'SELECT * FROM waitingroom');
-                                        while ($pengajuan = mysqli_fetch_array($query)) {
+                                        $query = mysqli_query($conn, 'SELECT * from barang');
+                                        while ($barang = mysqli_fetch_array($query)) {
                                             ?>
-
                                             <tr>
                                                 <td>
                                                     <?php echo $no++ ?>
                                                 </td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td><img src="../img/<?php echo $barang['gambar'] ?>" alt="Gambar Barang"
+                                                        class="gambar-barang"></td>
+                                                <td>
+                                                    <?php echo $barang['namaBarang'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $barang['jenisBarang'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $barang['stok'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $barang['harga'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $barang['sku'] ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $barang['namaSupplier'] ?>
+                                                </td>
                                                 <td>
                                                     <a href="#modalDetailBarang<?php echo $barang['idBarang'] ?>"
                                                         data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i
@@ -73,7 +90,6 @@
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
-
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -88,13 +104,12 @@
 
 
 <?php
-$p = mysqli_query($conn, 'SELECT * from waitingroom');
+$p = mysqli_query($conn, 'SELECT * from barang');
 while ($d = mysqli_fetch_array($p)) {
     ?>
 
     <!-- UPDATE -->
-    <div class="modal fade" id="modalEditBarang<?php echo $d['id_waiting'] ?>" tabindex="-1" role="dialog"
-        aria-hidden="true">
+    <div class="modal fade" id="modalEditBarang<?php echo $d['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
@@ -102,7 +117,7 @@ while ($d = mysqli_fetch_array($p)) {
                         <span class="fw-mediumbold">
                             Edit</span>
                         <span class="fw-light">
-                            Stok Barang
+                            Barang
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,16 +126,25 @@ while ($d = mysqli_fetch_array($p)) {
                 </div>
                 <form method="POST" enctype="multipart/form-data" action="">
                     <div class="modal-body">
-                        <input type="hidden" name="id" value="<?php echo $d['id_waiting'] ?>">
+                        <input type="hidden" name="id" value="<?php echo $d['idBarang'] ?>">
+                        <input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input value="<?php echo $d['namabarang'] ?>" type="text" name="namabarang" class="form-control"
-                                placeholder="Nama Barang" required="" readonly>
+                            <input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control"
+                                placeholder="Barang" required="">
                         </div>
                         <div class="form-group">
+                            <?php
+                            $query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
+                            ?>
                             <label>Jenis Barang</label>
-                            <input value="<?php echo $d['jenisbarang'] ?>" type="text" name="jenisbarang"
-                                class="form-control" placeholder="Jenis Barang" required="" readonly>
+                            <select name="jenisbarang" class="form-control" required="">
+                                <?php
+                                while ($jenis_barang = mysqli_fetch_assoc($query)) {
+                                    echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $d['jenisBarang'] . '</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Stok</label>
@@ -130,94 +154,30 @@ while ($d = mysqli_fetch_array($p)) {
                         <div class="form-group">
                             <label>Harga</label>
                             <input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control"
-                                placeholder="Harga" required="" readonly>
+                                placeholder="Harga" required="">
                         </div>
                         <div class="form-group">
                             <label>SKU</label>
-                            <input value="<?php echo $d['sku'] ?>" type="text" name="sku" class="form-control"
-                                placeholder="SKU" required="" readonly>
+                            <input value="<?php echo $d['sku'] ?>" type="text" name="SKU" class="form-control"
+                                placeholder="SKU" required="">
                         </div>
                         <div class="form-group">
-                            <label>ID Supplier</label>
-                            <input value="<?php echo $d['namasupplier'] ?>" type="text" name="namasupplier"
-                                class="form-control" placeholder="Nama Supplier" required="" readonly>
+                            <label>Nama Supplier</label>
+                            <input value="<?php echo $d['namaSupplier'] ?>" type="text" name="namaSupplier"
+                                class="form-control" placeholder="Nama Supplier" required="">
                         </div>
+                        <div class="form-group">
+                            <label>Gambar</label>
+                            <img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
+                            <input type="file" name="foto" class="form-control">
+                        </div>
+
                     </div>
                     <div class="modal-footer no-bd">
-                        <button type="submit" name="ubah" class="btn btn-primary"><i class="fa fa-save"></i> Save
+                        <button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i> Save
                             Changes</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
-                            Cancel</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-<?php } ?>
-
-<?php
-$q = mysqli_query($conn, 'SELECT * FROM barang');
-
-while ($k = mysqli_fetch_array($q)) {
-    ?>
-
-    <!-- READ -->
-    <div class="modal fade" id="modalDetailBarang<?php echo $k['jenisBarang'] ?>" tabindex="-1" role="dialog"
-        aria-hidden="true">
-        <div class="modal-dialog modal-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header no-bd">
-                    <h5 class="modal-title">
-                        <span class="fw-mediumbold">
-                            Detail</span>
-                        <span class="fw-light">
-                            Stok Barang
-                        </span>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" enctype="multipart/form-data" action="">
-                    <div class="modal-body">
-                        <input type="hidden" name="id" value="<?php echo $d['id_waiting'] ?>">
-                        <div class="form-group">
-                            <label>Nama Barang</label>
-                            <input value="<?php echo $d['namabarang'] ?>" type="text" name="namabarang" class="form-control"
-                                placeholder="Nama Barang" required="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Jenis Barang</label>
-                            <input value="<?php echo $d['jenisbarang'] ?>" type="text" name="jenisbarang"
-                                class="form-control" placeholder="Jenis Barang" required="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Stok</label>
-                            <input value="<?php echo $d['stok'] ?>" type="number" name="stok" class="form-control"
-                                placeholder="Stok" required="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>Harga</label>
-                            <input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control"
-                                placeholder="Harga" required="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>SKU</label>
-                            <input value="<?php echo $d['sku'] ?>" type="text" name="sku" class="form-control"
-                                placeholder="SKU" required="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label>ID Supplier</label>
-                            <input value="<?php echo $d['namasupplier'] ?>" type="text" name="namasupplier"
-                                class="form-control" placeholder="Nama Supplier" required="" readonly>
-                        </div>
-                    </div>
-                    <div class="modal-footer no-bd">
-                        <button type="submit" name="ubah" class="btn btn-primary"><i class="fa fa-save"></i> Save
-                            Changes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
-                            Cancel</button>
+                            Close</button>
                     </div>
                 </form>
             </div>
@@ -266,17 +226,91 @@ while ($row = mysqli_fetch_array($c)) {
 <?php } ?>
 
 <?php
+$q = mysqli_query($conn, 'SELECT * FROM barang');
+
+while ($k = mysqli_fetch_array($q)) {
+    ?>
+
+    <!-- READ -->
+    <div class="modal fade" id="modalDetailBarang<?php echo $k['idBarang'] ?>" tabindex="-1" role="dialog"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h5 class="modal-title">
+                        <span class="fw-mediumbold">
+                            Detail</span>
+                        <span class="fw-light">
+                            Barang
+                        </span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" enctype="multipart/form-data" action="">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="<?php echo $k['idBarang'] ?>">
+                        <input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
+                        <div class="form-group">
+                            <label>Nama Barang</label>
+                            <input readonly value="<?php echo $k['namaBarang'] ?>" type="text" name="namaBarang"
+                                class="form-control" placeholder="Barang" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis Barang</label>
+                            <input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang"
+                                class="form-control" placeholder="Jenis Barang ..." required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Stok</label>
+                            <input readonly value="<?php echo $k['stok'] ?>" type="number" name="stok" class="form-control"
+                                placeholder="Stok" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input readonly value="<?php echo $k['harga'] ?>" type="number" name="harga"
+                                class="form-control" placeholder="Harga" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>SKU</label>
+                            <input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control"
+                                placeholder="SKU" required="">
+                        </div>
+                        <div class="form-group">
+                            <label>Gambar</label>
+                            <img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
+                        </div>
+                    </div>
+                    <div class="modal-footer no-bd">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
+                            Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
+
+<?php
 if (isset($_POST['ubah'])) {
-    $id_Waiting = $_POST['id'];
-    $nama_barang = $_POST['namabarang'];
-    $jenis_barang = $_POST['jenisbarang'];
-    $sku = $_POST['sku'];
-    $namaSupplier = $_POST['namaSupplier'];
-    $harga = $_POST['harga'];
-
-
-    mysqli_query($conn, "UPDATE waitingroom set namabarang='$nama_barang', jenisbarang='$jenis_barang', sku='$sku', namasupplier='$namaSupplier', harga='$harga' where id_waiting='$id_Waiting'");
-    echo "<script>alert ('Data Berhasil Diubah') </script>";
-    echo "<meta http-equiv='refresh' content=0; URL=?view=datastokbarang>";
+    $data = array(
+        'id' => $_POST['id'],
+        'namaBarang' => $_POST['namaBarang'],
+        'jenisBarang' => $_POST['jenisBarang'],
+        'stok' => $_POST['stok'],
+        'harga' => $_POST['harga'],
+        'sku' => $_POST['sku'],
+        'gambarLama' => $_POST['gambarLama'],  // Menggunakan $_POST untuk gambar lama
+        'foto' => $_FILES['foto']['name'],
+        'file_tmp' => $_FILES['foto']['tmp_name'],
+    );
+    $crudDataBarang->Update($data);
+} elseif (isset($_POST['hapus'])) {
+    $id = $_POST['id'];
+    mysqli_query($conn, "DELETE from barang where idBarang='$id'");
+    echo "<script>alert ('Data Berhasil Dihapus') </script>";
+    echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
 }
 ?>

@@ -47,6 +47,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                             <th>Harga</th>
                                             <th>SKU</th>
                                             <th>Nama Supplier</th>
+                                            <th>Foto</th>
                                             <th>Status</th>
                                             <th>Action</th>
 
@@ -71,14 +72,16 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                     <?php echo $pengajuan['jenisbarang'] ?>
                                                 </td>
                                                 <td>
+                                                    <?php echo $pengajuan['harga'] ?>
+                                                </td>
+                                                <td>
                                                     <?php echo $pengajuan['sku'] ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $pengajuan['namasupplier'] ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo $pengajuan['harga'] ?>
-                                                </td>
+                                                <td><img src="../img/<?php echo $pengajuan['gambar'] ?>" alt="Gambar Barang"
+                                                        class="gambar-barang"></td>
                                                 <td>
                                                     <?php if ($pengajuan['status'] == 'menunggu') { ?>
                                                         <div class="badge badge-warning">
@@ -164,6 +167,10 @@ $crudPengajuan = new CrudPengajuan($conn);
                         <label>Harga</label>
                         <input type="number" name="harga" class="form-control" placeholder="Harga" required="">
                     </div>
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" name="foto" class="form-control" placeholder required="">
+                    </div>
                     <div class="modal-footer no-bd">
                         <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i>
                             Save</button>
@@ -236,6 +243,11 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                             <input value="<?php echo $pengajuan['harga'] ?>" type="number" name="harga" class="form-control"
                                 placeholder="Harga ..." required="">
                         </div>
+                        <div class="form-group">
+                            <label>Foto</label>
+                            <img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
+                            <input type="file" name="foto" class="form-control">
+                        </div>
 
                     </div>
                     <div class="modal-footer no-bd">
@@ -260,6 +272,8 @@ if (isset($_POST['simpan'])) {
         'sku' => $_POST['sku'],
         'namasupplier' => $_POST['namasupplier'],
         'harga' => $_POST['harga'],
+        'foto' => $_FILES['foto']['name'],
+        'file_tmp' => $_FILES['foto']['tmp_name'],
     );
 
     $crudPengajuan->Create($data);
@@ -270,7 +284,9 @@ if (isset($_POST['simpan'])) {
         'jenis_barang' => $_POST['jenisbarang'],
         'sku' => $_POST['sku'],
         'namasupplier' => $_POST['namasupplier'],
-        'harga' => $_POST['harga']
+        'harga' => $_POST['harga'],
+        'foto' => $_FILES['foto']['name'],
+        'file_tmp' => $_FILES['foto']['tmp_name'],
     );
     // echo "<script>alert ('pe') </script>";
     $crudPengajuan->Update($data);
