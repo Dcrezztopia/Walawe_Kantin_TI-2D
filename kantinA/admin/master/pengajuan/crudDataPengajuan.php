@@ -1,7 +1,8 @@
 <?php
 
+
 $connection = $conn;
-class crudDataBarang 
+class crudDataPengajuan 
 {
     private $connection;
     public function __construct($conn)
@@ -9,68 +10,125 @@ class crudDataBarang
         $this->connection = $conn;
     }
 
+    public function Create($data) {
+        $id_waiting = $data['id_waiting'];
+        $nama_barang = $data['namaBarang'];
+        $jenis_barang = $data['jenisBarang'];
+        $sku = $data['sku'];
+        $namasupplier = $data['namaSupplier'];
+        $harga = $data['harga'];
 
-    public function Create($data)
-    {
-        $nama_barang = $_POST['namaBarang'];
-        $jenis_barang = $_POST['jenisBarang'];
-        $stok = $_POST['stok'];
-        $harga = $_POST['harga'];
-        $sku = $_POST['sku'];
-        $nama_supplier = $_POST['namaSupplier'];
-        $foto = $_FILES['foto']['name'];
-        $file_tmp = $_FILES['foto']['tmp_name'];
-        $upload_path = '../img/';
+        $status = $this->getStatusFromWaitingRoom($id_waiting);
 
-        move_uploaded_file($file_tmp, $upload_path . $foto);
-        
-        $query_insert = "INSERT into barang values ('','$nama_barang','$jenis_barang','$stok','$harga','$sku', '$nama_supplier','$foto')";
-        $result = $this->connection->query($query_insert);
-
-        if ($result) {
-            echo "<script>alert('Data Berhasil Disimpan')</script>";
-            echo "<script>window.location.replace('?view=datapengajuan');</script>";
+        if ($status === 'disetujui') {
+            $this->tampilkanPesanDanRedirect('Barang telah disetujui', '?view=databarang');
         } else {
-            echo "<script>alert('Gagal menyimpan data')</script>";
+            $jenis_barang_query = $this->getJenisBarangQuery($jenis_barang);
+
+            $this->updateStatusWaitingRoom($id_waiting);
+
+            $this->insertIntoTabelBarang($nama_barang, $jenis_barang_query, $sku, $harga, $namasupplier);
+
+            $this->tampilkanPesanSukses($jenis_barang_query);
         }
     }
 
+    private function getStatusFromWaitingRoom($id_waiting) {
+        $result = mysqli_query($this->connection, "SELECT status FROM waitingroom WHERE id_waiting='$id_waiting'");
+        $row = mysqli_fetch_assoc($result);
 
-    public function Update($data)
-    {
-        $idBarang = $_POST['id'];
-        $nama_barang = $_POST['namaBarang'];
-        $jenis_barang = $_POST['jenisBarang'];
-        $stok = $_POST['stok'];
-        $harga = $_POST['harga'];
-        $sku = $_POST['sku'];
-    
-        // Ambil nilai asli gambar dari input tersembunyi
-        $gambarLama = $_POST['gambarLama'];
-    
-        // Ambil informasi file
-        $foto = $_FILES['foto']['name'];
-        $file_tmp = $_FILES['foto']['tmp_name'];
-        $upload_path = '../img/';
-    
-        // Jika ada file baru diunggah, pindahkan file
-        if (!empty($foto)) {
-            move_uploaded_file($file_tmp, $upload_path . $foto);
-        } else {
-            // Jika tidak ada file baru, gunakan nilai asli gambar
-            $foto = $gambarLama;
-        }
-    
-        // Update data barang
-        $query_insert = "UPDATE barang SET namaBarang='$nama_barang', jenisBarang='$jenis_barang', stok='$stok', harga='$harga', sku='$sku', gambar='$foto' WHERE idBarang='$idBarang'";
-        $result = $this->connection->query($query_insert);
-        echo "<script>alert ('Data Berhasil Diubah') </script>";
-        echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+        return $row['status'];
     }
+
+    private function getJenisBarangQuery($jenis_barang) {
+        $resultCheckJenis = mysqli_query($this->connection, "SELECT * FROM jenisbarang WHERE jenisBarang = '$jenis_barang'");
+        $rowCheckJenis = mysqli_fetch_assoc($resultCheckJenis);
+
+        if ($rowCheckJenis) {
+            return $jenis_barang;
+        } else {
+            mysqli_query($this->connection, "INSERT INTO jenisbarang (jenisBarang, deskripsi) VALUES ('$jenis_barang', 'belum tersedia')");
+            return $jenis_barang;
+        }
+    }
+
+    private function updateStatusWaitingRoom($id_waiting) {
+        mysqli_query($this->connection, "UPDATE waitingroom SET status='disetujui' WHERE id_waiting='$id_waiting'");
+    }
+
+    private function insertIntoTabelBarang($nama_barang, $jenis_barang_query, $sku, $harga, $namasupplier) {
+        mysqli_query($this->connection, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga, namaSupplier) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier')");
+    }
+
+    private function tampilkanPesanSukses($jenis_barang_query) {
+        echo "<script>alert('Data berhasil disimpan" . ($jenis_barang_query ? "" : " (jenis barang baru)") . "')</script>";
+        echo "<script>window.location.replace('?view=datapengajuan');</script>";
+    }
+
+    private function tampilkanPesanDanRedirect($pesan, $redirectUrl) {
+        echo "<script>alert('$pesan')</script>";
+        echo "<meta http-equiv='refresh' content=0; URL=$redirectUrl>";
+    }
+    
+    // public function Create($data) {
+    //     $id_waiting = $_POST['id_waiting'];
+    //     $nama_barang =$_POST['namaBarang'];
+    //     $jenis_barang = $_POST['jenisBarang'];
+    //     $sku = $_POST['sku'];
+    //     $namasupplier = $_POST['namaSupplier'];
+    //     $harga = $_POST['harga'];
+	
+	// 	// Check if the status is 'disetujui'
+	// 	$result = mysqli_query($this->connection, "SELECT status FROM waitingroom WHERE id_waiting='$id_waiting'");
+	// 	$row = mysqli_fetch_assoc($result);
+	// 	$status = $row['status'];
+	
+	// 	if ($status === 'disetujui') {
+	// 		echo "<script>alert('Barang telah disetujui')</script>";
+	// 		echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+	// 	} else {
+	// 		// Cek apakah jenis barang sudah ada di tabel jenisbarang
+	// 		$resultCheckJenis = mysqli_query($this->connection, "SELECT * FROM jenisbarang WHERE jenisBarang = '$jenis_barang'");
+	// 		$rowCheckJenis = mysqli_fetch_assoc($resultCheckJenis);
+	
+	// 		if ($rowCheckJenis) {
+	// 			// Jenis barang sudah ada, gunakan jenisBarang langsung
+	// 			$jenis_barang_query = $jenis_barang;
+	// 		} else {
+	// 			// Jenis barang belum ada, tambahkan ke tabel jenisbarang
+	// 			mysqli_query($this->connection, "INSERT INTO jenisbarang (jenisBarang, deskripsi) VALUES ('$jenis_barang', 'belum tersedia')");
+	// 			$jenis_barang_query = $jenis_barang;
+	// 		}
+	
+	// 		// Update status ke 'disetujui' di tabel waitingroom
+	// 		mysqli_query($this->connection, "UPDATE waitingroom SET status='disetujui' WHERE id_waiting='$id_waiting'");
+	
+	// 		// Insert ke tabel barang
+	// 		mysqli_query($this->connection, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga, namaSupplier) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier')");
+			
+	// 		if ($rowCheckJenis) {
+	// 			echo "<script>alert('Data berhasil disimpan')</script>";
+	// 			echo "<script>window.location.replace('?view=datapengajuan');</script>";
+	// 		} else {
+	// 			echo "<script>alert('Data berhasil disimpan (jenis barang baru)')</script>";
+	// 			echo "<script>window.location.replace('?view=datapengajuan');</script>";
+	// 		}
+	// 	}
+    // }
 
     public function Delete($data)
     {
-
+    $id_waiting = $_POST['id_waiting'];
+    $query_delete = "DELETE FROM waitingroom WHERE id_waiting = $id_waiting";
+    $result = $this->connection->query($query_delete);
+    
+    if ($result) {
+        echo "<script>alert ('Data Pengajuan  Berhasil Dihapus') </script>";
+        echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+    } else {
+        echo "<script>alert ('Gagal menghapus data Pengajuan Barang') </script>";
+        echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+    }
     }
 }
 ?>

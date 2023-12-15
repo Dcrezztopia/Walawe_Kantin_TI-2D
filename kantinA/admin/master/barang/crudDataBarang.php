@@ -1,5 +1,4 @@
 <?php
-
 require_once '../crud.php';
 $connection = $conn;
 class crudDataBarang implements Crud
@@ -20,7 +19,7 @@ class crudDataBarang implements Crud
         $sku = $_POST['sku'];
         $nama_supplier = $_POST['namaSupplier'];
         $foto = $_FILES['foto']['name'];
-        $file_tmp = $_FILES['foto']['tmp_name'];    
+        $file_tmp = $_FILES['foto']['tmp_name'];
         $upload_path = '../img/';
 
         move_uploaded_file($file_tmp, $upload_path . $foto);
@@ -72,6 +71,11 @@ class crudDataBarang implements Crud
     public function Delete($data)
     {
 
+        $id = $_POST['id'];
+        $query_insert = "DELETE from barang where idBarang='$id'";
+        $result = $this->connection->query($query_insert);
+        echo "<script>alert ('Data Berhasil Dihapus') </script>";
+        echo"<meta http-equiv='refresh' content=0; URL=?view=databarang>";
     }
 }
 ?>
