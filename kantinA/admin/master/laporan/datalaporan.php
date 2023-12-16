@@ -55,8 +55,26 @@
 								<h4 class="card-title">Laporan Penghasilan</h4>
 							</div>
 						</div>
+						<?php
+						$no = 1;
+						$query = mysqli_query($conn,'SELECT * from omset');
+						while ($tanggal = mysqli_fetch_array($query)) {
+						?>
 						<div class="row card-body">
-							
+						<div class="col-md-4">
+								<div class="form-group">
+									<label>Mulai Tanggal</label>
+									<input type="date" name="mulai" class="form-control" placeholder="ymd" readonly value="<?php echo $tanggal['tanggalMulai'] ?>">
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Sampai Tanggal</label>
+									<input type="date" name="akhir" class="form-control" placeholder="ymd" readonly value="<?php echo $tanggal['tanggalSelesai'] ?>">
+								</div>
+							</div>
+							<?php } ?>
 							<div class="col-md-4">
 							<?php
 															$no = 1;
