@@ -42,55 +42,8 @@
 										<input type="date" id="inputSampaiTanggal" class="form-control" name="sampai_tanggal" value="<?php echo $sampai_tanggal ?>" required>
 									</div>
 								</div>
-<<<<<<< HEAD
 								<div class="col-md-4 d-flex align-items-center mt-2">
 									<button type="submit" name="tampil" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i>&nbsp; Tampilkan</button>
-=======
-							</div>
-							<div class="col-md-4 d-flex align-items-center mt-2">
-								<button type="submit" name="tampil" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i>&nbsp; Tampilkan</button>
-							</div>
-							
-							
-						</div>
-					</div>
-					
-					<div class="card">
-						<div class="card-header">
-							<div class="d-flex align-items-center">
-								<h4 class="card-title">Laporan Penghasilan</h4>
-							</div>
-						</div>
-						<?php
-						$no = 1;
-						$query = mysqli_query($conn,'SELECT * from omset');
-						while ($tanggal = mysqli_fetch_array($query)) {
-						?>
-						<div class="row card-body">
-						<div class="col-md-4">
-								<div class="form-group">
-									<label>Mulai Tanggal</label>
-									<input type="date" name="mulai" class="form-control" placeholder="ymd" readonly value="<?php echo $tanggal['tanggalMulai'] ?>">
-								</div>
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>Sampai Tanggal</label>
-									<input type="date" name="akhir" class="form-control" placeholder="ymd" readonly value="<?php echo $tanggal['tanggalSelesai'] ?>">
-								</div>
-							</div>
-							<?php } ?>
-							<div class="col-md-4">
-							<?php
-															$no = 1;
-															$query = mysqli_query($conn,'SELECT nilai_omset FROM omset where id = 1');
-															while ($omset = mysqli_fetch_array($query)) {
-														?>
-								<div class="form-group mb-3">
-									<label>Omzet</label>
-									<input readonly value="<?php echo $omset['nilai_omset'] ?>" type="number" name="omset" class="form-control" >
->>>>>>> a256928ae1a39949daba47e1788ace1a29f203a8
 								</div>
 
 
@@ -110,12 +63,12 @@
 											<tr>
 												<td class="font-weight-bold">Mulai Tanggal</td>
 												<td class="font-weight-bold">:</td>
-												<td><?php echo $tanggal['tanggalMulai'] ?></td>
+												<td><?php echo DATE('D, M Y'); ?></td>
 											</tr>
 											<tr>
 												<td class="font-weight-bold">Sampai Tanggal</td>
 												<td class="font-weight-bold">:</td>
-												<td><?php echo $tanggal['tanggalSelesai'] ?></td>
+												<td><?php echo DATE('D, M Y'); ?></td>
 											</tr>
 										</tbody>
 									</table>
