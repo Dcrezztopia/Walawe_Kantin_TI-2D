@@ -1,3 +1,12 @@
+<style>
+	.no-border,
+	.no-border th,
+	.no-border td {
+		border: none;
+	}
+</style>
+
+
 <div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
@@ -57,48 +66,48 @@
 								</div>
 							</div>
 							<div class="row card-body">
-							<?php
-										$no = 1;
-										$query = mysqli_query($conn, 'SELECT * FROM omset where id = 1');
-										while ($omset = mysqli_fetch_array($query)) {
-										?>
-								<div class="col-md-5 mb-4 ml-3">
-									<table class="table table-bordered border-light no-border">
-										<tbody>
-											<tr>
-												<td class="font-weight-bold">Mulai Tanggal</td>
-												<td class="font-weight-bold">:</td>
-												<td><?php echo $omset['tanggalMulai'] ?></td>
-											</tr>
-											<tr>
-												<td class="font-weight-bold">Sampai Tanggal</td>
-												<td class="font-weight-bold">:</td>
-												<td><?php echo $omset['tanggalSelesai'] ?></td>
-											</tr>
+								<?php
+								$no = 1;
+								$query = mysqli_query($conn, 'SELECT * FROM omset where id = 1');
+								while ($omset = mysqli_fetch_array($query)) {
+								?>
+									<div class="col-md-5 mb-4 ml-3">
+										<table class="table table-bordered border-light no-border">
+											<tbody>
+												<tr>
+													<td class="font-weight-bold">Mulai Tanggal</td>
+													<td class="font-weight-bold">:</td>
+													<td><?php echo date('d/m/Y', strtotime($omset['tanggalMulai'])) ?></td>
+												</tr>
+												<tr>
+													<td class="font-weight-bold">Sampai Tanggal</td>
+													<td class="font-weight-bold">:</td>
+													<td><?php echo date('d/m/Y', strtotime($omset['tanggalSelesai'])) ?></td>
+												</tr>
 											<?php } ?>
-										</tbody>
-									</table>
+											</tbody>
+										</table>
 
-									<div class="row">
-										<?php
-										$no = 1;
-										$query = mysqli_query($conn, 'SELECT nilai_omset FROM omset where id = 1');
-										while ($omset = mysqli_fetch_array($query)) {
-										?>
-											<div class="form-group col-md-7">
-												<label>Omzet</label>
-												<input readonly value="<?php echo $omset['nilai_omset'] ?>" type="number" name="omset" class="form-control">
-											</div>
+										<div class="row">
+											<?php
+											$no = 1;
+											$query = mysqli_query($conn, 'SELECT nilai_omset FROM omset where id = 1');
+											while ($omset = mysqli_fetch_array($query)) {
+											?>
+												<div class="form-group col-md-7">
+													<label>Omzet</label>
+													<input readonly value="<?php echo $omset['nilai_omset'] ?>" type="number" name="omset" class="form-control">
+												</div>
 
-											<div class="d-flex align-items-center form-group mt-4">
-												<a href="cetaklaporan.php" target="_blank">
-													<button type="button" name="cetak" class="btn btn-success w-100"><i class="fa fa-print" aria-hidden="true"></i>&nbsp; Cetak</button>
-												</a>
-											</div>
+												<div class="d-flex align-items-center form-group mt-4">
+													<a href="cetaklaporan.php" target="_blank">
+														<button type="button" name="cetak" class="btn btn-success w-100"><i class="fa fa-print" aria-hidden="true"></i>&nbsp; Cetak</button>
+													</a>
+												</div>
+										</div>
+									<?php } ?>
+
 									</div>
-								<?php } ?>
-
-								</div>
 			</form>
 
 
@@ -130,7 +139,7 @@
 							<tr>
 								<td><?php echo $no++ ?></td>
 								<td><?php echo $transaksi['kodeTransaksi'] ?></td>
-								<td><?php echo $transaksi['tanggal'] ?></td>
+								<td><?php echo date('d/m/Y', strtotime($transaksi['tanggal'])) ?></td>
 								<td><?php echo $transaksi['jumlahitem'] ?></td>
 								<td><?php echo $transaksi['totalPembayaran'] ?></td>
 								<td><?php echo $transaksi['nip'] ?></td>
@@ -165,7 +174,7 @@ while ($k = mysqli_fetch_array($q)) {
 						<span class="fw-mediumbold">
 							Detail</span>
 						<span class="fw-light">
-							Barang
+							Transaksi
 						</span>
 					</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -183,17 +192,32 @@ while ($k = mysqli_fetch_array($q)) {
 							<label>Tanggal</label>
 							<input readonly value="<?php echo $k['tanggal'] ?>" type="date" name="tanggal" class="form-control">
 						</div>
-						<div class="form-group">
-							<label>Jumlah Item</label>
-							<input readonly value="<?php echo $k['jumlahitem'] ?>" type="number" name="jumlahitem" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Total Pembayaran</label>
-							<input readonly value="<?php echo $k['totalPembayaran'] ?>" type="number" name="totalpembayaran" class="form-control">
-						</div>
-						<div class="form-group">
-							<label>Pegawai yang menangani</label>
-							<input readonly value="<?php echo $k['nip'] ?>" type="number" name="nip" class="form-control">
+						<div class="table-responsive">
+							<table id="add-row" class="display table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>No</th>
+										<th>SKU</th>
+										<th>Jumlah</th>
+										<th>Harga</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+
+									$no = 1; {
+									?>
+										<tr>
+											<td><?php echo $no++ ?></td>
+											<td><?php echo $transaksi['sku'] ?></td>
+											<td><?php echo $transaksi['jumlahitem'] ?></td>
+											<td><?php echo $transaksi['harga'] ?></td>
+
+										</tr>
+									<?php } ?>
+								</tbody>
+							</table>
 						</div>
 					</div>
 					<div class="modal-footer no-bd">

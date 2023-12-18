@@ -28,8 +28,7 @@ $crudJenisBarang = new crudJenisBarang($conn);
 						<div class="card-header">
 							<div class="d-flex align-items-center">
 								<h4 class="card-title">Data Jenis Barang</h4>
-								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-									data-target="#modalAddBarang">
+								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalAddBarang">
 									<i class="fa fa-plus"></i>
 									Tambah Data
 								</button>
@@ -52,7 +51,7 @@ $crudJenisBarang = new crudJenisBarang($conn);
 										$no = 1;
 										$query = mysqli_query($conn, 'SELECT * from jenisbarang');
 										while ($barang = mysqli_fetch_array($query)) {
-											?>
+										?>
 											<tr>
 												<td>
 													<?php echo $no++ ?>
@@ -64,15 +63,9 @@ $crudJenisBarang = new crudJenisBarang($conn);
 													<?php echo $barang['deskripsi'] ?>
 												</td>
 												<td>
-													<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>"
-														data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i
-															class="fa fa-eye"></i></a>
-													<a href="#modalEditBarang<?php echo $barang['jenisBarang'] ?>"
-														data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i
-															class="fa fa-edit"></i></a>
-													<a href="#modalHapusBarang<?php echo $barang['jenisBarang'] ?>"
-														data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i
-															class="fa fa-trash"></i></a>
+													<a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+													<a href="#modalEditBarang<?php echo $barang['jenisBarang'] ?>" data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
+													<a href="#modalHapusBarang<?php echo $barang['jenisBarang'] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
 												</td>
 											</tr>
 										<?php } ?>
@@ -107,13 +100,11 @@ $crudJenisBarang = new crudJenisBarang($conn);
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Jenis Barang</label>
-						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang"
-							required="">
+						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="">
 					</div>
 					<div class="form-group">
 						<label>Deskripsi</label>
-						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8"
-							required></textarea>
+						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required></textarea>
 					</div>
 				</div>
 				<div class="modal-footer no-bd">
@@ -129,11 +120,10 @@ $crudJenisBarang = new crudJenisBarang($conn);
 <?php
 $p = mysqli_query($conn, 'SELECT * from jenisbarang');
 while ($d = mysqli_fetch_array($p)) {
-	?>
+?>
 
 	<!-- UPDATE -->
-	<div class="modal fade" id="modalEditBarang<?php echo $d['jenisBarang'] ?>" tabindex="-1" role="dialog"
-		aria-hidden="true">
+	<div class="modal fade" id="modalEditBarang<?php echo $d['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
@@ -153,13 +143,11 @@ while ($d = mysqli_fetch_array($p)) {
 						<input type="hidden" name="id" value="<?php echo $d['jenisBarang'] ?>">
 						<div class="form-group">
 							<label>Jenis Barang</label>
-							<input value="<?php echo $d['jenisBarang'] ?>" type="text" name="jenisBarangBaru"
-								class="form-control" placeholder="Jenis Barang ..." required="">
+							<input value="<?php echo $d['jenisBarang'] ?>" type="text" name="jenisBarangBaru" class="form-control" placeholder="Jenis Barang ..." required="">
 						</div>
 						<div class="form-group">
 							<label>Deskripsi</label>
-							<textarea name="deskripsi" class="form-control" rows="8" placeholder="Deskripsi ..."
-								required=""><?php echo $d['deskripsi']; ?></textarea>
+							<textarea name="deskripsi" class="form-control" rows="8" placeholder="Deskripsi ..." required=""><?php echo $d['deskripsi']; ?></textarea>
 						</div>
 					</div>
 					<div class="modal-footer no-bd">
@@ -178,11 +166,10 @@ while ($d = mysqli_fetch_array($p)) {
 <?php
 $c = mysqli_query($conn, 'SELECT * from jenisbarang');
 while ($row = mysqli_fetch_array($c)) {
-	?>
+?>
 
 	<!-- DELETE -->
-	<div class="modal fade" id="modalHapusBarang<?php echo $row['jenisBarang'] ?>" tabindex="-1" role="dialog"
-		aria-hidden="true">
+	<div class="modal fade" id="modalHapusBarang<?php echo $row['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
@@ -218,11 +205,10 @@ while ($row = mysqli_fetch_array($c)) {
 $q = mysqli_query($conn, 'SELECT * FROM jenisbarang');
 
 while ($k = mysqli_fetch_array($q)) {
-	?>
+?>
 
 	<!-- READ -->
-	<div class="modal fade" id="modalDetailBarang<?php echo $k['jenisBarang'] ?>" tabindex="-1" role="dialog"
-		aria-hidden="true">
+	<div class="modal fade" id="modalDetailBarang<?php echo $k['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
@@ -242,13 +228,11 @@ while ($k = mysqli_fetch_array($q)) {
 						<input type="hidden" name="id" value="<?php echo $k['jenisBarang'] ?>">
 						<div class="form-group">
 							<label>Jenis Barang</label>
-							<input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang"
-								class="form-control" placeholder="Jenis Barang" required="">
+							<input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="">
 						</div>
 						<div class="form-group">
 							<label>Deskripsi </label>
-							<textarea readonly name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8"
-								required=""><?php echo $k['deskripsi']; ?></textarea>
+							<textarea readonly name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required=""><?php echo $k['deskripsi']; ?></textarea>
 						</div>
 					</div>
 					<div class="modal-footer no-bd">
