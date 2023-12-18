@@ -57,19 +57,25 @@
 								</div>
 							</div>
 							<div class="row card-body">
+							<?php
+										$no = 1;
+										$query = mysqli_query($conn, 'SELECT * FROM omset where id = 1');
+										while ($omset = mysqli_fetch_array($query)) {
+										?>
 								<div class="col-md-5 mb-4 ml-3">
 									<table class="table table-bordered border-light no-border">
 										<tbody>
 											<tr>
 												<td class="font-weight-bold">Mulai Tanggal</td>
 												<td class="font-weight-bold">:</td>
-												<td><?php echo DATE('D, M Y'); ?></td>
+												<td><?php echo $omset['tanggalMulai'] ?></td>
 											</tr>
 											<tr>
 												<td class="font-weight-bold">Sampai Tanggal</td>
 												<td class="font-weight-bold">:</td>
-												<td><?php echo DATE('D, M Y'); ?></td>
+												<td><?php echo $omset['tanggalSelesai'] ?></td>
 											</tr>
+											<?php } ?>
 										</tbody>
 									</table>
 
