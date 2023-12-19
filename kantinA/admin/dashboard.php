@@ -133,7 +133,13 @@ $b = mysqli_fetch_array($key);
 											<tbody>
 												<?php
 													$no = 1;
-													$query = mysqli_query($conn,'SELECT * from barang');
+													$query = mysqli_query($conn,'SELECT b.idBarang, b.namaBarang, b.jenisBarang, b.stok, b.harga, 
+													SUM(dt.jumlah) AS totalTerjual
+											 FROM barang b
+											 JOIN detailtransaksi dt ON b.idBarang = dt.idBarang
+											 GROUP BY b.idBarang, b.namaBarang, b.jenisBarang, b.stok, b.harga
+											 ORDER BY totalTerjual DESC;
+											 ');
 													while ($barang = mysqli_fetch_array($query)) {
 												?>
 												<tr>
