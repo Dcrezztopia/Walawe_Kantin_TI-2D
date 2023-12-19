@@ -17,6 +17,7 @@ class crudDataPengajuan
         $sku = $data['sku'];
         $namasupplier = $data['namaSupplier'];
         $harga = $data['harga'];
+        $gambar = $data['gambar'];
 
         $status = $this->getStatusFromWaitingRoom($id_waiting);
 
@@ -27,7 +28,7 @@ class crudDataPengajuan
 
             $this->updateStatusWaitingRoom($id_waiting);
 
-            $this->insertIntoTabelBarang($nama_barang, $jenis_barang_query, $sku, $harga, $namasupplier);
+            $this->insertIntoTabelBarang($nama_barang, $jenis_barang_query, $sku, $harga, $namasupplier, $gambar);
 
             $this->tampilkanPesanSukses($jenis_barang_query);
         }
@@ -56,8 +57,8 @@ class crudDataPengajuan
         mysqli_query($this->connection, "UPDATE waitingroom SET status='disetujui' WHERE id_waiting='$id_waiting'");
     }
 
-    private function insertIntoTabelBarang($nama_barang, $jenis_barang_query, $sku, $harga, $namasupplier) {
-        mysqli_query($this->connection, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga, namaSupplier) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier')");
+    private function insertIntoTabelBarang($nama_barang, $jenis_barang_query, $sku, $harga, $namasupplier, $gambar) {
+        mysqli_query($this->connection, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga, namaSupplier, gambar) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier', '$gambar')");
     }
 
     private function tampilkanPesanSukses($jenis_barang_query) {

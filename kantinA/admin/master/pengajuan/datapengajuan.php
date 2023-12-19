@@ -74,6 +74,9 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 														<?php echo $pinjamruangan['harga'] ?>
 													</td>
 													<td>
+													<img src="../img/<?php echo $pinjamruangan['gambar'] ?>" alt="Gambar Barang" class="gambar-barang">
+													</td>
+													<td>
 														
 														<?php if ($pinjamruangan['status'] == 'menunggu') { ?>
                                                             <div class="badge badge-warning"><?php echo $pinjamruangan['status'] ?></div>
@@ -85,13 +88,14 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 																</td>
 																
 																<td>
-																	<form method="POST">
+																	<form method="POST" enctype="multipart/form-data">
 																		<input type="hidden" name="id_waiting" value="<?php echo $pinjamruangan['id_waiting']; ?>">
 																		<input type="hidden" name="namaBarang" value="<?php echo $pinjamruangan['namabarang']; ?>">
 																		<input type="hidden" name="jenisBarang" value="<?php echo $pinjamruangan['jenisbarang']; ?>">
 																		<input type="hidden" name="sku" value="<?php echo $pinjamruangan['sku']; ?>">
 																		<input type="hidden" name="namaSupplier" value="<?php echo $pinjamruangan['namasupplier']; ?>">
 																		<input type="hidden" name="harga" value="<?php echo $pinjamruangan['harga']; ?>">
+																		<input type="hidden" name="gambar" value="<?php echo $pinjamruangan['gambar']; ?>">
 																		<button type="Accept" name="simpan" class="btn btn-xs btn-success"><i class="fa fa-check-square-o"></i></button>
 																		<button type="Delete" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-times-circle"></i></button>
 																	</form>
@@ -119,6 +123,7 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 			'sku' => $_POST['sku'],
 			'namaSupplier' => $_POST['namaSupplier'],  // Menggunakan $_POST untuk gambar lama
 			'harga' => $_POST['harga'],
+			'gambar' => $_POST['gambar']
 		);
 		$crudDataPengajuan->Create($data);	
 	}

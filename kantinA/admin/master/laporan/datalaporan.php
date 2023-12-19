@@ -161,7 +161,19 @@
 </div>
 
 <?php
-$q = mysqli_query($conn, 'SELECT * FROM transaksi');
+$q = mysqli_query($conn, 'SELECT 
+t.kodeTransaksi,
+t.tanggal,
+b.sku,
+dt.jumlah,
+dt.harga
+FROM 
+transaksi t
+JOIN 
+detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
+JOIN 
+barang b ON dt.idBarang = b.idBarang;
+');
 
 while ($k = mysqli_fetch_array($q)) {
 ?>
@@ -204,15 +216,28 @@ while ($k = mysqli_fetch_array($q)) {
 									</tr>
 								</thead>
 								<tbody>
-									<?php
+								<?php
+                                $s = mysqli_query($conn, 'SELECT 
+                                t.kodeTransaksi,
+                                t.tanggal,
+                                b.sku,
+                                dt.jumlah,
+                                dt.harga
+                                FROM 
+                                transaksi t
+                                JOIN 
+                                detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
+                                JOIN 
+                                barang b ON dt.idBarang = b.idBarang;
+                                ');
 
-									$no = 1; {
-									?>
+                                while ($k = mysqli_fetch_array($s)) {
+                                ?>
 										<tr>
 											<td><?php echo $no++ ?></td>
-											<td><?php echo $transaksi['sku'] ?></td>
-											<td><?php echo $transaksi['jumlahitem'] ?></td>
-											<td><?php echo $transaksi['harga'] ?></td>
+											<td><?php echo $k['sku'] ?></td>
+											<td><?php echo $k['jumlah'] ?></td>
+											<td><?php echo $k['harga'] ?></td>
 
 										</tr>
 									<?php } ?>
