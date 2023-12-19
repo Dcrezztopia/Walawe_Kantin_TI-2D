@@ -169,7 +169,7 @@ session_start();
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-                        <h4>Apakah anda ingin <b>Logout</b>?</h4>
+                        <h4>Apakah Anda Ingin Logout?</h4>
                     </div>
                     <div class="modal-footer no-bd">
                         <button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
@@ -201,37 +201,13 @@ session_start();
         elseif ($_GET['view'] == 'datapengajuan')
             include 'dataPegawai/pengajuan/datapengajuan.php';
 
-        elseif ($_GET['view'] == 'createpengajuan')
-            include 'dataPegawai/pengajuan/createpengajuan.php';
-
-        elseif ($_GET['view'] == 'detailpengajuan')
-            include 'dataPegawai/pengajuan/detailpengajuan.php';
-
-        elseif ($_GET['view'] == 'editpengajuan')
-            include 'dataPegawai/pengajuan/editpengajuan.php';
-
         // Data Jenis Barang
         elseif ($_GET['view'] == 'datajenisbarang')
             include 'dataPegawai/jenisbarang/datajenisbarang.php';
 
-        elseif ($_GET['view'] == 'createjenisbarang')
-            include 'dataPegawai/jenisbarang/createjenisbarang.php';
-
-        elseif ($_GET['view'] == 'detailjenisbarang')
-            include 'dataPegawai/jenisbarang/detailjenisbarang.php';
-
-        elseif ($_GET['view'] == 'editjenisbarang')
-            include 'dataPegawai/jenisbarang/editjenisbarang.php';
-
         // Data Stok Barang
         elseif ($_GET['view'] == 'datastokbarang')
             include 'dataPegawai/stokbarang/datastokbarang.php';
-
-        elseif ($_GET['view'] == 'detailstokbarang')
-            include 'dataPegawai/stokbarang/detailstokbarang.php';
-
-        elseif ($_GET['view'] == 'editstokbarang')
-            include 'dataPegawai/stokbarang/editstokbarang.php';
 
         // Profil
         elseif ($_GET['view'] == 'profil')

@@ -78,9 +78,9 @@ $crudDataBarang = new crudDataBarang($conn);
                                                     <?php echo $barang['namaSupplier'] ?>
                                                 </td>
                                                 <td>
-                                                    <a href="#modalDetailBarang<?php echo $barang['idBarang'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+
                                                     <a href="#modalEditBarang<?php echo $barang['idBarang'] ?>" data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
-                                                    <a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+
                                                 </td>
                                             </tr>
                                         <?php } ?>

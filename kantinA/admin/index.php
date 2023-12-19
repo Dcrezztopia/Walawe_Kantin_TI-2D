@@ -149,7 +149,7 @@ $q = mysqli_fetch_array($p);
 
 						<li class="nav-item">
 							<a href="#" class="nav-link" data-toggle="modal" data-target="#logoutConfirmationModal">
-								<i class="fas fa-lock"></i>
+								<i class="fa fa-sign-out"></i>
 								<p>Logout</p>
 							</a>
 						</li>
@@ -176,7 +176,7 @@ $q = mysqli_fetch_array($p);
 					</div>
 					<div class="modal-footer no-bd">
 						<button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
-						<a class="btn btn-danger" href="../logout.php"><i class="fas fa-lock"></i>&nbsp;Logout</a>
+						<a class="btn btn-danger" href="../logout.php"><i class="fa fa-sign-out"></i>&nbsp;Logout</a>
 					</div>
 				</div>
 			</div>
