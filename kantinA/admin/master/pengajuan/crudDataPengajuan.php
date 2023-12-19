@@ -130,6 +130,14 @@ class crudDataPengajuan
         echo "<script>alert ('Gagal menghapus data Pengajuan Barang') </script>";
         echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
     }
-    }
+}
+
+public function Decline($data)
+{
+    $id_waiting = $_POST['id_waiting'];
+    $query_update = "UPDATE waitingroom SET status = 'ditolak' where id_waiting = $id_waiting";
+    $result = $this->connection->query($query_update);
+    echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+}
 }
 ?>

@@ -97,6 +97,7 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 																		<input type="hidden" name="harga" value="<?php echo $pinjamruangan['harga']; ?>">
 																		<input type="hidden" name="gambar" value="<?php echo $pinjamruangan['gambar']; ?>">
 																		<button type="Accept" name="simpan" class="btn btn-xs btn-success"><i class="fa fa-check-square-o"></i></button>
+																		<button type="Decline" name="tolak" class="btn btn-xs btn-fail"><i class="fa fa-check-square-o"></i></button>
 																		<button type="Delete" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-times-circle"></i></button>
 																	</form>
 																</td>
@@ -127,16 +128,24 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 		);
 		$crudDataPengajuan->Create($data);	
 	}
-
-
-elseif(isset($_POST['hapus']))
-{
-	$data = array(
-		'id_waiting' => $_POST['id_waiting'],
-	);
-	$crudDataPengajuan->Delete($data);	
-}
-
+	
+	
+	elseif(isset($_POST['hapus']))
+	{
+		$data = array(
+			'id_waiting' => $_POST['id_waiting'],
+		);
+		$crudDataPengajuan->Delete($data);	
+	}
+	
+	elseif(isset($_POST['tolak']))
+	{
+		$data = array(
+			'id_waiting' => $_POST['id_waiting']
+		);
+		$crudDataPengajuan->Decline($data);
+	
+	}
 
 
 
