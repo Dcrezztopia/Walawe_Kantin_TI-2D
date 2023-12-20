@@ -268,18 +268,18 @@ if (isset($_POST['simpan'])) {
 		'jenisBarang' => $_POST['jenisBarang'],
 		'deskripsi' => $_POST['deskripsi']
 	);
-	$crudDataJenisBarang->Create($data);
+	$crudJenisBarang->Create($data);
 } elseif (isset($_POST['ubah'])) {
 	$data = array(
 		'id' => $_POST['id'],
 		'deskripsi' => $_POST['deskripsi'],
 		'jenisBarangBaru' => $_POST['jenisBarangBaru']
 	);
-	$crudDataJenisBarang->Update($data);
+	$crudJenisBarang->Update($data);
 } elseif (isset($_POST['hapus'])) {
 	$data = array(
 		'jenisBarang' => $_POST['jenisBarang']
 	);
-	$crudDataJenisBarang->Delete($data);
+	$crudJenisBarang->Delete($data);
 }
 ?>
