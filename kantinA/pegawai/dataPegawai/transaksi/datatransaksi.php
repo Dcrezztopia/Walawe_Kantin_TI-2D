@@ -1,3 +1,5 @@
+<?php unset($_SESSION['kembalian']); ?>
+
 <div class="main-panel">
     <div class="content">
         <div class="page-inner">
@@ -59,7 +61,8 @@
                                                 <td><?= $pengajuan['nip']; ?></td>
                                                 <td><?= $pengajuan['tanggal']; ?></td>
                                                 <td>
-                                                    <a href="#modalDetailBarang<?php echo $barang['jenisBarang'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+                                                    <button data-toggle="modal" data-target="#modalDetailTransaksi" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></button>
+
                                                 </td>
                                             </tr>
 
@@ -74,6 +77,92 @@
         </div>
     </div>
 </div>
+
+<?php
+$q = mysqli_query($conn, 'SELECT t.kodeTransaksi, t.tanggal, b.sku, dt.jumlah, dt.harga FROM transaksi t JOIN detailtransaksi dt 
+ON t.kodeTransaksi = dt.kodeTransaksi JOIN barang b ON dt.idBarang = b.idBarang;
+');
+
+while ($k = mysqli_fetch_array($q)) {
+?>
+
+    <!-- READ -->
+    <div class="modal fade" id="modalDetailTransaksi" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h5 class="modal-title">
+                        <span class="fw-mediumbold">
+                            Detail</span>
+                        <span class="fw-light">
+                            Transaksi
+                        </span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" enctype="multipart/form-data" action="">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" value="<?php echo $k['kodeTransaksi'] ?>">
+                        <div class="form-group">
+                            <label>Kode Transaksi</label>
+                            <input readonly value="<?php echo $k['kodeTransaksi'] ?>" type="number" name="kodeTransaksi" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal</label>
+                            <input readonly value="<?php echo $k['tanggal'] ?>" type="date" name="tanggal" class="form-control">
+                        </div>
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>SKU</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $s = mysqli_query($conn, 'SELECT 
+                                t.kodeTransaksi,
+                                t.tanggal,
+                                b.sku,
+                                dt.jumlah,
+                                dt.harga
+                                FROM 
+                                transaksi t
+                                JOIN 
+                                detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
+                                JOIN 
+                                barang b ON dt.idBarang = b.idBarang;
+                                ');
+
+                                    while ($k = mysqli_fetch_array($s)) {
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $no++ ?></td>
+                                            <td><?php echo $k['sku'] ?></td>
+                                            <td><?php echo $k['jumlah'] ?></td>
+                                            <td><?php echo $k['harga'] ?></td>
+
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer no-bd">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
 
 <?php
 if (isset($_POST['ubah'])) {

@@ -32,5 +32,8 @@ if ($cek > 0) {
     var_dump($data);
   }
 } else {
+  session_start();
+  $_SESSION['gagal_login'] = 'gagal';
   header("location:index.php?alert=gagal");
+  exit(); // Stop the script execution after redirect
 }

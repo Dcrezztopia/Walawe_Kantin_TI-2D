@@ -41,6 +41,12 @@ session_start();
         }
     </style>
 
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
@@ -194,9 +200,6 @@ session_start();
         elseif ($_GET['view'] == 'createtransaksi')
             include 'dataPegawai/transaksi/createtransaksi.php';
 
-        elseif ($_GET['view'] == 'detailtransaksi')
-            include 'dataPegawai/transaksi/detailtransaksi.php';
-
         // Data Pengajuan
         elseif ($_GET['view'] == 'datapengajuan')
             include 'dataPegawai/pengajuan/datapengajuan.php';
@@ -259,7 +262,6 @@ session_start();
             });
         });
     </script>
-
 </body>
 
 </html>

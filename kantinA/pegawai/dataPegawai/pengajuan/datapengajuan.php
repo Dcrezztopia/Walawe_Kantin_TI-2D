@@ -28,8 +28,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Data Pengajuan Barang</h4>
-                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-                                    data-target="#modalAddBarang">
+                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalAddBarang">
                                     <i class="fa fa-plus"></i>
                                     Tambah Data
                                 </button>
@@ -47,7 +46,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                             <th>Harga</th>
                                             <th>SKU</th>
                                             <th>Nama Supplier</th>
-                                            <th>Foto</th>
+                                            <th>Gambar</th>
                                             <th>Status</th>
                                             <th>Action</th>
 
@@ -59,7 +58,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                         $no = 1;
                                         $query = mysqli_query($conn, 'SELECT * FROM waitingroom');
                                         while ($pengajuan = mysqli_fetch_array($query)) {
-                                            ?>
+                                        ?>
 
                                             <tr>
                                                 <td>
@@ -80,8 +79,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                 <td>
                                                     <?php echo $pengajuan['namasupplier'] ?>
                                                 </td>
-                                                <td><img src="../img/<?php echo $pengajuan['gambar'] ?>" alt="Gambar Barang"
-                                                        class="gambar-barang"></td>
+                                                <td><img src="../img/<?php echo $pengajuan['gambar'] ?>" alt="Gambar Barang" class="gambar-barang"></td>
                                                 <td>
                                                     <?php if ($pengajuan['status'] == 'menunggu') { ?>
                                                         <div class="badge badge-warning">
@@ -98,9 +96,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <a href="#modalEditBarang<?php echo $pengajuan['id_waiting'] ?>"
-                                                        data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i
-                                                            class="fa fa-edit"></i></a>
+                                                    <a href="#modalEditBarang<?php echo $pengajuan['id_waiting'] ?>" data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
                                                 </td>
                                             </tr>
 
@@ -138,8 +134,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
-                        <input type="text" id="nama_barang" name="nama_barang" class="form-control"
-                            placeholder="Nama Barang" required>
+                        <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang" required>
                     </div>
                     <div class="form-group">
                         <?php
@@ -160,8 +155,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                     </div>
                     <div class="form-group">
                         <label>Nama Supplier</label>
-                        <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier"
-                            required="">
+                        <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier" required="">
                     </div>
                     <div class="form-group">
                         <label>Harga</label>
@@ -174,8 +168,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                     <div class="modal-footer no-bd">
                         <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i>
                             Save</button>
-                        <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i
-                                class="fa fa-times"></i> Close</button>
+                        <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                     </div>
                 </div>
 
@@ -187,11 +180,10 @@ $crudPengajuan = new CrudPengajuan($conn);
 <?php
 $p = mysqli_query($conn, 'SELECT * from waitingroom');
 while ($pengajuan = mysqli_fetch_array($p)) {
-    ?>
+?>
 
     <!-- UPDATE -->
-    <div class="modal fade" id="modalEditBarang<?php echo $pengajuan['id_waiting'] ?>" tabindex="-1" role="dialog"
-        aria-hidden="true">
+    <div class="modal fade" id="modalEditBarang<?php echo $pengajuan['id_waiting'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
@@ -212,8 +204,7 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                         <input type="hidden" name="id" value="<?php echo $pengajuan['id_waiting'] ?>">
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input value="<?php echo $pengajuan['namabarang'] ?>" type="text" name="namabarang"
-                                class="form-control" placeholder="Nama Barang ..." required="">
+                            <input value="<?php echo $pengajuan['namabarang'] ?>" type="text" name="namabarang" class="form-control" placeholder="Nama Barang ..." required="">
                         </div>
                         <div class="form-group">
                             <?php
@@ -230,18 +221,15 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                         </div>
                         <div class="form-group">
                             <label>SKU</label>
-                            <input value="<?php echo $pengajuan['sku'] ?>" type="text" name="sku" class="form-control"
-                                placeholder="SKU ..." required="">
+                            <input value="<?php echo $pengajuan['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU ..." required="">
                         </div>
                         <div class="form-group">
                             <label>Nama Supplier</label>
-                            <input value="<?php echo $pengajuan['namasupplier'] ?>" type="text" name="namasupplier"
-                                class="form-control" placeholder="Nama Supplier ..." required="">
+                            <input value="<?php echo $pengajuan['namasupplier'] ?>" type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier ..." required="">
                         </div>
                         <div class="form-group">
                             <label>Harga</label>
-                            <input value="<?php echo $pengajuan['harga'] ?>" type="number" name="harga" class="form-control"
-                                placeholder="Harga ..." required="">
+                            <input value="<?php echo $pengajuan['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
                         </div>
                         <div class="form-group">
                             <label>Foto</label>
@@ -252,8 +240,7 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                     </div>
                     <div class="modal-footer no-bd">
                         <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
-                        <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i
-                                class="fa fa-times"></i> Close</button>
+                        <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                     </div>
 
                 </form>

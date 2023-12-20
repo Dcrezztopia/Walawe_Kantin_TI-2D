@@ -159,7 +159,7 @@ $q = mysqli_fetch_array($p);
 		</div>
 
 		<div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header no-bd">
 						<h5 class="modal-title">

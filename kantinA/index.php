@@ -1,5 +1,7 @@
 <?php
+session_start();
 include "koneksi.php";
+
 ?>
 
 
@@ -33,6 +35,19 @@ include "koneksi.php";
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/azzara.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1ZqjKw0BOyL8GfZ2mPAmUw/A763lSNtFqIo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+        function gagalLogin() {
+            Swal.fire({
+                title: 'Gagal Login!',
+                text: 'Username Atau Password Salah',
+                icon: 'error',
+                confirmButtonColor: '#2e8aff'
+            });
+        }
+    </script>
 </head>
 
 <body class="login" style="background: linear-gradient(rgba(154, 109, 6, 0.8), rgba(154, 109, 6, 0.8)), url('assets/img/gedung.png') center/cover;">
@@ -66,6 +81,18 @@ include "koneksi.php";
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/ready.js"></script>
+    <script>
+        <?php
+        if (isset($_SESSION['gagal_login'])) : ?>
+            Swal.fire({
+                title: 'Gagal Login!',
+                text: 'Username Atau Password Salah',
+                icon: 'error',
+                confirmButtonColor: '#2e8aff'
+            });
+            <?php unset($_SESSION['gagal_login']); ?>
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>
