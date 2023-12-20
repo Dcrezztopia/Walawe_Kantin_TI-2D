@@ -1,3 +1,39 @@
+<html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1ZqjKw0BOyL8GfZ2mPAmUw/A763lSNtFqIo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    function berhasilTambah() {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Data Pengajuan Barang Berhasil Ditambahkan',
+            icon: 'success',
+            confirmButtonColor: '#2e8aff'
+        }).then(function() {
+            window.location.replace('?view=datapengajuan');
+        });
+    }
+
+    function berhasilEdit() {
+        Swal.fire({
+            title: "Berhasil!",
+            text: "Data Pengajuan Barang Berhasil Diubah",
+            icon: "success",
+            confirmButtonColor: "#2e8aff"
+        }).then(function() {
+            window.location.replace('?view=datapengajuan');
+        });
+    }
+
+    function gagal() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "Data Pengajuan Barang Gagal Ditambahkan",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        });
+    }
+</script>
+
 <?php
 
 require_once '../crud.php';
@@ -30,31 +66,10 @@ class CrudPengajuan implements Crud
         $result = $this->connection->query($query_insert);
 
         if ($result) {
-            echo "<script>alert('Data Berhasil Disimpan')</script>";
-            echo "<script>window.location.replace('?view=datapengajuan');</script>";
+            echo "<script>berhasilTambah();</script>";
         } else {
-            echo "<script>alert('Gagal menyimpan data')</script>";
+            echo "<script>gagal();</script>";
         }
-
-        // if ($result) {
-        //     // Success Modal
-        //     echo '
-        //         <script>
-        //             $(document).ready(function(){
-        //                 $("#successModal").modal("show");
-        //             });
-        //         </script>
-        //     ';
-        // } else {
-        //     // Error Modal
-        //     echo '
-        //         <script>
-        //             $(document).ready(function(){
-        //                 $("#errorModal").modal("show");
-        //             });
-        //         </script>
-        //     ';
-        // }
     }
 
     public function Read()
@@ -89,8 +104,7 @@ class CrudPengajuan implements Crud
 
         mysqli_query($this->connection, "UPDATE waitingroom set namabarang='$nama_barang', jenisbarang='$jenis_barang', sku='$sku', namasupplier='$namasupplier', harga='$harga', gambar ='$foto' where id_waiting='$id_waiting'");
 
-        echo "<script>alert ('Data Berhasil Diubah') </script>";
-        echo "<script>window.location.replace('?view=datapengajuan');</script>";
+        echo "<script>berhasilEdit();</script>";
     }
 
     public function Delete($data)

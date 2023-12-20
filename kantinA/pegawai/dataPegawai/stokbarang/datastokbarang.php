@@ -53,13 +53,12 @@ $crudDataBarang = new crudDataBarang($conn);
                                         $no = 1;
                                         $query = mysqli_query($conn, 'SELECT * from barang');
                                         while ($barang = mysqli_fetch_array($query)) {
-                                            ?>
+                                        ?>
                                             <tr>
                                                 <td>
                                                     <?php echo $no++ ?>
                                                 </td>
-                                                <td><img src="../img/<?php echo $barang['gambar'] ?>" alt="Gambar Barang"
-                                                        class="gambar-barang"></td>
+                                                <td><img src="../img/<?php echo $barang['gambar'] ?>" alt="Gambar Barang" class="gambar-barang"></td>
                                                 <td>
                                                     <?php echo $barang['namaBarang'] ?>
                                                 </td>
@@ -79,15 +78,9 @@ $crudDataBarang = new crudDataBarang($conn);
                                                     <?php echo $barang['namaSupplier'] ?>
                                                 </td>
                                                 <td>
-                                                    <a href="#modalDetailBarang<?php echo $barang['idBarang'] ?>"
-                                                        data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i
-                                                            class="fa fa-eye"></i></a>
-                                                    <a href="#modalEditBarang<?php echo $barang['idBarang'] ?>"
-                                                        data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i
-                                                            class="fa fa-edit"></i></a>
-                                                    <a href="#modalHapusBarang<?php echo $barang['idBarang'] ?>"
-                                                        data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i
-                                                            class="fa fa-trash"></i></a>
+
+                                                    <a href="#modalEditBarang<?php echo $barang['idBarang'] ?>" data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
+
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -106,7 +99,7 @@ $crudDataBarang = new crudDataBarang($conn);
 <?php
 $p = mysqli_query($conn, 'SELECT * from barang');
 while ($d = mysqli_fetch_array($p)) {
-    ?>
+?>
 
     <!-- UPDATE -->
     <div class="modal fade" id="modalEditBarang<?php echo $d['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -117,7 +110,7 @@ while ($d = mysqli_fetch_array($p)) {
                         <span class="fw-mediumbold">
                             Edit</span>
                         <span class="fw-light">
-                            Barang
+                            Stok Barang
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -130,15 +123,14 @@ while ($d = mysqli_fetch_array($p)) {
                         <input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control"
-                                placeholder="Barang" required="">
+                            <input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Barang" required="" readonly>
                         </div>
                         <div class="form-group">
                             <?php
                             $query = mysqli_query($conn, 'SELECT * FROM jenisbarang');
                             ?>
                             <label>Jenis Barang</label>
-                            <select name="jenisbarang" class="form-control" required="">
+                            <select name="jenisbarang" class="form-control" required="" readonly>
                                 <?php
                                 while ($jenis_barang = mysqli_fetch_assoc($query)) {
                                     echo '<option value="' . $jenis_barang['jenisBarang'] . '">' . $d['jenisBarang'] . '</option>';
@@ -148,29 +140,25 @@ while ($d = mysqli_fetch_array($p)) {
                         </div>
                         <div class="form-group">
                             <label>Stok</label>
-                            <input value="<?php echo $d['stok'] ?>" type="number" name="stok" class="form-control"
-                                placeholder="Stok" required="">
+                            <input value="<?php echo $d['stok'] ?>" type="number" name="stok" class="form-control" placeholder="Stok" required="">
                         </div>
                         <div class="form-group">
                             <label>Harga</label>
-                            <input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control"
-                                placeholder="Harga" required="">
+                            <input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="" readonly>
                         </div>
                         <div class="form-group">
                             <label>SKU</label>
-                            <input value="<?php echo $d['sku'] ?>" type="text" name="SKU" class="form-control"
-                                placeholder="SKU" required="">
+                            <input value="<?php echo $d['sku'] ?>" type="text" name="SKU" class="form-control" placeholder="SKU" required="" readonly>
                         </div>
                         <div class="form-group">
                             <label>Nama Supplier</label>
-                            <input value="<?php echo $d['namaSupplier'] ?>" type="text" name="namaSupplier"
-                                class="form-control" placeholder="Nama Supplier" required="">
+                            <input value="<?php echo $d['namaSupplier'] ?>" type="text" name="namaSupplier" class="form-control" placeholder="Nama Supplier" required="" readonly>
                         </div>
                         <div class="form-group">
                             <label>Gambar</label>
-                            <img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
-                            <input type="file" name="foto" class="form-control">
+                            <img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
                         </div>
+
 
                     </div>
                     <div class="modal-footer no-bd">
@@ -189,11 +177,10 @@ while ($d = mysqli_fetch_array($p)) {
 <?php
 $c = mysqli_query($conn, 'SELECT * from barang');
 while ($row = mysqli_fetch_array($c)) {
-    ?>
+?>
 
     <!-- DELETE -->
-    <div class="modal fade" id="modalHapusBarang<?php echo $row['idBarang'] ?>" tabindex="-1" role="dialog"
-        aria-hidden="true">
+    <div class="modal fade" id="modalHapusBarang<?php echo $row['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
@@ -201,7 +188,7 @@ while ($row = mysqli_fetch_array($c)) {
                         <span class="fw-mediumbold">
                             Hapus</span>
                         <span class="fw-light">
-                            Barang
+                            Stok Barang
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -229,11 +216,10 @@ while ($row = mysqli_fetch_array($c)) {
 $q = mysqli_query($conn, 'SELECT * FROM barang');
 
 while ($k = mysqli_fetch_array($q)) {
-    ?>
+?>
 
     <!-- READ -->
-    <div class="modal fade" id="modalDetailBarang<?php echo $k['idBarang'] ?>" tabindex="-1" role="dialog"
-        aria-hidden="true">
+    <div class="modal fade" id="modalDetailBarang<?php echo $k['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
@@ -241,7 +227,7 @@ while ($k = mysqli_fetch_array($q)) {
                         <span class="fw-mediumbold">
                             Detail</span>
                         <span class="fw-light">
-                            Barang
+                            Stok Barang
                         </span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -254,28 +240,23 @@ while ($k = mysqli_fetch_array($q)) {
                         <input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input readonly value="<?php echo $k['namaBarang'] ?>" type="text" name="namaBarang"
-                                class="form-control" placeholder="Barang" required="">
+                            <input readonly value="<?php echo $k['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Barang" required="">
                         </div>
                         <div class="form-group">
                             <label>Jenis Barang</label>
-                            <input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang"
-                                class="form-control" placeholder="Jenis Barang ..." required="">
+                            <input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang ..." required="">
                         </div>
                         <div class="form-group">
                             <label>Stok</label>
-                            <input readonly value="<?php echo $k['stok'] ?>" type="number" name="stok" class="form-control"
-                                placeholder="Stok" required="">
+                            <input readonly value="<?php echo $k['stok'] ?>" type="number" name="stok" class="form-control" placeholder="Stok" required="">
                         </div>
                         <div class="form-group">
                             <label>Harga</label>
-                            <input readonly value="<?php echo $k['harga'] ?>" type="number" name="harga"
-                                class="form-control" placeholder="Harga" required="">
+                            <input readonly value="<?php echo $k['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="">
                         </div>
                         <div class="form-group">
                             <label>SKU</label>
-                            <input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control"
-                                placeholder="SKU" required="">
+                            <input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU" required="">
                         </div>
                         <div class="form-group">
                             <label>Gambar</label>
