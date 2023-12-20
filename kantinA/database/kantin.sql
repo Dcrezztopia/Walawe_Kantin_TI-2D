@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Des 2023 pada 08.20
--- Versi server: 10.4.27-MariaDB
--- Versi PHP: 8.2.0
+-- Waktu pembuatan: 20 Des 2023 pada 00.17
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,8 +34,38 @@ CREATE TABLE `barang` (
   `stok` varchar(225) NOT NULL,
   `harga` decimal(10,0) NOT NULL,
   `sku` varchar(255) NOT NULL,
-  `namaSupplier` varchar(200) NOT NULL
+  `namaSupplier` varchar(200) NOT NULL,
+  `gambar` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `barang`
+--
+
+INSERT INTO `barang` (`idBarang`, `namaBarang`, `jenisBarang`, `stok`, `harga`, `sku`, `namaSupplier`, `gambar`) VALUES
+(93, 'Strawberry', 'Laptop', '200', 5000, 'GH13', 'blablabla', 'p.jpg'),
+(94, 'susu amer', 'Minuman Beralkohol', '10', 10000, 'GH12', 'ariel anjay', 'aksdjnjkasdjkn');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cart`
+--
+
+CREATE TABLE `cart` (
+  `id_card` int(11) NOT NULL,
+  `id_barang` varchar(255) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `harga` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `cart`
+--
+
+INSERT INTO `cart` (`id_card`, `id_barang`, `jumlah`, `harga`) VALUES
+(5, '93', 2, 10000),
+(6, '94', 2, 20000);
 
 -- --------------------------------------------------------
 
@@ -44,10 +74,19 @@ CREATE TABLE `barang` (
 --
 
 CREATE TABLE `detailtransaksi` (
-  `kodedetail` int(11) NOT NULL,
+  `kodeTransaksi` int(11) NOT NULL,
   `idBarang` int(11) NOT NULL,
-  `kodeTransaksi` int(11) NOT NULL
+  `jumlah` varchar(225) DEFAULT NULL,
+  `harga` decimal(10,0) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `detailtransaksi`
+--
+
+INSERT INTO `detailtransaksi` (`kodeTransaksi`, `idBarang`, `jumlah`, `harga`) VALUES
+(31, 93, '2', 10000),
+(31, 94, '2', 20000);
 
 -- --------------------------------------------------------
 
@@ -65,9 +104,28 @@ CREATE TABLE `jenisbarang` (
 --
 
 INSERT INTO `jenisbarang` (`jenisBarang`, `deskripsi`) VALUES
-('Makanan Berat', 'Jenis barang makanan berat'),
-('Makanan Ringan', 'Jenis barang makanan ringan'),
-('Minuman', 'Jenis barang minuman');
+('Laptop', 'Barang masih berfungsi dengan baik'),
+('Minuman Beralkohol', 'Memabukkan');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `omset`
+--
+
+CREATE TABLE `omset` (
+  `id` int(11) NOT NULL,
+  `nilai_omset` decimal(10,2) DEFAULT NULL,
+  `tanggalMulai` date NOT NULL,
+  `tanggalSelesai` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `omset`
+--
+
+INSERT INTO `omset` (`id`, `nilai_omset`, `tanggalMulai`, `tanggalSelesai`) VALUES
+(1, 30000.00, '2023-12-01', '2023-12-31');
 
 -- --------------------------------------------------------
 
@@ -82,6 +140,24 @@ CREATE TABLE `transaksi` (
   `nip` int(11) NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transaksi`
+--
+
+INSERT INTO `transaksi` (`kodeTransaksi`, `jumlahitem`, `totalPembayaran`, `nip`, `tanggal`) VALUES
+(1, 20, 30000, 1792371, '2023-12-13'),
+(2, 5, 500000, 1792371, '2023-01-01'),
+(3, 3, 300000, 1792371, '2023-01-05'),
+(4, 8, 800000, 1792371, '2023-02-10'),
+(5, 2, 200000, 1792371, '2023-02-15'),
+(6, 6, 600000, 1792371, '2023-03-03'),
+(7, 4, 400000, 1792371, '2023-03-08'),
+(8, 7, 700000, 1792371, '2023-04-12'),
+(9, 1, 100000, 1792371, '2023-04-18'),
+(10, 9, 900000, 1792371, '2023-05-22'),
+(11, 5, 500000, 1792371, '2023-05-28'),
+(31, 2, 30000, 1792371, '2023-12-20');
 
 -- --------------------------------------------------------
 
@@ -118,8 +194,16 @@ CREATE TABLE `waitingroom` (
   `sku` varchar(225) NOT NULL,
   `namasupplier` varchar(225) NOT NULL,
   `harga` decimal(10,0) NOT NULL,
+  `gambar` varchar(225) NOT NULL,
   `status` enum('menunggu','disetujui','ditolak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `waitingroom`
+--
+
+INSERT INTO `waitingroom` (`id_waiting`, `namabarang`, `jenisbarang`, `sku`, `namasupplier`, `harga`, `gambar`, `status`) VALUES
+(15, 'Barang', 'Laptop', 'D023-2034', 'blablabla', 2304, 'gambar.jpg', 'disetujui');
 
 --
 -- Indexes for dumped tables
@@ -134,10 +218,16 @@ ALTER TABLE `barang`
   ADD KEY `fk_jenis` (`jenisBarang`);
 
 --
+-- Indeks untuk tabel `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id_card`);
+
+--
 -- Indeks untuk tabel `detailtransaksi`
 --
 ALTER TABLE `detailtransaksi`
-  ADD PRIMARY KEY (`kodedetail`),
+  ADD PRIMARY KEY (`kodeTransaksi`,`idBarang`),
   ADD KEY `fk_kodeTransaksi` (`kodeTransaksi`),
   ADD KEY `fk_idBarang` (`idBarang`);
 
@@ -146,6 +236,12 @@ ALTER TABLE `detailtransaksi`
 --
 ALTER TABLE `jenisbarang`
   ADD PRIMARY KEY (`jenisBarang`);
+
+--
+-- Indeks untuk tabel `omset`
+--
+ALTER TABLE `omset`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `transaksi`
@@ -174,19 +270,25 @@ ALTER TABLE `waitingroom`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `idBarang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT untuk tabel `detailtransaksi`
+-- AUTO_INCREMENT untuk tabel `cart`
 --
-ALTER TABLE `detailtransaksi`
-  MODIFY `kodedetail` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cart`
+  MODIFY `id_card` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT untuk tabel `omset`
+--
+ALTER TABLE `omset`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `kodeTransaksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kodeTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
@@ -198,7 +300,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `waitingroom`
 --
 ALTER TABLE `waitingroom`
-  MODIFY `id_waiting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_waiting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

@@ -217,19 +217,20 @@ while ($k = mysqli_fetch_array($q)) {
 								</thead>
 								<tbody>
 								<?php
-                                $s = mysqli_query($conn, 'SELECT 
-                                t.kodeTransaksi,
-                                t.tanggal,
-                                b.sku,
-                                dt.jumlah,
-                                dt.harga
-                                FROM 
-                                transaksi t
-                                JOIN 
-                                detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
-                                JOIN 
-                                barang b ON dt.idBarang = b.idBarang;
-                                ');
+$s = mysqli_query($conn, "SELECT 
+t.kodeTransaksi,
+t.tanggal,
+b.sku,
+dt.jumlah,
+dt.harga
+FROM 
+transaksi t
+JOIN 
+detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
+JOIN 
+barang b ON dt.idBarang = b.idBarang
+WHERE 
+t.kodeTransaksi = '{$k['kodeTransaksi']}'");
 
                                 while ($k = mysqli_fetch_array($s)) {
                                 ?>
