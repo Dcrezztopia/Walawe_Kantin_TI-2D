@@ -57,11 +57,11 @@
                                                 <td><?php echo $no++ ?></td>
                                                 <td><?= $pengajuan['kodeTransaksi']; ?></td>
                                                 <td><?= $pengajuan['jumlahitem']; ?></td>
-                                                <td><?= $pengajuan['totalPembayaran']; ?></td>
+                                                <td>Rp<?php echo number_format($pengajuan['totalPembayaran'], 0, ',', '.'); ?></td>
                                                 <td><?= $pengajuan['nip']; ?></td>
                                                 <td><?= $pengajuan['tanggal']; ?></td>
                                                 <td>
-                                                    <button data-toggle="modal" data-target="#modalDetailTransaksi" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></button>
+                                                <a href="#modalDetailTransaksi<?php echo $pengajuan['kodeTransaksi'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
 
                                                 </td>
                                             </tr>
@@ -87,7 +87,7 @@ while ($k = mysqli_fetch_array($q)) {
 ?>
 
     <!-- READ -->
-    <div class="modal fade" id="modalDetailTransaksi" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="modalDetailTransaksi<?php echo $k['kodeTransaksi'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
@@ -126,19 +126,20 @@ while ($k = mysqli_fetch_array($q)) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $s = mysqli_query($conn, 'SELECT 
-                                t.kodeTransaksi,
-                                t.tanggal,
-                                b.sku,
-                                dt.jumlah,
-                                dt.harga
-                                FROM 
-                                transaksi t
-                                JOIN 
-                                detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
-                                JOIN 
-                                barang b ON dt.idBarang = b.idBarang;
-                                ');
+$s = mysqli_query($conn, "SELECT 
+t.kodeTransaksi,
+t.tanggal,
+b.sku,
+dt.jumlah,
+dt.harga
+FROM 
+transaksi t
+JOIN 
+detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
+JOIN 
+barang b ON dt.idBarang = b.idBarang
+WHERE 
+t.kodeTransaksi = '{$k['kodeTransaksi']}'");
 
                                     while ($k = mysqli_fetch_array($s)) {
                                     ?>
@@ -146,7 +147,7 @@ while ($k = mysqli_fetch_array($q)) {
                                             <td><?php echo $no++ ?></td>
                                             <td><?php echo $k['sku'] ?></td>
                                             <td><?php echo $k['jumlah'] ?></td>
-                                            <td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
+z											<td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
 
                                         </tr>
                                     <?php } ?>

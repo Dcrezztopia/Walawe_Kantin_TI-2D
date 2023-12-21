@@ -9,8 +9,13 @@ $q = mysqli_fetch_array($p);
 ?>
 
 <?php
-$key = mysqli_query($conn, 'SELECT count(*) as barang from barang');
+$key = mysqli_query($conn, 'SELECT count(*) as barang from jenisbarang');
 $b = mysqli_fetch_array($key);
+?>
+
+<?php
+$ed = mysqli_query($conn, 'SELECT count(*) as barang from barang');
+$a = mysqli_fetch_array($ed);
 ?>
 
 <div class="main-panel">
@@ -96,7 +101,7 @@ $b = mysqli_fetch_array($key);
                                 <div class="col col-stats ml-3 ml-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Data Stok Barang</p>
-                                        <h4 class="card-title"><?php echo $b['barang'] ?></h4>
+                                        <h4 class="card-title"><?php echo $a['barang'] ?></h4>
                                         <a href="?view=datastokbarang" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
                                     </div>
                                 </div>
