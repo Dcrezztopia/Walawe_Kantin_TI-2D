@@ -136,7 +136,7 @@ $crudDataBarang = new crudDataBarang($conn);
 					</div>
 					<div class="form-group">
 						<label>Foto</label>
-						<input type="file" name="foto" class="form-control" placeholder required="">
+						<input type="file" name="foto" class="form-control" >
 					</div>
 				</div>
 				<div class="modal-footer no-bd">
