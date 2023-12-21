@@ -68,8 +68,8 @@ $crudDataBarang = new crudDataBarang($conn);
                                                 <td>
                                                     <?php echo $barang['stok'] ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo $barang['harga'] ?>
+												<td>
+                                                    Rp<?php echo number_format($barang['harga'], 0, ',', '.'); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $barang['sku'] ?>
@@ -142,7 +142,8 @@ while ($d = mysqli_fetch_array($p)) {
                         </div>
                         <div class="form-group">
                             <label>Harga</label>
-                            <input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="" readonly>
+                            
+                            <input value="<?php echo number_format($d['harga'], 0, ',', '.'); ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="" readonly>
                         </div>
                         <div class="form-group">
                             <label>SKU</label>

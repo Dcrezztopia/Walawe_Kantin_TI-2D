@@ -71,9 +71,8 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 												<td>
 													<?php echo $pinjamruangan['namasupplier'] ?>
 												</td>
-												<td>
-													<?php echo $pinjamruangan['harga'] ?>
-												</td>
+												<td>Rp<?php echo number_format($pinjamruangan['harga'], 0, ',', '.'); ?></td>
+
 												<td>
 													<img src="../img/<?php echo $pinjamruangan['gambar'] ?>" alt="Gambar Barang" class="gambar-barang">
 												</td>

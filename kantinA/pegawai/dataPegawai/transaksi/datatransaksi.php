@@ -146,7 +146,7 @@ while ($k = mysqli_fetch_array($q)) {
                                             <td><?php echo $no++ ?></td>
                                             <td><?php echo $k['sku'] ?></td>
                                             <td><?php echo $k['jumlah'] ?></td>
-                                            <td><?php echo $k['harga'] ?></td>
+                                            <td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
 
                                         </tr>
                                     <?php } ?>
