@@ -73,7 +73,7 @@ class crudDataBarang implements Crud
 
 
         if($foto == null){
-            $fotosekarang = $foto == null ? 'pp.jpeg' : $foto;
+            $fotosekarang = $foto == null ? 'default.jpg' : $foto;
             $query_insert = "INSERT into barang values ('','$nama_barang','$jenis_barang','$stok','$harga','$sku', '$nama_supplier','$fotosekarang')";            
         } else {
             move_uploaded_file($file_tmp, $upload_path . $foto);
