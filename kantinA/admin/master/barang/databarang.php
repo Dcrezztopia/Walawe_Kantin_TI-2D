@@ -184,7 +184,7 @@ while ($d = mysqli_fetch_array($p)) {
 								$resultJenis = mysqli_query($conn, "SELECT jenisBarang FROM jenisbarang");
 								while ($rowJenis = mysqli_fetch_assoc($resultJenis)) {
 									$jenisBarang = $rowJenis['jenisBarang'];
-									$selected = ($jenisBarang == $barang['jenisBarang']) ? 'selected' : '';
+									$selected = ($jenisBarang == $d['jenisBarang']) ? 'selected' : '';  
 									echo "<option value='$jenisBarang' $selected>$jenisBarang</option>";
 								}
 								?>

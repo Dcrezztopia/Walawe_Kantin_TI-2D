@@ -13,6 +13,11 @@ $key = mysqli_query($conn, 'SELECT count(*) as user from user');
 $b = mysqli_fetch_array($key);
 ?>
 
+<?php
+$asd = mysqli_query($conn, 'SELECT count(*) as transaksi from transaksi');
+$das = mysqli_fetch_array($asd);
+?>
+
 <div class="main-panel">
 	<div class="content">
 		<div class="my-3" style="margin: 0 2rem;">
@@ -76,7 +81,7 @@ $b = mysqli_fetch_array($key);
 									<div class="numbers">
 										<p class="card-category">Data Jenis Barang</p>
 										<h4 class="card-title"><?php echo $q['waitingroom'] ?></h4>
-										<a href="?view=datapengajuan" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
+										<a href="?view=datajenisbarang" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
 									</div>
 								</div>
 							</div>
@@ -95,9 +100,8 @@ $b = mysqli_fetch_array($key);
 								</div>
 								<div class="col col-stats ml-3 ml-sm-0">
 									<div class="numbers">
-										<p class="card-category">Data Laporan<br>
-											<br>
-										</p>
+										<p class="card-category">Data Laporan</p>
+											<h4 class="card-title"><?php echo $das['transaksi'] ?></h4>
 										<a href="?view=datalaporan" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
 									</div>
 								</div>

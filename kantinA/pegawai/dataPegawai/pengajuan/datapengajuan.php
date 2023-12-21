@@ -213,6 +213,8 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                             <select name="jenisbarang" class="form-control" required="">
                                 <?php
                                 while ($jenis_barang = mysqli_fetch_assoc($query)) {
+                                    // $selected = ($jenis_barang['jenisBarang'] == $pengajuan['jenisbarang']) ? 'selected' : '';
+                                    // echo '<option value="' . $jenis_barang['jenisBarang'] . '" ' . $selected . '>' . $jenis_barang['jenisBarang'] . '</option>';  
                                     echo '<option value="' . $pengajuan['jenisbarang'] . '">' . $jenis_barang['jenisBarang'] . '</option>';
                                 }
                                 ?>
