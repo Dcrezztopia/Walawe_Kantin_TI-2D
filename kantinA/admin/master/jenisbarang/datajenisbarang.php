@@ -94,7 +94,7 @@ $crudDataJenisBarang = new crudDataJenisBarang($conn);
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Jenis Barang</label>
-						<input type="text" name="jenisBarang" class="form-control" placeholder="jenisBarang ..." required="">
+						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="">
 					</div>
 					<div class="form-group">
 						<label>Deskripsi</label>

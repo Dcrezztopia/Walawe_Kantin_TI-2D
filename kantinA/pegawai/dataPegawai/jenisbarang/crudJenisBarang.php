@@ -1,3 +1,50 @@
+<html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1ZqjKw0BOyL8GfZ2mPAmUw/A763lSNtFqIo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    function berhasilTambah() {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Data Jenis Barang Berhasil Ditambahkan',
+            icon: 'success',
+            confirmButtonColor: '#2e8aff'
+        }).then(function() {
+            window.location.replace('?view=datajenisbarang');
+        });
+    }
+
+    function berhasilEdit() {
+        Swal.fire({
+            title: "Berhasil!",
+            text: "Data Jenis Barang Berhasil Diubah",
+            icon: "success",
+            confirmButtonColor: "#2e8aff"
+        }).then(function() {
+            window.location.replace('?view=datajenisbarang');
+        });
+    }
+
+    function berhasilHapus() {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Data Jenis Barang Berhasil Dihapus',
+            icon: 'success',
+            confirmButtonColor: '#2e8aff'
+        }).then(function() {
+            window.location.replace('?view=datajenisbarang');
+        });
+    }
+
+    function gagal() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "Data Jenis Barang Gagal Ditambahkan",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        });
+    }
+</script>
+
 <?php
 
 require_once '../crud.php';
@@ -20,10 +67,9 @@ class crudJenisBarang implements Crud
         $result = $this->connection->query($query_insert);
 
         if ($result) {
-            echo "<script>alert ('Data Jenis Barang Berhasil Disimpan') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>berhasilTambah();</script>";
         } else {
-            echo "<script>alert ('Gagal menyimpan data Jenis Barang') </script>";
+            echo "<script>gagal();</script>";
         }
     }
 
@@ -83,8 +129,5 @@ class crudJenisBarang implements Crud
             echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
         }
     }
-
-
-
 }
 ?>

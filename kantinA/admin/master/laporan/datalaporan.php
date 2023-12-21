@@ -100,7 +100,7 @@
 												</div>
 
 												<div class="d-flex align-items-center form-group mt-4">
-													<a href="cetaklaporan.php" target="_blank">
+													<a href="?view=export.php" target="_blank">
 														<button type="button" name="cetak" class="btn btn-success w-100"><i class="fa fa-print" aria-hidden="true"></i>&nbsp; Cetak</button>
 													</a>
 												</div>
@@ -141,7 +141,7 @@
 								<td><?php echo $transaksi['kodeTransaksi'] ?></td>
 								<td><?php echo date('d/m/Y', strtotime($transaksi['tanggal'])) ?></td>
 								<td><?php echo $transaksi['jumlahitem'] ?></td>
-								<td><?php echo $transaksi['totalPembayaran'] ?></td>
+								<td>Rp<?php echo number_format($transaksi['totalPembayaran'], 0, ',', '.'); ?></td>
 								<td><?php echo $transaksi['nip'] ?></td>
 								<td>
 									<a href="#modalDetailBarang<?php echo $transaksi['kodeTransaksi'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
@@ -232,13 +232,13 @@ barang b ON dt.idBarang = b.idBarang
 WHERE 
 t.kodeTransaksi = '{$k['kodeTransaksi']}'");
 
-                                while ($k = mysqli_fetch_array($s)) {
-                                ?>
+									while ($k = mysqli_fetch_array($s)) {
+									?>
 										<tr>
 											<td><?php echo $no++ ?></td>
 											<td><?php echo $k['sku'] ?></td>
 											<td><?php echo $k['jumlah'] ?></td>
-											<td><?php echo $k['harga'] ?></td>
+											<td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
 
 										</tr>
 									<?php } ?>

@@ -35,7 +35,7 @@ include "koneksi.php";
     <link rel="stylesheet" href="assets/css/azzara.css">
 </head>
 
-<body class="login" style="background-color: #9A6D06">
+<body class="login" style="background: linear-gradient(rgba(154, 109, 6, 0.8), rgba(154, 109, 6, 0.8)), url('assets/img/gedung.png') center/cover;">
     <div class="wrapper wrapper-login">
 
         <div class="container container-login animated fadeIn">

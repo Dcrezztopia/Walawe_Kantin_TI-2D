@@ -34,8 +34,7 @@ $b = mysqli_fetch_array($key);
                                     <div class="numbers">
                                         <p class="card-category">Data Transaksi</p>
                                         <h4 class="card-title"><?php echo $row['transaksi'] ?></h4>
-                                        <a href="?view=datatransaksi" class="btn btn-primary"><i
-                                                class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
+                                        <a href="?view=datatransaksi" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +55,7 @@ $b = mysqli_fetch_array($key);
                                     <div class="numbers">
                                         <p class="card-category">Data Pengajuan Barang</p>
                                         <h4 class="card-title"><?php echo $q['pengajuan'] ?></h4>
-                                        <a href="?view=datapengajuan" class="btn btn-primary"><i
-                                                class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
+                                        <a href="?view=datapengajuan" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
                                     </div>
                                 </div>
                             </div>
@@ -78,8 +76,7 @@ $b = mysqli_fetch_array($key);
                                     <div class="numbers">
                                         <p class="card-category">Data Jenis Barang</p>
                                         <h4 class="card-title"><?php echo $b['barang'] ?></h4>
-                                        <a href="?view=datajenisbarang" class="btn btn-primary"><i
-                                                class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
+                                        <a href="?view=datajenisbarang" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
                                     </div>
                                 </div>
                             </div>
@@ -100,8 +97,7 @@ $b = mysqli_fetch_array($key);
                                     <div class="numbers">
                                         <p class="card-category">Data Stok Barang</p>
                                         <h4 class="card-title"><?php echo $b['barang'] ?></h4>
-                                        <a href="?view=databarang" class="btn btn-primary"><i
-                                                class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
+                                        <a href="?view=datastokbarang" class="btn btn-primary"><i class="fa fa-folder-open-o" aria-hidden="true"></i> Kelola</a>
                                     </div>
                                 </div>
                             </div>
