@@ -7,7 +7,7 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Pengajuan</h4>
+				<h4 class="page-title">Pengajuan Barang</h4>
 				<ul class="breadcrumbs">
 					<li class="nav-home">
 						<a href="#">
@@ -18,7 +18,7 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 						<i class="flaticon-right-arrow"></i>
 					</li>
 					<li class="nav-item">
-						<a href="#">Pengajuan</a>
+						<a href="#">Pengajuan Barang</a>
 					</li>
 				</ul>
 			</div>
@@ -36,12 +36,13 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 								<table id="add-row" class="display table table-striped table-hover">
 									<thead>
 										<tr>
-											<th>Id Waiting</th>
+											<th>ID Waiting</th>
 											<th>Nama Barang</th>
 											<th>Jenis Barang</th>
-											<th>SKU </th>
-											<th>Nama Supplier</th>
 											<th>Harga</th>
+											<th>SKU</th>
+											<th>Nama Supplier</th>
+											<th>Gambar</th>
 											<th>Status</th>
 											<th>Action</th>
 										</tr>
@@ -99,6 +100,13 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 														<button type="Accept" title="Terima" name="simpan" class="btn btn-xs btn-success"><i class="fa fa-check-square-o"></i></button>
 														<button type="Decline" title="Tolak" name="tolak" class="btn btn-xs btn-warning"><i class="fa fa-times-circle"></i></button>
 														<button type="Delete" title="Hapus" name="hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+
+														<!-- <button type="button" title="Terima" name="simpan" data-toggle="modal" data-target="#acceptPengajuan" class="btn btn-xs btn-success">
+															<i class="fa fa-check-square-o"></i>
+														</button>
+
+														<button type="button" title="Tolak" name="tolak" data-toggle="modal" data-target="#declinePengajuan" class="btn btn-xs btn-warning"><i class="fa fa-times-circle"></i></button>
+														<button type="button" title="Hapus" name="hapus" data-toggle="modal" data-target="#deletePengajuan" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button> -->
 													</form>
 												</td>
 											</tr>
@@ -110,6 +118,84 @@ $crudDataPengajuan = new crudDataPengajuan($conn);
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ACCEPT -->
+<div class="modal fade" id="acceptPengajuan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header no-bd">
+				<h5 class="modal-title">
+					<span class="fw-mediumbold">Terima</span>
+					<span class="fw-light">Pengajuan Barang</span>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+				<h4>Apakah Anda Ingin Menyetujui Barang Ini?</h4>
+			</div>
+			<div class="modal-footer no-bd">
+				<button class="btn btn-success" type="button" data-dismiss="modal"><i class="fa fa-check-square-o"></i>&nbsp;Accept</button>
+				<button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- DECLINE -->
+<div class="modal fade" id="declinePengajuan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header no-bd">
+				<h5 class="modal-title">
+					<span class="fw-mediumbold">Tolak</span>
+					<span class="fw-light">Pengajuan Barang</span>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+				<h4>Apakah Anda Ingin Menolak Barang Ini?</h4>
+			</div>
+			<div class="modal-footer no-bd">
+				<button class="btn btn-warning" type="button" data-dismiss="modal"><i class="fa fa-times-circle"></i>&nbsp;Decline</button>
+				<button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- DELETE -->
+<div class="modal fade" id="deletePengajuan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header no-bd">
+				<h5 class="modal-title">
+					<span class="fw-mediumbold">Hapus</span>
+					<span class="fw-light">Pengajuan Barang</span>
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+				<h4>Apakah Anda Menghapus Barang Ini?</h4>
+			</div>
+			<div class="modal-footer no-bd">
+				<button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-trash"></i>&nbsp;Delete</button>
+				<button class="btn btn-primary" type="button" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Cancel</button>
+
 			</div>
 		</div>
 	</div>

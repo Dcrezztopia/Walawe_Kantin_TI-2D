@@ -1,4 +1,4 @@
-9 <div class="main-panel">
+<div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
@@ -61,7 +61,7 @@
 												}
 												?>
 											</select>
-											<input type="hidden" class="form-control" id="skuAfterInput" name="skuAfterInput" autocomplete="off">
+
 											<span>Sisa Barang : <span id="sisaBarang"></span></span>
 										</div>
 
@@ -82,6 +82,16 @@
 											<input type="number" name="jumlah" id="jumlahInput" class="form-control" placeholder="0">
 										</div>
 									</div>
+
+
+									<div class="d-flex">
+										<div class="form-group" id="totalNominal" style="width: 70px; padding-right: 0;">
+											<label class="fw-bold">Total</label>
+										</div>
+										<div class="form-group w-100" id="angkaNominal" style="padding-left: 0;">
+											<span id="total" style="color: red; font-size: 70px"><?php echo $totalJumlah == '' ? 0 : $totalJumlah ?></span>
+										</div>
+									</div>
 									<div style="display: grid; grid-template-columns:2fr 1fr;">
 										<div class="form-group" id="idTransaksiFormGroup">
 											<label class="fw-bold">Nominal</label>
@@ -91,20 +101,6 @@
 										<input type="hidden" name="totalJumlah" value="<?= $totalJumlah; ?>">
 									</div>
 
-									<div style="display: grid; grid-template-columns:2fr 1fr;">
-										<div class="form-group" id="idTransaksiFormGroup">
-											<label class="fw-bold">ID Transaksi</label>
-											<input type="text" id="idTransaksi" class="form-control" value="12345" readonly>
-										</div>
-									</div>
-									<div class="d-flex">
-										<div class="form-group" id="totalNominal" style="width: 70px; padding-right: 0;">
-											<label class="fw-bold">Total</label>
-										</div>
-										<div class="form-group w-100" id="angkaNominal" style="padding-left: 0;">
-											<span id="total" style="color: red; font-size: 70px">100000</span>
-										</div>
-									</div>
 								</div>
 								<div class="row col-md-8">
 									<div class="table-responsive d-flex">
@@ -133,7 +129,7 @@
 
 												<?php
 												$no = 1;
-												$query = mysqli_query($conn, 'SELECT cart.jumlah AS jumlah, barang.sku AS sku, barang.namaBarang AS nama_barang, barang.harga AS harga, cart.jumlah AS card from cart INNER JOIN barang ON cart.id_barang = barang.idBarang');
+												$query = mysqli_query($conn, 'SELECT barang.idBarang AS id_barang, cart.jumlah AS jumlah, barang.sku AS sku, barang.namaBarang AS nama_barang, barang.harga AS harga, cart.jumlah AS card from cart INNER JOIN barang ON cart.id_barang = barang.idBarang');
 
 												while ($barang = mysqli_fetch_array($query)) {
 												?>
@@ -154,16 +150,14 @@
 															<?php echo $barang['jumlah'] ?>
 														</td>
 														<td>
-															<a href="modalHapusTransaksi<?php echo $row[''] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+															<a href="#" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger hapusCart" data-id="<?php echo $barang['id_barang']; ?>"><i class="fa fa-trash"></i></a>
 														</td>
 													</tr>
 												<?php } ?>
-
 											</tbody>
 										</table>
 									</div>
 								</div>
-
 							</div>
 
 							<div class="card-action w-100">
@@ -261,6 +255,27 @@
 				}
 			});
 		});
+		$('.hapusCart').click(function() {
+			var idBarang = $(this).data('id');
+
+
+			$.ajax({
+				type: 'POST',
+				url: 'dataPegawai/transaksi/deleteTransaction.php', // Replace with your actual server-side script
+				data: {
+					id_barang: idBarang
+				},
+				success: function(response) {
+					// Reload the page or update the table as needed
+					location.reload();
+				},
+				error: function(xhr, status, error) {
+					console.error(xhr.responseText);
+					alert('Error occurred while deleting the transaction.');
+				}
+			});
+
+		});
 	});
 </script>
 <script type="text/javascript">
@@ -318,7 +333,7 @@ if (isset($_POST['simpan'])) {
 	$result = mysqli_query($conn, $query);
 
 	if ($result) {
-		echo "<script>alert('Data berhasil ditambahkan ke dalam cart.')</script>";
+		// echo "<script>alert('Data berhasil ditambahkan ke dalam cart.')</script>";
 		// Tambahkan redirect atau operasi lain sesuai kebutuhan
 	} else {
 		echo "Error: " . mysqli_error($conn);
@@ -327,6 +342,7 @@ if (isset($_POST['simpan'])) {
 } else if (isset($_POST['bayar'])) {
 	$totalBarang = $_POST['totalBarang'];
 	$totalJumlah = $_POST['totalJumlah'];
+	$nominal = $_POST['nominal'];
 
 	// Insert into 'transaksi' table
 	$queryTransaksi = "INSERT INTO transaksi (jumlahitem, totalPembayaran, nip, tanggal) VALUES ('$totalBarang', '$totalJumlah', '1792371', CURDATE())";
@@ -360,8 +376,16 @@ if (isset($_POST['simpan'])) {
 			if (!$resultClearCart) {
 				echo "Error clearing data from cart: " . mysqli_error($conn);
 			}
-			echo "<script>alert('Data berhasil disalin dari cart ke detailTransaksi.')</script>";
-			echo "<script>window.location.replace('?view=datatransaksi');</script>";
+
+			// Calculate the change (kembalian)
+			$change = $nominal - $totalJumlah;
+			$_SESSION['kembalian'] = $change;
+?>
+			<script>
+
+			</script>
+<?php
+			// echo "<script>window.location.replace('?view=datatransaksi');</script>";
 		} else {
 			echo "<script>alert('Tidak ada data di tabel cart.')</script>";
 			echo "<script>window.location.replace('?view=datatransaksi');</script>";
@@ -374,3 +398,22 @@ if (isset($_POST['simpan'])) {
 	echo "<script>window.location.replace('?view=createtransaksi');</script>";
 }
 ?>
+
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1ZqjKw0BOyL8GfZ2mPAmUw/A763lSNtFqIo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+	<?php if (isset($_SESSION['kembalian'])) : ?>
+		Swal.fire({
+			title: 'Transaksi Berhasil!',
+			text: `Kembalian Customer: Rp<?php echo $_SESSION['kembalian']; ?>`,
+			icon: 'success',
+			confirmButtonColor: '#2e8aff'
+		});
+
+	<?php endif; ?>
+</script>

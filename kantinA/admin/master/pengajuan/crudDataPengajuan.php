@@ -98,7 +98,7 @@ class crudDataPengajuan
         mysqli_query($this->connection, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga, namaSupplier, gambar) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier', '$gambar')");
     }
 
-    private function tampilkanPesanSukses($jenis_barang_query)
+    private function tampilkanPesanSukses($jenis_barang_query = 'default')
     {
         echo "<script>alert('Data berhasil disimpan" . ($jenis_barang_query ? "" : " (jenis barang baru)") . "')</script>";
         echo "<script>window.location.replace('?view=datapengajuan');</script>";

@@ -144,7 +144,7 @@
 								<td>Rp<?php echo number_format($transaksi['totalPembayaran'], 0, ',', '.'); ?></td>
 								<td><?php echo $transaksi['nip'] ?></td>
 								<td>
-									<a href="#modalDetailBarang<?php echo $transaksi['kodeTransaksi'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+									<a href="#modalDetailTransaksi<?php echo $transaksi['kodeTransaksi'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
 								</td>
 							</tr>
 
@@ -161,24 +161,14 @@
 </div>
 
 <?php
-$q = mysqli_query($conn, 'SELECT 
-t.kodeTransaksi,
-t.tanggal,
-b.sku,
-dt.jumlah,
-dt.harga
-FROM 
-transaksi t
-JOIN 
-detailtransaksi dt ON t.kodeTransaksi = dt.kodeTransaksi
-JOIN 
-barang b ON dt.idBarang = b.idBarang;
+$q = mysqli_query($conn, 'SELECT t.kodeTransaksi, t.tanggal, b.sku, dt.jumlah, dt.harga FROM transaksi t JOIN detailtransaksi dt 
+ON t.kodeTransaksi = dt.kodeTransaksi JOIN barang b ON dt.idBarang = b.idBarang;
 ');
 
 while ($k = mysqli_fetch_array($q)) {
 ?>
 
-	<div class="modal fade" id="modalDetailBarang<?php echo $k['kodeTransaksi'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="modalDetailTransaksi<?php echo $k['kodeTransaksi'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
@@ -247,7 +237,7 @@ t.kodeTransaksi = '{$k['kodeTransaksi']}'");
 						</div>
 					</div>
 					<div class="modal-footer no-bd">
-						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-undo"></i> Close</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
 					</div>
 				</form>
 			</div>
