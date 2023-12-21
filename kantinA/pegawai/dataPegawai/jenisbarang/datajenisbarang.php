@@ -82,7 +82,7 @@ $crudJenisBarang = new crudJenisBarang($conn);
 
 <!-- CREATE -->
 <div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog " role="document">
+	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header no-bd">
 				<h5 class="modal-title">
@@ -100,11 +100,11 @@ $crudJenisBarang = new crudJenisBarang($conn);
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Jenis Barang</label>
-						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="">
+						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>Deskripsi</label>
-						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required></textarea>
+						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required autocomplete="off"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer no-bd">
@@ -124,7 +124,7 @@ while ($d = mysqli_fetch_array($p)) {
 
 	<!-- UPDATE -->
 	<div class="modal fade" id="modalEditBarang<?php echo $d['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -143,11 +143,11 @@ while ($d = mysqli_fetch_array($p)) {
 						<input type="hidden" name="id" value="<?php echo $d['jenisBarang'] ?>">
 						<div class="form-group">
 							<label>Jenis Barang</label>
-							<input value="<?php echo $d['jenisBarang'] ?>" type="text" name="jenisBarangBaru" class="form-control" placeholder="Jenis Barang ..." required="">
+							<input value="<?php echo $d['jenisBarang'] ?>" type="text" name="jenisBarangBaru" class="form-control" placeholder="Jenis Barang" required="" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Deskripsi</label>
-							<textarea name="deskripsi" class="form-control" rows="8" placeholder="Deskripsi ..." required=""><?php echo $d['deskripsi']; ?></textarea>
+							<textarea name="deskripsi" class="form-control" rows="8" placeholder="Deskripsi" required=""><?php echo $d['deskripsi']; ?></textarea>
 						</div>
 					</div>
 					<div class="modal-footer no-bd">
@@ -170,7 +170,7 @@ while ($row = mysqli_fetch_array($c)) {
 
 	<!-- DELETE -->
 	<div class="modal fade" id="modalHapusBarang<?php echo $row['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -209,7 +209,7 @@ while ($k = mysqli_fetch_array($q)) {
 
 	<!-- READ -->
 	<div class="modal fade" id="modalDetailBarang<?php echo $k['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog modal-centered" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -228,7 +228,7 @@ while ($k = mysqli_fetch_array($q)) {
 						<input type="hidden" name="id" value="<?php echo $k['jenisBarang'] ?>">
 						<div class="form-group">
 							<label>Jenis Barang</label>
-							<input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="">
+							<input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Deskripsi </label>

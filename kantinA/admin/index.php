@@ -159,7 +159,7 @@ $q = mysqli_fetch_array($p);
 		</div>
 
 		<div class="modal fade" id="logoutConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header no-bd">
 						<h5 class="modal-title">
@@ -181,43 +181,6 @@ $q = mysqli_fetch_array($p);
 				</div>
 			</div>
 		</div>
-
-		<!-- JS NOTIF BELL SAMPING TULISAN PENGAJUAN -->
-		<!-- <script>
-			function updateNotificationsCount() {
-				$.ajax({
-					url: 'path/to/your/script/getUnacceptedPengajuanCount.php',
-					method: 'GET',
-					dataType: 'json',
-					success: function(response) {
-						var count = response.count;
-						$('.navbar-notifications').attr('data-count', count);
-					},
-					error: function() {
-						console.log('Failed to fetch the unaccepted pengajuan count');
-					}
-				});
-			}
-
-			// Call the function to update the count
-			updateNotificationsCount();
-
-			// Set an interval to periodically update the count
-			setInterval(updateNotificationsCount, 10000); // Update every 10 seconds
-		</script> -->
-
-		<!-- <php
-		// getUnacceptedPengajuanCount.php
-		header('Content-Type: application/json');
-
-		// Your database connection code here
-
-		$query = "SELECT COUNT(*) as count FROM pengajuan WHERE status = 'pending'";
-		$result = mysqli_query($conn, $query);
-		$row = mysqli_fetch_assoc($result);
-
-		echo json_encode(['count' => $row['count']]);
-		?> -->
 
 		<?php
 		// Dashboard

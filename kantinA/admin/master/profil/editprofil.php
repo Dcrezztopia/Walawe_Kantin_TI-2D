@@ -1,3 +1,30 @@
+<html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tZ1ZqjKw0BOyL8GfZ2mPAmUw/A763lSNtFqIo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    function berhasil() {
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Profil Berhasil Diubah',
+            icon: 'success',
+            confirmButtonColor: '#2e8aff'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=profil';
+            }
+        });
+    }
+
+    function gagal() {
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Profil Gagal Diubah',
+            icon: 'error',
+            confirmButtonColor: '#2e8aff'
+        })
+    }
+</script>
+
 <?php
 session_start();
 
@@ -27,35 +54,35 @@ class EditProfil
     }
 
     public function updateUserProfile($nama_lengkap, $username, $nip, $password)
-{
-    $user = $this->user;
+    {
+        $user = $this->user;
 
-    // Use mysqli_real_escape_string to prevent SQL injection for string variables
-    $nama_lengkap = isset($nama_lengkap) ? mysqli_real_escape_string($this->conn, $nama_lengkap) : '';
-    $username = isset($username) ? mysqli_real_escape_string($this->conn, $username) : '';
-    $password = isset($password) ? mysqli_real_escape_string($this->conn, $password) : '';
+        // Use mysqli_real_escape_string to prevent SQL injection for string variables
+        $nama_lengkap = isset($nama_lengkap) ? mysqli_real_escape_string($this->conn, $nama_lengkap) : '';
+        $username = isset($username) ? mysqli_real_escape_string($this->conn, $username) : '';
+        $password = isset($password) ? mysqli_real_escape_string($this->conn, $password) : '';
 
-    // Check if at least one field is filled
-    if (!empty($nama_lengkap) || !empty($username) || !empty($nip) || !empty($password)) {
-        // Fix: Use proper escaping for $nip as it's an integer
-        $sqlUpdate = "UPDATE user SET nama_lengkap='$nama_lengkap', username='$username', nip=$nip, password='$password' WHERE nip={$user['nip']}";
-        $queryUpdate = mysqli_query($this->conn, $sqlUpdate);
+        // Check if at least one field is filled
+        if (!empty($nama_lengkap) || !empty($username) || !empty($nip) || !empty($password)) {
+            // Fix: Use proper escaping for $nip as it's an integer
+            $sqlUpdate = "UPDATE user SET nama_lengkap='$nama_lengkap', username='$username', nip=$nip, password='$password' WHERE nip={$user['nip']}";
+            $queryUpdate = mysqli_query($this->conn, $sqlUpdate);
 
-        // Update $user if the query is successful
-        if ($queryUpdate) {
-            // Fetch the updated user data
-            $ambildata = mysqli_query($this->conn, "SELECT * FROM user WHERE nip=$nip");
-            $this->user = mysqli_fetch_assoc($ambildata);
+            // Update $user if the query is successful
+            if ($queryUpdate) {
+                // Fetch the updated user data
+                $ambildata = mysqli_query($this->conn, "SELECT * FROM user WHERE nip=$nip");
+                $this->user = mysqli_fetch_assoc($ambildata);
 
-            // Update $_SESSION['username'] with the new username
-            $_SESSION['username'] = $username;
+                // Update $_SESSION['username'] with the new username
+                $_SESSION['username'] = $username;
+            }
+            return $queryUpdate;
+        } else {
+            // Handle the case where no fields are filled
+            return false;
         }
-        return $queryUpdate;
-    } else {
-        // Handle the case where no fields are filled
-        return false;
     }
-}
 
     public function getUser()
     {
@@ -77,16 +104,15 @@ if (isset($_POST['simpan'])) {
         // Update $user if the query is successful
         $user = $editProfil->getUser();
     }
-    
+
     if ($queryUpdate) {
         // Redirect ke halaman profil jika update berhasil
-        echo '<script>window.location.href="?view=profil";</script>';
+        echo "<script>berhasil();</script>";
         exit();
     } else {
         // Tampilkan pesan error jika update gagal
-        echo '<script>alert("Update gagal", false);</script>';
+        echo "<script>gagal();</script>";
     }
-    
 }
 
 $user = $editProfil->getUser();
@@ -97,94 +123,94 @@ $user = $editProfil->getUser();
         <div id="popup-message-alert"></div>
     </div>
 
-<div class="main-panel" style="margin-top: -40px;">
-    <div class="content">
-        <div class="page-inner">
-            <div class="page-header">
-                <h4 class="page-title">Edit Profil</h4>
-                <ul class="breadcrumbs">
-                    <li class="nav-home">
-                        <a href="?view=dashboard">
-                            <i class="flaticon-home"></i>
-                        </a>
-                    </li>
-                    <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="?view=profil">Profil</a>
-                    </li>
-                    <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Edit Profil</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="row card-body">
-                            <div class="row">
-                                <div class="col-sm-8 ml-5 mr-5 mt-3 text-center">
-                                    <img src="../assets/img/administrator.png" class="rounded" alt="user" width="201" height="177">
-                                    <h4 class="fw-bold mt-3">admin</h4>
+    <div class="main-panel" style="margin-top: -40px;">
+        <div class="content">
+            <div class="page-inner">
+                <div class="page-header">
+                    <h4 class="page-title">Edit Profil</h4>
+                    <ul class="breadcrumbs">
+                        <li class="nav-home">
+                            <a href="?view=dashboard">
+                                <i class="flaticon-home"></i>
+                            </a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?view=profil">Profil</a>
+                        </li>
+                        <li class="separator">
+                            <i class="flaticon-right-arrow"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#">Edit Profil</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="row">
+                                    <div class="col-sm-8 ml-5 mr-5 mt-3 text-center">
+                                        <img src="../assets/img/administrator.png" class="rounded" alt="user" width="201" height="177">
+                                        <h4 class="fw-bold mt-3">ADMIN</h4>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-sm-4 mb-4">
-                                <div class="form-group" id="namaFormGroup">
-                                    <label class="fw-bold">Nama</label>
-                                    <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" value="<?= $user['nama_lengkap'] ?>" required>                                 
-                                </div>
-                                <div class="form-group" id="usernameFormGroup">
-                                    <label class="fw-bold">Username</label>
-                                    <input type="text" name="username" id="username" class="form-control" value="<?= $user['username']?>" required>
-                                </div>
-                                <div class="form-group" id="nipFormGroup">
-                                    <label class="fw-bold">NIP</label>
-                                    <input type="number" name="nip" id="nip" class="form-control" value="<?= $user['nip'] ?>" required>                                
-                                </div>
-                                <div class="form-group" id="passwordFormGroup">
-                                    <label class="fw-bold">Password</label>
-                                    <div class="input-group">
-                                        <input type="password" name="password" id="password" class="form-control" value="<?= $user['password']?>" required>                                   
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fas fa-eye" id="togglePassword"></i>
-                                            </span>
+                                <div class="col-sm-4 mb-4">
+                                    <div class="form-group" id="namaFormGroup">
+                                        <label class="fw-bold">Nama</label>
+                                        <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" value="<?= $user['nama_lengkap'] ?>" required>
+                                    </div>
+                                    <div class="form-group" id="usernameFormGroup">
+                                        <label class="fw-bold">Username</label>
+                                        <input type="text" name="username" id="username" class="form-control" value="<?= $user['username'] ?>" required>
+                                    </div>
+                                    <div class="form-group" id="nipFormGroup">
+                                        <label class="fw-bold">NIP</label>
+                                        <input type="number" name="nip" id="nip" class="form-control" value="<?= $user['nip'] ?>" required>
+                                    </div>
+                                    <div class="form-group" id="passwordFormGroup">
+                                        <label class="fw-bold">Password</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password" id="password" class="form-control" value="<?= $user['password'] ?>" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-eye" id="togglePassword"></i>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <script>
-                            const togglePassword = document.getElementById('togglePassword');
-                            const passwordInput = document.getElementById('password');
+                            <script>
+                                const togglePassword = document.getElementById('togglePassword');
+                                const passwordInput = document.getElementById('password');
 
-                            togglePassword.addEventListener('click', function () {
-                                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                                passwordInput.setAttribute('type', type);
-                                this.classList.toggle('fa-eye-slash');
-                            });
-                        </script>
+                                togglePassword.addEventListener('click', function() {
+                                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                                    passwordInput.setAttribute('type', type);
+                                    this.classList.toggle('fa-eye-slash');
+                                });
+                            </script>
+                        </div>
                     </div>
                 </div>
+                <div class="card-action">
+                    <button type="submit" name="simpan" class="btn btn-success">
+                        <i class="fa fa-save" aria-hidden="true"></i> Save Changes</button>
+                    <a href="?view=profil" class="btn btn-danger">
+                        <i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+                </div>
             </div>
-            <div class="card-action">
-                <button type="submit" name="simpan" class="btn btn-success">
-                    <i class="fa fa-save" aria-hidden="true"></i> Save Changes</button>
-                <a href="?view=profil" class="btn btn-danger">
-                    <i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
-            </div>     
         </div>
     </div>
-</div>
 </form>
 
 </body>
+
 </html>
 
 <?php mysqli_close($conn); ?>
-

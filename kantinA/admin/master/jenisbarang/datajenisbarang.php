@@ -76,7 +76,7 @@ $crudDataJenisBarang = new crudDataJenisBarang($conn);
 
 <!-- CREATE -->
 <div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header no-bd">
 				<h5 class="modal-title">
@@ -94,11 +94,11 @@ $crudDataJenisBarang = new crudDataJenisBarang($conn);
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Jenis Barang</label>
-						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="">
+						<input type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>Deskripsi</label>
-						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required></textarea>
+						<textarea id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" rows="8" required autocomplete="off"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer no-bd">
@@ -117,7 +117,7 @@ while ($d = mysqli_fetch_array($p)) {
 
 	<!-- UPDATE -->
 	<div class="modal fade" id="modalEditBarang<?php echo $d['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -160,7 +160,7 @@ while ($row = mysqli_fetch_array($c)) {
 ?>
 	<!-- DELETE -->
 	<div class="modal fade" id="modalHapusBarang<?php echo $row['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -197,7 +197,7 @@ while ($k = mysqli_fetch_array($q)) {
 ?>
 	<!-- READ -->
 	<div class="modal fade" id="modalDetailBarang<?php echo $k['jenisBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">

@@ -70,7 +70,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                 <td>
                                                     <?php echo $pengajuan['jenisbarang'] ?>
                                                 </td>
-												<td>Rp<?php echo number_format($pengajuan['harga'], 0, ',', '.'); ?></td>
+                                                <td>Rp<?php echo number_format($pengajuan['harga'], 0, ',', '.'); ?></td>
                                                 <td>
                                                     <?php echo $pengajuan['sku'] ?>
                                                 </td>
@@ -114,7 +114,7 @@ $crudPengajuan = new CrudPengajuan($conn);
 
 <!-- CREATE -->
 <div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header no-bd">
                 <h5 class="modal-title">
@@ -132,7 +132,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
-                        <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang" required>
+                        <input type="text" id="nama_barang" name="nama_barang" class="form-control" placeholder="Nama Barang" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <?php
@@ -149,15 +149,15 @@ $crudPengajuan = new CrudPengajuan($conn);
                     </div>
                     <div class="form-group">
                         <label>SKU</label>
-                        <input type="text" name="sku" class="form-control" placeholder="SKU" required="">
+                        <input type="text" name="sku" class="form-control" placeholder="SKU" required="" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Nama Supplier</label>
-                        <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier" required="">
+                        <input type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier" required="" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Harga</label>
-                        <input type="number" name="harga" class="form-control" placeholder="Harga" required="">
+                        <input type="number" name="harga" class="form-control" placeholder="Harga" required="" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
@@ -182,7 +182,7 @@ while ($pengajuan = mysqli_fetch_array($p)) {
 
     <!-- UPDATE -->
     <div class="modal fade" id="modalEditBarang<?php echo $pengajuan['id_waiting'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
                     <h5 class="modal-title">
@@ -200,10 +200,10 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                 <form method="POST" action="" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="id" value="<?php echo $pengajuan['id_waiting'] ?>">
-						<input type="hidden" name="gambarLama" value="<?php echo $pengajuan['gambar'] ?>">
+                        <input type="hidden" name="gambarLama" value="<?php echo $pengajuan['gambar'] ?>">
                         <div class="form-group">
                             <label>Nama Barang</label>
-                            <input value="<?php echo $pengajuan['namabarang'] ?>" type="text" name="namabarang" class="form-control" placeholder="Nama Barang ..." required="">
+                            <input value="<?php echo $pengajuan['namabarang'] ?>" type="text" name="namabarang" class="form-control" placeholder="Nama Barang" required="" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <?php
@@ -220,19 +220,19 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                         </div>
                         <div class="form-group">
                             <label>SKU</label>
-                            <input value="<?php echo $pengajuan['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU ..." required="">
+                            <input value="<?php echo $pengajuan['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU" required="" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label>Nama Supplier</label>
-                            <input value="<?php echo $pengajuan['namasupplier'] ?>" type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier ..." required="">
+                            <input value="<?php echo $pengajuan['namasupplier'] ?>" type="text" name="namasupplier" class="form-control" placeholder="Nama Supplier" required="" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label>Harga</label>
-                            <input value="<?php echo $pengajuan['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga ..." required="">
+                            <input value="<?php echo $pengajuan['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="">
                         </div>
                         <div class="form-group">
                             <label>Foto</label>
-                            <img src="../img/<?php echo $pengajuan['gambar'] ?>" width="100%" height="200">
+                            <img src="../img/<?php echo $pengajuan['gambar'] ?>" class="gambar-barang">
                             <input type="file" name="foto" class="form-control">
                         </div>
 

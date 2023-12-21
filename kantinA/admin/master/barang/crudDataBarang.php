@@ -43,6 +43,19 @@
             confirmButtonColor: "#f4656d"
         });
     }
+
+    function gagalSKU() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "Maaf SKU Telah Tersedia",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=databarang';
+            }
+        });
+    }
 </script>
 
 <?php
@@ -68,13 +81,12 @@ class crudDataBarang implements Crud
         $foto = $_FILES['foto']['name'];
         $file_tmp = $_FILES['foto']['tmp_name'];
         $upload_path = '../img/';
-    
+
         move_uploaded_file($file_tmp, $upload_path . $foto);
-    
+
         // Cek apakah SKU sudah tersedia
         if ($this->isSkuAvailable($sku)) {
-            echo "<script>alert('Maaf SKU Telah Tersedia')</script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
+            echo "<script>gagalSKU();</script>";
         } else {
             // SKU belum tersedia, lanjutkan dengan operasi insert
             if ($foto == null) {
@@ -84,9 +96,9 @@ class crudDataBarang implements Crud
                 move_uploaded_file($file_tmp, $upload_path . $foto);
                 $query_insert = "INSERT into barang values ('','$nama_barang','$jenis_barang','$stok','$harga','$sku', '$nama_supplier','$foto')";
             }
-    
+
             $result = $this->connection->query($query_insert);
-    
+
             if ($result) {
                 echo "<script>berhasilTambah();</script>";
             } else {
@@ -137,11 +149,11 @@ class crudDataBarang implements Crud
     }
 
     private function isSkuAvailable($sku)
-{
-    $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM barang WHERE sku = '$sku'");
-    $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
+    {
+        $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM barang WHERE sku = '$sku'");
+        $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
 
-    return $rowCheckJenis ? true : false;
-}
+        return $rowCheckJenis ? true : false;
+    }
 }
 ?>

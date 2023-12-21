@@ -32,6 +32,32 @@
             confirmButtonColor: "#f4656d"
         });
     }
+
+    function gagalWaiting() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "SKU Telah Tersedia di WaitingRoom",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=datapengajuan';
+            }
+        });
+    }
+
+    function gagalBarang() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "Data PSKU Telah Tersedia di Barang",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=datapengajuan';
+            }
+        });
+    }
 </script>
 
 <?php
@@ -58,25 +84,23 @@ class CrudPengajuan implements Crud
         $file_tmp = $_FILES['foto']['tmp_name'];
         $upload_path = '../img/';
         $status = 'menunggu';
-    
+
         move_uploaded_file($file_tmp, $upload_path . $foto);
-    
+
         // Ganti query SELECT sesuai dengan tabel waitingroom
-    
-        
+
+
         if ($this->isSkuWaitingAvailable($sku)) {
-            echo "<script>alert('Maaf SKU Telah Tersedia di WaitingRoom')</script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
+            echo "<script>gagalWaiting();</script>";
         } else {
             if ($this->isSkuAvailable($sku)) {
-                echo "<script>alert('Maaf SKU Telah Tersedia di Barang')</script>";
-                echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
+                echo "<script>gagalBarang();</script>";
             } else {
-    
+
                 // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
                 $query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, gambar, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga','$foto', '$status')";
                 $result = $this->connection->query($query_insert);
-        
+
                 if ($result) {
                     echo "<script>berhasilTambah();</script>";
                 } else {
@@ -126,19 +150,19 @@ class CrudPengajuan implements Crud
     }
 
     private function isSkuAvailable($sku)
-{
-    // Ganti query SELECT sesuai dengan tabel waitingroom
-    $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM barang WHERE sku = '$sku'");
-    $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
+    {
+        // Ganti query SELECT sesuai dengan tabel waitingroom
+        $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM barang WHERE sku = '$sku'");
+        $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
 
-    return $rowCheckJenis ? true : false;
-}
+        return $rowCheckJenis ? true : false;
+    }
     private function isSkuWaitingAvailable($sku)
-{
-    // Ganti query SELECT sesuai dengan tabel waitingroom
-    $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM waitingroom WHERE sku = '$sku'");
-    $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
+    {
+        // Ganti query SELECT sesuai dengan tabel waitingroom
+        $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM waitingroom WHERE sku = '$sku'");
+        $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
 
-    return $rowCheckJenis ? true : false;
-}
+        return $rowCheckJenis ? true : false;
+    }
 }

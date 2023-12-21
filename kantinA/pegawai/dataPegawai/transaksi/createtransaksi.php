@@ -117,15 +117,7 @@
 											</thead>
 
 											<tbody>
-												<!-- <td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
 
-												<td>
-													<a href="modalHapusTransaksi<?php echo $row[''] ?>" data-toggle="modal" title="Hapus" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-												</td> -->
 
 												<?php
 												$no = 1;
@@ -143,9 +135,9 @@
 														<td>
 															<?php echo $barang['nama_barang'] ?>
 														</td>
-														
+
 														<td>Rp<?php echo number_format($barang['harga'], 0, ',', '.'); ?></td>
-														
+
 														<td>
 															<?php echo $barang['jumlah'] ?>
 														</td>

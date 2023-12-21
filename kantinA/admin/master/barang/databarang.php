@@ -82,7 +82,7 @@ $crudDataBarang = new crudDataBarang($conn);
 
 <!-- CREATE -->
 <div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header no-bd">
 				<h5 class="modal-title">
@@ -103,7 +103,7 @@ $crudDataBarang = new crudDataBarang($conn);
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Barang</label>
-						<input type="text" name="namaBarang" class="form-control" placeholder="Nama Barang" required="">
+						<input type="text" name="namaBarang" class="form-control" placeholder="Nama Barang" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>Jenis Barang</label>
@@ -120,23 +120,23 @@ $crudDataBarang = new crudDataBarang($conn);
 
 					<div class="form-group">
 						<label>Stok</label>
-						<input type="number" name="stok" class="form-control" placeholder="Stok" required="">
+						<input type="number" name="stok" class="form-control" placeholder="Stok" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>Harga</label>
-						<input type="number" name="harga" class="form-control" placeholder="Harga" required="">
+						<input type="number" name="harga" class="form-control" placeholder="Harga" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>SKU</label>
-						<input type="text" name="sku" class="form-control" placeholder="sku" required="">
+						<input type="text" name="sku" class="form-control" placeholder="SKU" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>Nama Supplier</label>
-						<input type="text" name="namaSupplier" class="form-control" placeholder="Nama Supplier" required="">
+						<input type="text" name="namaSupplier" class="form-control" placeholder="Nama Supplier" required="" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label>Foto</label>
-						<input type="file" name="foto" class="form-control" >
+						<input type="file" name="foto" class="form-control">
 					</div>
 				</div>
 				<div class="modal-footer no-bd">
@@ -155,7 +155,7 @@ while ($d = mysqli_fetch_array($p)) {
 
 	<!-- EDIT -->
 	<div class="modal fade" id="modalEditBarang<?php echo $d['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -175,7 +175,7 @@ while ($d = mysqli_fetch_array($p)) {
 						<input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
 						<div class="form-group">
 							<label>Nama Barang</label>
-							<input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Nama Barang" required="">
+							<input value="<?php echo $d['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Nama Barang" required="" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Jenis Barang</label>
@@ -192,15 +192,15 @@ while ($d = mysqli_fetch_array($p)) {
 						</div>
 						<div class="form-group">
 							<label>Stok</label>
-							<input value="<?php echo $d['stok'] ?>" type="number" name="stok" class="form-control" placeholder="Stok" required="">
+							<input value="<?php echo $d['stok'] ?>" type="number" name="stok" class="form-control" placeholder="Stok" required="" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Harga</label>
-							<input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="">
+							<input value="<?php echo $d['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<label>Gambar</label>
-							<img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
+							<img src="../img/<?php echo $d['gambar'] ?>" class="gambar-barang">
 							<input type="file" name="foto" class="form-control">
 						</div>
 
@@ -222,7 +222,7 @@ while ($row = mysqli_fetch_array($c)) {
 ?>
 	<!-- DELETE -->
 	<div class="modal fade" id="modalHapusBarang<?php echo $row['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -259,7 +259,7 @@ while ($k = mysqli_fetch_array($q)) {
 ?>
 	<!-- READ -->
 	<div class="modal fade" id="modalDetailBarang<?php echo $k['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header no-bd">
 					<h5 class="modal-title">
@@ -299,7 +299,7 @@ while ($k = mysqli_fetch_array($q)) {
 						</div>
 						<div class="form-group">
 							<label>Gambar</label>
-							<img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
+							<img src="../img/<?php echo $k['gambar'] ?>" class="gambar-barang">
 						</div>
 					</div>
 					<div class="modal-footer no-bd">

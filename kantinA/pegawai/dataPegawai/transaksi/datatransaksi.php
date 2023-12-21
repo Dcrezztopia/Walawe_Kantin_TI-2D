@@ -59,9 +59,9 @@
                                                 <td><?= $pengajuan['jumlahitem']; ?></td>
                                                 <td>Rp<?php echo number_format($pengajuan['totalPembayaran'], 0, ',', '.'); ?></td>
                                                 <td><?= $pengajuan['nip']; ?></td>
-                                                <td><?= $pengajuan['tanggal']; ?></td>
+                                                <td><?= date('d/m/Y', strtotime($pengajuan['tanggal'])); ?></td>
                                                 <td>
-                                                <a href="#modalDetailTransaksi<?php echo $pengajuan['kodeTransaksi'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
+                                                    <a href="#modalDetailTransaksi<?php echo $pengajuan['kodeTransaksi'] ?>" data-toggle="modal" title="Detail" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i></a>
 
                                                 </td>
                                             </tr>
@@ -87,7 +87,7 @@ while ($k = mysqli_fetch_array($q)) {
 ?>
 
     <!-- READ -->
-	<div class="modal fade" id="modalDetailTransaksi<?php echo $k['kodeTransaksi'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="modalDetailTransaksi<?php echo $k['kodeTransaksi'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header no-bd">
@@ -126,7 +126,7 @@ while ($k = mysqli_fetch_array($q)) {
                                 </thead>
                                 <tbody>
                                     <?php
-$s = mysqli_query($conn, "SELECT 
+                                    $s = mysqli_query($conn, "SELECT 
 t.kodeTransaksi,
 t.tanggal,
 b.sku,
@@ -147,7 +147,7 @@ t.kodeTransaksi = '{$k['kodeTransaksi']}'");
                                             <td><?php echo $no++ ?></td>
                                             <td><?php echo $k['sku'] ?></td>
                                             <td><?php echo $k['jumlah'] ?></td>
-											<td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
+                                            <td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
 
                                         </tr>
                                     <?php } ?>
@@ -178,33 +178,5 @@ if (isset($_POST['ubah'])) {
     mysqli_query($conn, "UPDATE waitingroom set namabarang='$nama_barang', jenisbarang='$jenis_barang', sku='$sku', namasupplier='$namaSupplier', harga='$harga' where id_waiting='$id_Waiting'");
     echo "<script>alert ('Data Berhasil Diubah') </script>";
     echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
-}
-
-
-if (isset($_POST['hapus'])) {
-    $id = $_POST['id'];
-    $id_ruangan = $_POST['id_ruangan'];
-
-    $selSto = mysqli_query($conn, "SELECT * FROM ruangan WHERE id='$id_ruangan'");
-    $sto    = mysqli_fetch_array($selSto);
-    $sisa    = 'free';
-
-    mysqli_query($conn, "UPDATE ruangan SET status='$sisa' WHERE id='$id_ruangan'");
-    mysqli_query($conn, "DELETE from pinjamruangan where id='$id'");
-    echo "<script>alert ('Data Berhasil Dihapus') </script>";
-    echo "<meta http-equiv='refresh' content=0; URL=?view=datapinjamruangan>";
-} elseif (isset($_POST['ubah'])) {
-    $id = $_POST['id'];
-    $id_ruangan = $_POST['id_ruangan'];
-
-    $selSto = mysqli_query($conn, "SELECT * FROM ruangan WHERE id='$id_ruangan'");
-    $sto    = mysqli_fetch_array($selSto);
-    $sisa   = 'free';
-    $status = 'selesai';
-
-    mysqli_query($conn, "UPDATE ruangan SET status='$sisa' WHERE id='$id_ruangan'");
-    mysqli_query($conn, "UPDATE pinjamruangan SET status='$status' where id='$id'");
-    echo "<script>alert ('Data Berhasil Dihapus') </script>";
-    echo "<meta http-equiv='refresh' content=0; URL=?view=datapinjamruangan>";
 }
 ?>

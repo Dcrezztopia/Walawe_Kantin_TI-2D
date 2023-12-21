@@ -8,6 +8,10 @@
             text: 'Data Pengajuan Barang Berhasil Diajukan',
             icon: 'success',
             confirmButtonColor: '#2e8aff'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=datapengajuan';
+            }
         });
     }
 
@@ -17,6 +21,10 @@
             text: "Data Pengajuan Barang Berhasil Ditolak",
             icon: "error",
             confirmButtonColor: "#2e8aff"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=datapengajuan';
+            }
         });
     }
 
@@ -26,6 +34,23 @@
             text: 'Data Pengajuan Barang Berhasil Dihapus',
             icon: 'success',
             confirmButtonColor: '#2e8aff'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=datapengajuan';
+            }
+        });
+    }
+
+    function gagalHapus() {
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Data Pengajuan Barang Gagal Dihapus',
+            icon: 'error',
+            confirmButtonColor: '#2e8aff'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '?view=datajenisbarang';
+            }
         });
     }
 </script>
@@ -55,7 +80,7 @@ class crudDataPengajuan
         $status = $this->getStatusFromWaitingRoom($id_waiting);
 
         if ($status === 'disetujui') {
-            $this->tampilkanPesanDanRedirect('Barang telah disetujui', '?view=databarang');
+            $this->tampilkanPesanDanRedirect('<script>berhasilTerima();</script>', '?view=databarang');
         } else {
             $jenis_barang_query = $this->getJenisBarangQuery($jenis_barang);
 
@@ -110,52 +135,6 @@ class crudDataPengajuan
         echo "<meta http-equiv='refresh' content=0; URL=$redirectUrl>";
     }
 
-    // public function Create($data) {
-    //     $id_waiting = $_POST['id_waiting'];
-    //     $nama_barang =$_POST['namaBarang'];
-    //     $jenis_barang = $_POST['jenisBarang'];
-    //     $sku = $_POST['sku'];
-    //     $namasupplier = $_POST['namaSupplier'];
-    //     $harga = $_POST['harga'];
-
-    // 	// Check if the status is 'disetujui'
-    // 	$result = mysqli_query($this->connection, "SELECT status FROM waitingroom WHERE id_waiting='$id_waiting'");
-    // 	$row = mysqli_fetch_assoc($result);
-    // 	$status = $row['status'];
-
-    // 	if ($status === 'disetujui') {
-    // 		echo "<script>alert('Barang telah disetujui')</script>";
-    // 		echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
-    // 	} else {
-    // 		// Cek apakah jenis barang sudah ada di tabel jenisbarang
-    // 		$resultCheckJenis = mysqli_query($this->connection, "SELECT * FROM jenisbarang WHERE jenisBarang = '$jenis_barang'");
-    // 		$rowCheckJenis = mysqli_fetch_assoc($resultCheckJenis);
-
-    // 		if ($rowCheckJenis) {
-    // 			// Jenis barang sudah ada, gunakan jenisBarang langsung
-    // 			$jenis_barang_query = $jenis_barang;
-    // 		} else {
-    // 			// Jenis barang belum ada, tambahkan ke tabel jenisbarang
-    // 			mysqli_query($this->connection, "INSERT INTO jenisbarang (jenisBarang, deskripsi) VALUES ('$jenis_barang', 'belum tersedia')");
-    // 			$jenis_barang_query = $jenis_barang;
-    // 		}
-
-    // 		// Update status ke 'disetujui' di tabel waitingroom
-    // 		mysqli_query($this->connection, "UPDATE waitingroom SET status='disetujui' WHERE id_waiting='$id_waiting'");
-
-    // 		// Insert ke tabel barang
-    // 		mysqli_query($this->connection, "INSERT INTO barang (namaBarang, jenisBarang, sku, harga, namaSupplier) VALUES ('$nama_barang', '$jenis_barang_query', '$sku', '$harga', '$namasupplier')");
-
-    // 		if ($rowCheckJenis) {
-    // 			echo "<script>alert('Data berhasil disimpan')</script>";
-    // 			echo "<script>window.location.replace('?view=datapengajuan');</script>";
-    // 		} else {
-    // 			echo "<script>alert('Data berhasil disimpan (jenis barang baru)')</script>";
-    // 			echo "<script>window.location.replace('?view=datapengajuan');</script>";
-    // 		}
-    // 	}
-    // }
-
     public function Delete($data)
     {
         $id_waiting = $_POST['id_waiting'];
@@ -163,11 +142,9 @@ class crudDataPengajuan
         $result = $this->connection->query($query_delete);
 
         if ($result) {
-            echo "<script>alert ('Data Pengajuan  Berhasil Dihapus') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>berhasilHapus();</script>";
         } else {
-            echo "<script>alert ('Gagal menghapus data Pengajuan Barang') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>gagalHapus();</script>";
         }
     }
 
@@ -176,7 +153,7 @@ class crudDataPengajuan
         $id_waiting = $_POST['id_waiting'];
         $query_update = "UPDATE waitingroom SET status = 'ditolak' where id_waiting = $id_waiting";
         $result = $this->connection->query($query_update);
-        echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+        echo "<script>berhasilTolak();</script>";
     }
 }
 ?>

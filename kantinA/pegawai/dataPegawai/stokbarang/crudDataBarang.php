@@ -12,15 +12,6 @@
             window.location.replace('?view=datastokbarang');
         });
     }
-
-    function gagal() {
-        Swal.fire({
-            title: "Gagal!",
-            text: "Data Stok Barang Gagal Diubah",
-            icon: "error",
-            confirmButtonColor: "#f4656d"
-        });
-    }
 </script>
 
 <?php
@@ -38,7 +29,6 @@ class crudDataBarang implements Crud
 
     public function Create($data)
     {
-
     }
 
 
@@ -48,8 +38,7 @@ class crudDataBarang implements Crud
         $stok = $_POST['stok'];
         $query_insert = "UPDATE barang SET stok='$stok' WHERE idBarang='$idBarang'";
         $result = $this->connection->query($query_insert);
-        echo "<script>alert('Stok Berhasil di Edit');</script>";
-        echo "<meta http-equiv='refresh' content=0; URL=?view=datastokbarang>";
+        echo "<script>berhasilEdit();</script>";
     }
 
     public function Delete($data)

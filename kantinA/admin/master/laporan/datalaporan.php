@@ -99,11 +99,7 @@
 													<input readonly value="<?php echo number_format($omset['nilai_omset'], 0, ',', '.'); ?>" type="number" name="omset" class="form-control">
 												</div>
 
-												<div class="d-flex align-items-center form-group mt-4">
-													<a href="?view=export.php" target="_blank">
-														<button type="button" name="cetak" class="btn btn-success w-100"><i class="fa fa-print" aria-hidden="true"></i>&nbsp; Cetak</button>
-													</a>
-												</div>
+
 										</div>
 									<?php } ?>
 
@@ -206,8 +202,8 @@ while ($k = mysqli_fetch_array($q)) {
 									</tr>
 								</thead>
 								<tbody>
-								<?php
-$s = mysqli_query($conn, "SELECT 
+									<?php
+									$s = mysqli_query($conn, "SELECT 
 t.kodeTransaksi,
 t.tanggal,
 b.sku,
@@ -274,33 +270,3 @@ if (isset($_POST['tampil'])) {
 	}
 }
 ?>
-
-
-<!-- <?php
-
-		// if (isset($_POST['tampil'])) {
-		//     // Ambil nilai tanggal mulai dan tanggal sampai dari form
-		//     $mulai_tanggal = $_POST['mulai_tanggal'];
-		//     $sampai_tanggal = $_POST['sampai_tanggal'];
-
-		//     // Query untuk menghitung total omset dalam rentang tanggal
-		//     $query_omset = "SELECT SUM(totalPembayaran) AS totalOmset
-		//                     FROM transaksi
-		//                     WHERE tanggal BETWEEN '$mulai_tanggal' AND '$sampai_tanggal'";
-
-		//     $result_omset = mysqli_query($conn, $query_omset);
-
-		//     if ($result_omset) {
-		//         $omset_data = mysqli_fetch_assoc($result_omset);
-		//         $total_omset = $omset_data['totalOmset'];
-		// 		echo "Total Omset dari $mulai_tanggal sampai $sampai_tanggal adalah: $total_omset";
-
-		//         // Tampilkan total omset pada input field "Omzet"
-		//         echo '<script>
-		//                 document.getElementsByName("omzet")[0].value = "' . number_format($total_omset, 0, ',', '.') . '";
-		//               </script>';
-		//     } else {
-		//         echo "Error: " . mysqli_error($conn);
-		//     }
-		// }
-		?> -->

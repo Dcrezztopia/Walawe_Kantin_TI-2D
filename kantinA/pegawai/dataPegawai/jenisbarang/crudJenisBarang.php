@@ -35,12 +35,55 @@
         });
     }
 
-    function gagal() {
+    function gagalTambah() {
         Swal.fire({
             title: "Gagal!",
             text: "Data Jenis Barang Gagal Ditambahkan",
             icon: "error",
             confirmButtonColor: "#f4656d"
+        });
+    }
+
+    function gagalEditUsed() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "Tidak Bisa Mengubah Data Jenis Barang Karena Masih Digunakan Dalam Tabel Barang",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        }).then(function() {
+            window.location.replace('?view=datajenisbarang');
+        });
+
+    }
+
+    function gagalEdit() {
+        Swal.fire({
+            title: "Gagal!",
+            text: "Gagal Mengubah Data Jenis Barang",
+            icon: "error",
+            confirmButtonColor: "#f4656d"
+        });
+    }
+
+    function gagalHapus() {
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Data Jenis Barang Gagal Dihapus',
+            icon: 'success',
+            confirmButtonColor: '#2e8aff'
+        }).then(function() {
+            window.location.replace('?view=datajenisbarang');
+        });
+    }
+
+    function gagalHapusUsed() {
+        Swal.fire({
+            title: 'Gagal!',
+            text: 'Data Jenis Barang Gagal Dihapus',
+            icon: 'success',
+            confirmButtonColor: '#2e8aff'
+        }).then(function() {
+            window.location.replace('?view=datajenisbarang');
         });
     }
 </script>
@@ -69,7 +112,7 @@ class crudJenisBarang implements Crud
         if ($result) {
             echo "<script>berhasilTambah();</script>";
         } else {
-            echo "<script>gagal();</script>";
+            echo "<script>gagalTambah();</script>";
         }
     }
 
@@ -88,8 +131,7 @@ class crudJenisBarang implements Crud
         $count_barang = $result_check_barang->fetch_assoc()['count_barang'];
 
         if ($count_barang > 0) {
-            echo "<script>alert ('Tidak bisa mengubah data Jenis Barang karena masih digunakan dalam tabel Barang') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>gagalEditUsed();</script>";
         }
 
         // Eksekusi kueri update jika jenisBarang tidak digunakan dalam tabel barang
@@ -97,10 +139,9 @@ class crudJenisBarang implements Crud
         $result = $this->connection->query($query_update);
 
         if ($result) {
-            echo "<script>alert ('Data Jenis Barang Berhasil Diubah') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>berhasilEdit();</script>";
         } else {
-            echo "<script>alert ('Gagal mengubah data Jenis Barang') </script>";
+            echo "<script>gagalEdit();</script>";
         }
     }
 
@@ -114,19 +155,16 @@ class crudJenisBarang implements Crud
         $count_barang = $result_check_barang->fetch_assoc()['count_barang'];
 
         if ($count_barang > 0) {
-            echo "<script>alert ('Tidak bisa menghapus data Jenis Barang karena masih digunakan dalam tabel Barang') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>gagalHapusUsed();</script>";
         }
 
         $query_delete = "DELETE FROM jenisbarang WHERE jenisBarang='$jenis_barang'";
         $result = $this->connection->query($query_delete);
 
         if ($result) {
-            echo "<script>alert ('Data Jenis Barang Berhasil Dihapus') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>berhasilHapus();</script>";
         } else {
-            echo "<script>alert ('Gagal menghapus data Jenis Barang') </script>";
-            echo "<meta http-equiv='refresh' content=0; URL=?view=datajenisbarang>";
+            echo "<script>gagalHapus();</script>";
         }
     }
 }
