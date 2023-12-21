@@ -125,8 +125,7 @@ class crudDataPengajuan
 
     private function tampilkanPesanSukses($jenis_barang_query = 'default')
     {
-        echo "<script>alert('Data berhasil disimpan" . ($jenis_barang_query ? "" : " (jenis barang baru)") . "')</script>";
-        echo "<script>window.location.replace('?view=datapengajuan');</script>";
+        echo "<script>berhasilTerima();</script>";
     }
 
     private function tampilkanPesanDanRedirect($pesan, $redirectUrl)
