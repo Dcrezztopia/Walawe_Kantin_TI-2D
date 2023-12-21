@@ -143,9 +143,9 @@
 														<td>
 															<?php echo $barang['nama_barang'] ?>
 														</td>
-														<td>
+														
 														<td>Rp<?php echo number_format($barang['harga'], 0, ',', '.'); ?></td>
-														</td>
+														
 														<td>
 															<?php echo $barang['jumlah'] ?>
 														</td>

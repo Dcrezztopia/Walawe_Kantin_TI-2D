@@ -128,7 +128,7 @@ $crudDataBarang = new crudDataBarang($conn);
 					</div>
 					<div class="form-group">
 						<label>SKU</label>
-						<input type="text" name="SKU" class="form-control" placeholder="SKU" required="">
+						<input type="text" name="sku" class="form-control" placeholder="sku" required="">
 					</div>
 					<div class="form-group">
 						<label>Nama Supplier</label>
@@ -295,7 +295,7 @@ while ($k = mysqli_fetch_array($q)) {
 						</div>
 						<div class="form-group">
 							<label>SKU</label>
-							<input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU" required="">
+							<input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control" placeholder="sku" required="">
 						</div>
 						<div class="form-group">
 							<label>Gambar</label>
@@ -320,7 +320,7 @@ if (isset($_POST['simpan'])) {
 		'jenisBarang' => $_POST['jenisBarang'],
 		'stok' => $_POST['stok'],
 		'harga' => $_POST['harga'],
-		'sku' => $_POST['SKU'],
+		'sku' => $_POST['sku'],
 		'namaSupplier' => $_POST['namaSupplier'],  // Menggunakan $_POST untuk gambar lama
 		'foto' => $_FILES['foto']['name'],
 		'file_tmp' => $_FILES['foto']['tmp_name'],

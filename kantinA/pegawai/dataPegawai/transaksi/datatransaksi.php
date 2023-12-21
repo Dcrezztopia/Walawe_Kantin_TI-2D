@@ -147,7 +147,7 @@ t.kodeTransaksi = '{$k['kodeTransaksi']}'");
                                             <td><?php echo $no++ ?></td>
                                             <td><?php echo $k['sku'] ?></td>
                                             <td><?php echo $k['jumlah'] ?></td>
-z											<td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
+											<td>Rp<?php echo number_format($k['harga'], 0, ',', '.'); ?></td>
 
                                         </tr>
                                     <?php } ?>

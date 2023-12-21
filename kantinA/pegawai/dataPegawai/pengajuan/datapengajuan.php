@@ -70,9 +70,7 @@ $crudPengajuan = new CrudPengajuan($conn);
                                                 <td>
                                                     <?php echo $pengajuan['jenisbarang'] ?>
                                                 </td>
-                                                <td>
-                                                    <?php echo $pengajuan['harga'] ?>
-                                                </td>
+												<td>Rp<?php echo number_format($pengajuan['harga'], 0, ',', '.'); ?></td>
                                                 <td>
                                                     <?php echo $pengajuan['sku'] ?>
                                                 </td>
@@ -202,6 +200,7 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                 <form method="POST" action="" enctype="multipart/form-data">
                     <div class="modal-body">
                         <input type="hidden" name="id" value="<?php echo $pengajuan['id_waiting'] ?>">
+						<input type="hidden" name="gambarLama" value="<?php echo $pengajuan['gambar'] ?>">
                         <div class="form-group">
                             <label>Nama Barang</label>
                             <input value="<?php echo $pengajuan['namabarang'] ?>" type="text" name="namabarang" class="form-control" placeholder="Nama Barang ..." required="">
@@ -233,13 +232,13 @@ while ($pengajuan = mysqli_fetch_array($p)) {
                         </div>
                         <div class="form-group">
                             <label>Foto</label>
-                            <img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
+                            <img src="../img/<?php echo $pengajuan['gambar'] ?>" width="100%" height="200">
                             <input type="file" name="foto" class="form-control">
                         </div>
 
                     </div>
                     <div class="modal-footer no-bd">
-                        <button type="submit" name="simpan" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                        <button type="submit" name="ubah" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
                         <button type="button" name="close" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
                     </div>
 

@@ -96,7 +96,7 @@
 											?>
 												<div class="form-group col-md-7">
 													<label>Omzet</label>
-													<input readonly value="<?php echo $omset['nilai_omset'] ?>" type="number" name="omset" class="form-control">
+													<input readonly value="<?php echo number_format($omset['nilai_omset'], 0, ',', '.'); ?>" type="number" name="omset" class="form-control">
 												</div>
 
 												<div class="d-flex align-items-center form-group mt-4">

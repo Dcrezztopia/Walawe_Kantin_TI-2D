@@ -58,17 +58,31 @@ class CrudPengajuan implements Crud
         $file_tmp = $_FILES['foto']['tmp_name'];
         $upload_path = '../img/';
         $status = 'menunggu';
-
+    
         move_uploaded_file($file_tmp, $upload_path . $foto);
-
-        // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
-        $query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, gambar, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga','$foto', '$status')";
-        $result = $this->connection->query($query_insert);
-
-        if ($result) {
-            echo "<script>berhasilTambah();</script>";
+    
+        // Ganti query SELECT sesuai dengan tabel waitingroom
+    
+        
+        if ($this->isSkuWaitingAvailable($sku)) {
+            echo "<script>alert('Maaf SKU Telah Tersedia di WaitingRoom')</script>";
+            echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
         } else {
-            echo "<script>gagal();</script>";
+            if ($this->isSkuAvailable($sku)) {
+                echo "<script>alert('Maaf SKU Telah Tersedia di Barang')</script>";
+                echo "<meta http-equiv='refresh' content=0; URL=?view=datapengajuan>";
+            } else {
+    
+                // Ganti query INSERT menjadi sesuai dengan tabel waitingroom
+                $query_insert = "INSERT INTO waitingroom (namabarang, jenisbarang, sku, namasupplier, harga, gambar, status) VALUES ('$nama_barang', '$jenis_barang', '$sku', '$namasupplier', '$harga','$foto', '$status')";
+                $result = $this->connection->query($query_insert);
+        
+                if ($result) {
+                    echo "<script>berhasilTambah();</script>";
+                } else {
+                    echo "<script>gagal();</script>";
+                }
+            }
         }
     }
 
@@ -110,4 +124,21 @@ class CrudPengajuan implements Crud
     public function Delete($data)
     {
     }
+
+    private function isSkuAvailable($sku)
+{
+    // Ganti query SELECT sesuai dengan tabel waitingroom
+    $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM barang WHERE sku = '$sku'");
+    $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
+
+    return $rowCheckJenis ? true : false;
+}
+    private function isSkuWaitingAvailable($sku)
+{
+    // Ganti query SELECT sesuai dengan tabel waitingroom
+    $resultCheckSku = mysqli_query($this->connection, "SELECT sku FROM waitingroom WHERE sku = '$sku'");
+    $rowCheckJenis = mysqli_fetch_assoc($resultCheckSku);
+
+    return $rowCheckJenis ? true : false;
+}
 }
