@@ -78,9 +78,7 @@ $crudDataBarang = new crudDataBarang($conn);
                                                     <?php echo $barang['namaSupplier'] ?>
                                                 </td>
                                                 <td>
-
                                                     <a href="#modalEditBarang<?php echo $barang['idBarang'] ?>" data-toggle="modal" title="Edit" class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></a>
-
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -174,124 +172,13 @@ while ($d = mysqli_fetch_array($p)) {
 
 <?php } ?>
 
-<?php
-$c = mysqli_query($conn, 'SELECT * from barang');
-while ($row = mysqli_fetch_array($c)) {
-?>
-
-    <!-- DELETE -->
-    <div class="modal fade" id="modalHapusBarang<?php echo $row['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header no-bd">
-                    <h5 class="modal-title">
-                        <span class="fw-mediumbold">
-                            Hapus</span>
-                        <span class="fw-light">
-                            Stok Barang
-                        </span>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" enctype="multipart/form-data" action="">
-                    <div class="modal-body">
-                        <input type="hidden" name="id" value="<?php echo $row['idBarang'] ?>">
-                        <h4>Apakah Anda Ingin Menghapus Data Ini ?</h4>
-                    </div>
-                    <div class="modal-footer no-bd">
-                        <button type="submit" name="hapus" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i>
-                            Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-<?php } ?>
-
-<?php
-$q = mysqli_query($conn, 'SELECT * FROM barang');
-
-while ($k = mysqli_fetch_array($q)) {
-?>
-
-    <!-- READ -->
-    <div class="modal fade" id="modalDetailBarang<?php echo $k['idBarang'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header no-bd">
-                    <h5 class="modal-title">
-                        <span class="fw-mediumbold">
-                            Detail</span>
-                        <span class="fw-light">
-                            Stok Barang
-                        </span>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST" enctype="multipart/form-data" action="">
-                    <div class="modal-body">
-                        <input type="hidden" name="id" value="<?php echo $k['idBarang'] ?>">
-                        <input type="hidden" name="gambarLama" value="<?php echo $d['gambar'] ?>">
-                        <div class="form-group">
-                            <label>Nama Barang</label>
-                            <input readonly value="<?php echo $k['namaBarang'] ?>" type="text" name="namaBarang" class="form-control" placeholder="Barang" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Jenis Barang</label>
-                            <input readonly value="<?php echo $k['jenisBarang'] ?>" type="text" name="jenisBarang" class="form-control" placeholder="Jenis Barang ..." required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Stok</label>
-                            <input readonly value="<?php echo $k['stok'] ?>" type="number" name="stok" class="form-control" placeholder="Stok" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Harga</label>
-                            <input readonly value="<?php echo $k['harga'] ?>" type="number" name="harga" class="form-control" placeholder="Harga" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>SKU</label>
-                            <input readonly value="<?php echo $k['sku'] ?>" type="text" name="sku" class="form-control" placeholder="SKU" required="">
-                        </div>
-                        <div class="form-group">
-                            <label>Gambar</label>
-                            <img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
-                        </div>
-                    </div>
-                    <div class="modal-footer no-bd">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>
-                            Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-<?php } ?>
 
 <?php
 if (isset($_POST['ubah'])) {
     $data = array(
         'id' => $_POST['id'],
-        'namaBarang' => $_POST['namaBarang'],
-        'jenisBarang' => $_POST['jenisBarang'],
         'stok' => $_POST['stok'],
-        'harga' => $_POST['harga'],
-        'sku' => $_POST['sku'],
-        'gambarLama' => $_POST['gambarLama'],  // Menggunakan $_POST untuk gambar lama
-        'foto' => $_FILES['foto']['name'],
-        'file_tmp' => $_FILES['foto']['tmp_name'],
     );
     $crudDataBarang->Update($data);
-} elseif (isset($_POST['hapus'])) {
-    $id = $_POST['id'];
-    mysqli_query($conn, "DELETE from barang where idBarang='$id'");
-    echo "<script>alert ('Data Berhasil Dihapus') </script>";
-    echo "<meta http-equiv='refresh' content=0; URL=?view=databarang>";
-}
+} 
 ?>
