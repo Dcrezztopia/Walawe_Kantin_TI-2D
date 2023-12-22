@@ -155,7 +155,7 @@ while ($d = mysqli_fetch_array($p)) {
                         </div>
                         <div class="form-group">
                             <label>Gambar</label>
-                            <img src="../img/<?php echo $k['gambar'] ?>" width="100%" height="200">
+                            <img src="../img/<?php echo $d['gambar'] ?>" width="100%" height="200">
                         </div>
 
 
